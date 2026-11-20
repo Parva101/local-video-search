@@ -24,6 +24,8 @@ When a rebuilt container serves changed static assets, force-refresh the cached 
 
 When a pip pin conflicts with a dependency's own requirement (nncore's opencv-python next to our headless pin), both get installed into one target and the collision wins silently at import; constrain the dependency or install it with --no-deps.
 
+When pip installs into a `--target` directory, its dependencies (including torch) land there and PYTHONPATH shadowing breaks the container's compiled operators; build a venv with `--system-site-packages` inside the container and pin the container's versions as constraints so incompatibilities fail at install time.
+
 # Lessons
 
 - When a model uses separate description and verification prompts, test both on the failed recording and version each task without invalidating unrelated indexes.
