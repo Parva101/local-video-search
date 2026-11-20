@@ -362,3 +362,11 @@ Stage 4 under the autonomous mandate. `POST /count-events` defines an event by t
 Proof: count suite 6 passed ungated against the labelled local VLM fixture; full model-enabled regression 535 passed, 2 private-checkout skips, 2 existing warnings. Real browser run: "the robot arm moves a cup" on the fresh coffee upload returned 1 occurrence, 3 of 3 intervals checked, with the two adjacent-window reports merged into one event spanning 16.4-20.1 seconds and zero console errors. [Evidence](evaluation/event-counting-e2e-results.json).
 
 Known limits: observed counts over checked partitions only; the half-second merge rule cannot separate events closer than that; sparse frame sampling can miss brief actions; long scans are budget-bounded; cross-camera identity and repeated-event semantics beyond temporal overlap remain unbuilt.
+
+## Product release — 19 November 2026
+
+Stage 5 under the autonomous mandate. The browser gains a **Search every indexed video** scope (no recording filter; any ready index satisfies the gate). The README opens with a product intro, feature list, quick start and honest scope; the research log follows below it. An MIT LICENSE was added (model checkpoints keep their own Apache/MIT terms). The repository was initialized on `main` and pushed public to https://github.com/Parva101/local-video-search ; remote verified in sync at `b328011`, with `.env`, media and `.codex-backups` excluded by `.gitignore`.
+
+Final state: 535 model-enabled tests pass (2 private-checkout skips, 2 existing warnings); live database upgraded v4→v5→v6 in place; every new capability has a real end-to-end browser proof with zero console errors (image query at 17.88-20.14 s; keyword "today" scope; yesterday exclusion; Whisper ASR search with playback at 147.08 s; occurrence count 1 of 1 with adjacent-window merge 16.4-20.1 s; all-videos search).
+
+Known gaps kept visible: a fresh-machine Compose run is still recommended before broad announcements; supervised-benchmark comparisons (the mandate's stage 7) remain future work; ASR audio-origin and half-second merge limits apply.

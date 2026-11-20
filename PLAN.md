@@ -50,6 +50,16 @@ Proof: count suite 6 passed ungated against the labelled local VLM fixture (vali
 
 Known limits: observed counts only; half-second merge rule; sparse sampling can miss brief actions; long scans are budget-bounded. Next: stage 5, corpus UX and release polish, then the GitHub release.
 
+### Stage 5 complete and released — 19 November 2026
+
+Corpus UX: **Search every indexed video** toggle posts searches without a recording scope; the gate accepts any ready index. Asset version bumped to v0.6. README restructured with a product intro, feature list and quick start; MIT LICENSE added; `.gitignore` re-checked (no `.env`, media or `.codex-backups` staged).
+
+Released: repository initialized on `main`, committed, and pushed to **https://github.com/Parva101/local-video-search** (public, MIT). Remote verified in sync at `b328011`.
+
+Proof: full model-enabled regression **535 passed, 2 private-checkout skips, 2 existing warnings**; live database upgraded v4→v5→v6 with all data intact; browser checks for image queries, keyword-detected "today" scope, yesterday exclusion, real Whisper ASR search with playback, real occurrence counting with merge, and all-videos search — all with zero console errors; evidence in `evaluation/`.
+
+Remaining honest gaps for later sessions: a true fresh-machine Compose run (second project, clean volumes) is recommended before public announcements — every test already proves fresh schema creation, and the live DB proves in-place upgrades, but the end-to-end fresh-docker flow has not been run on another machine; the ASR audio-origin assumption; supervised-benchmark claims (stage 7) remain future work under the 19 November mandate's honest-comparison framing.
+
 ## Current request: upload a video, index it, ask questions
 
 ### Reported failure: long-video index stops at48/205
