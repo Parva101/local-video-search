@@ -83,7 +83,8 @@ def build_sample(row, media_root: Path, frames_root: Path, index: int):
         content.append({"type": "image", "image": frame_path.relative_to(frames_root.parent).as_posix()})
         content.append({"type": "text", "text": f"Frame at source-relative {seconds:.9f} seconds:"})
     if row["kind"] == "description":
-        answer = row["payload"]
+        # Only the serving contract fields; never the hosted trace metadata.
+        answer = {key: row["payload"][key] for key in ("summary", "actions", "objects", "uncertainties")}
     else:
         answer = {key: row["response"][key] for key in ("status", "intervals", "observation")}
     return {"task": row["kind"], "messages": [

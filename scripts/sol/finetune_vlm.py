@@ -156,7 +156,7 @@ def main():
                 image.close()
             inputs = {key: value.to("cuda") for key, value in batch.items() if hasattr(value, "to")}
             with torch.inference_mode():
-                output_ids = model.generate(**inputs, max_new_tokens=320, do_sample=False)
+                output_ids = model.generate(**inputs, max_new_tokens=640, do_sample=False)
             generated = processor.tokenizer.decode(output_ids[0][inputs["input_ids"].shape[1]:],
                                                     skip_special_tokens=True).strip()
             teacher = json.loads(row["answer"])
