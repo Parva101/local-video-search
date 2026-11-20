@@ -98,6 +98,9 @@ def main():
     parser.add_argument("--max-steps", type=int, default=20)
     parser.add_argument("--batch-probe", action="store_true",
                         help="Build one batch on CPU, print keys and shapes, and exit without loading the model")
+    parser.add_argument("--eval-only", action="store_true",
+                        help="Generate on the held-out split with a trained adapter and score agreement with the recorded teacher outputs")
+    parser.add_argument("--adapter", type=Path, default=None)
     args = parser.parse_args()
     started = time.monotonic()
 
@@ -123,6 +126,72 @@ def main():
         args.out.mkdir(parents=True, exist_ok=True)
         (args.out / "batch-probe.json").write_text(json.dumps(keys, indent=2, sort_keys=True) + "\n",
                                                    encoding="utf-8")
+        return
+
+    if args.eval_only:
+        from peft import PeftModel
+
+        rows = load_rows(args.data / "eval.jsonl", args.data)
+        model = AutoModelForMultimodalLM.from_pretrained(
+            base, local_files_only=True, trust_remote_code=False, use_safetensors=True,
+            dtype=torch.bfloat16, device_map=None,
+        ).cuda()
+        model = PeftModel.from_pretrained(model, str(args.adapter), is_trainable=False)
+        model.eval()
+        import hashlib
+
+        def word_overlap(a, b):
+            wa, wb = set(a.lower().split()), set(b.lower().split())
+            return len(wa & wb) / len(wa | wb) if wa | wb else 0.0
+
+        report = {"adapter_sha256": hashlib.sha256(Path(args.adapter, "adapter_model.safetensors").read_bytes()).hexdigest(),
+                  "base_revision": json.loads(args.base_manifest.read_text(encoding="utf-8"))["revision"],
+                  "rows": []}
+        valid = agree = overlaps = verify_count = describe_count = 0
+        for index, row in enumerate(rows):
+            text = processor.apply_chat_template(row["prompt"], tokenize=False, add_generation_prompt=True)
+            images = [Image.open(path).convert("RGB") for path in row["images"]]
+            batch = processor(text=[text], images=[images], padding=True, return_tensors="pt")
+            for image in images:
+                image.close()
+            inputs = {key: value.to("cuda") for key, value in batch.items() if hasattr(value, "to")}
+            with torch.inference_mode():
+                output_ids = model.generate(**inputs, max_new_tokens=320, do_sample=False)
+            generated = processor.tokenizer.decode(output_ids[0][inputs["input_ids"].shape[1]:],
+                                                    skip_special_tokens=True).strip()
+            teacher = json.loads(row["answer"])
+            item = {"index": index, "task": teacher.get("status") and "verify" or "describe", "generated": generated[:400]}
+            is_valid = False
+            try:
+                parsed = json.loads(generated)
+                is_valid = isinstance(parsed, dict)
+            except (json.JSONDecodeError, ValueError):
+                parsed = {}
+            if is_valid:
+                valid += 1
+                if "status" in teacher:
+                    verify_count += 1
+                    if parsed.get("status") == teacher["status"]:
+                        agree += 1
+                        item["status_agree"] = True
+                else:
+                    describe_count += 1
+                    overlap = word_overlap(str(parsed.get("summary", "")), str(teacher.get("summary", "")))
+                    overlaps += overlap
+                    item["summary_overlap"] = round(overlap, 3)
+            report["rows"].append(item)
+            event("eval_row", index=index, valid=is_valid)
+        report["metrics"] = {
+            "rows": len(rows), "json_valid_rate": round(valid / len(rows), 3),
+            "verification_status_agreement": round(agree / verify_count, 3) if verify_count else None,
+            "verification_rows": verify_count,
+            "mean_summary_word_overlap": round(overlaps / describe_count, 3) if describe_count else None,
+            "description_rows": describe_count,
+        }
+        args.out.mkdir(parents=True, exist_ok=True)
+        (args.out / "eval-report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n",
+                                                   encoding="utf-8")
+        event("eval_complete", **report["metrics"])
         return
     model = AutoModelForMultimodalLM.from_pretrained(
         base, local_files_only=True, trust_remote_code=False, use_safetensors=True,

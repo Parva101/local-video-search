@@ -33,6 +33,8 @@ if [[ "$MODE" == "probe" ]]; then
     ARGS+=(--batch-probe)
 elif [[ "$MODE" == "smoke" ]]; then
     ARGS+=(--smoke)
+elif [[ "$MODE" == "eval" ]]; then
+    ARGS+=(--eval-only --adapter "$ROOT/runs/finetune-v1/adapter")
 else
     ARGS+=(--epochs 2)
 fi
