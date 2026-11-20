@@ -144,6 +144,18 @@ This local-first round still caught the biggest remaining bug before wasting ano
 
 **Full training COMPLETED 0:0 in 14:20** (job 2111550). The trained adapter is at `runs/finetune-v1/adapter/` (161 MB safetensors, SHA-256 `c5268e8127a3a3cbe6e122e96307996359b7d07a5f416d6c6071ce68e50135d1`).
 
+### First acceptance verdict and the clean-target retrain — 20 November 2026
+
+**Eval job 2120547 COMPLETED 0:0 in 17:29.** The shakedown adapter's honest verdict:
+
+- **Verification task: the fine-tune works.** Every valid generation was a verification row: 18/18 schema-valid, with correct interval bounds and observations on the coffee fixtures, and **66.7% status agreement** with the hosted teacher (12/18) — from only 32 training verifications.
+- **Description task: 0% valid — a dataset bug, not a training failure.** The failed rows showed the adapter reproducing the hosted Gemma's `_trace` metadata (usage stats, `revision: hosted-unpinned...`) because the description targets were exported with the full stored payload; the model spent its token budget on a fake trace and truncated before content. The verification builder had stripped its fields correctly; the description builder had not.
+- **Acceptance: FAIL as-is** (json_valid_rate 0.31 overall). Root cause precisely identified.
+
+Fixes committed (`7c7e36f`): description targets now carry only the four serving fields (`summary`, `actions`, `objects`, `uncertainties`); eval generation budget raised to 640 tokens. The dataset was rebuilt locally (same 258/58 split, new hashes `7b8956c9`/`813a7665`, targets verified trace-free) and transferred with hashes confirmed.
+
+**Retrain submitted and chained: train job 2122366, eval job 2122367** (starts automatically after the train succeeds). Both on the watch list. The next heartbeat reads the v2 eval report and applies the acceptance gate honestly.
+
 ### Dataset scale-up — the path to a meaningful quality claim (20 November 2026)
 
 The first training run was a pipeline shakedown: 258 rows is the entire production supervision inventory (284 descriptions + 32 verifications, minus the held-out slice), 253 of 284 from one recording, and 2 epochs its honest ceiling. It proves the pinned-model pipeline end to end; it cannot yet support a quality claim over hosted Gemma, and the acceptance eval will report that honestly.
