@@ -154,7 +154,17 @@ This local-first round still caught the biggest remaining bug before wasting ano
 
 Fixes committed (`7c7e36f`): description targets now carry only the four serving fields (`summary`, `actions`, `objects`, `uncertainties`); eval generation budget raised to 640 tokens. The dataset was rebuilt locally (same 258/58 split, new hashes `7b8956c9`/`813a7665`, targets verified trace-free) and transferred with hashes confirmed.
 
-**Retrain submitted and chained: train job 2122366, eval job 2122367** (starts automatically after the train succeeds). Both on the watch list. The next heartbeat reads the v2 eval report and applies the acceptance gate honestly.
+### Swarm organization and acceptance eval v2 — 20 November 2026
+
+**The team** (user directive): 40 specialist roles organized into nine squads, documented in TEAM.md, executing as GLM-5.3 subagents in parallel waves with strict file lanes — no agent edits outside its lane; the main session is the tech lead that reviews, tests, commits and pushes every wave. Wave 1 in flight: backend test coverage, enterprise docs + sample questions, the Charades hard-negative dataset builder (the meaningful-training scale-up), frontend polish/accessibility, and API/store hardening.
+
+**Acceptance eval v2 (job 2122367, chained after the clean-target retrain 2122366): COMPLETED 0:0 in 6:00.**
+
+- `json_valid_rate: 1.0` — all 58 held-out rows schema-valid (v1: 0.31). The trace-pollution fix fully resolved description outputs; generation time fell from 17:29 to 6:00.
+- `mean_summary_word_overlap: 0.262` over 40 description rows — real content agreement with the hosted teacher from only 258 training rows.
+- `verification_status_agreement: 0.611` (11/18) — within one query of v1's 66.7%.
+
+Honest verdict: the shakedown adapter now satisfies the serving contract perfectly (100% schema validity on both tasks) with meaningful content distillation, but quality parity with the hosted 31B model is not yet established — the 0.262/0.611 numbers are a 258-row baseline, not a win. The hosted path stays the default; the path to a genuine claim is the hard-negative expansion now being built in Wave 1, followed by retraining and re-evaluation on the same held-out gate.
 
 ### Dataset scale-up — the path to a meaningful quality claim (20 November 2026)
 
