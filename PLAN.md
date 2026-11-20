@@ -89,6 +89,10 @@ Smoke 2073664 FAILED 1:0 after 10:15 — the gate caught a real contamination: `
 
 Re-plan (second and final attempt under the two-failure rule): the sbatch now creates a **venv with `--system-site-packages` inside the container**, so the container's torch 2.11.0+cu129 and transformers 5.6.2 satisfy the requirements, and `training-constraints.txt` pins both so an incompatible peft/trl fails at install time instead of shadowing compiled packages. The trainer also switched to the documented `AutoModelForMultimodalLM` class. Fixed scripts committed (`0bec695`), hash-verified on both machines, and the re-planned smoke is submitted as **job 2079044** (one A100, 1 h wall). Check: `sacct -j 2079044`; log: `logs/finetune-smoke-2079044.log`; pass marker: `runs/finetune-v1/smoke-gate.json`. If this attempt fails, stop and re-plan the training environment rather than resubmitting.
 
+### Automated Sol monitoring — 20 November 2026 (user requirement)
+
+Long jobs are never left unwatched. `scripts/monitor_sol_jobs.ps1` (committed) polls the jobs in `.codex-backups/sol-monitor/watch.json` and is registered as the Windows scheduled task **VideoSearchSolMonitor** (every 10 minutes, 30-day repetition). Each poll appends to `monitor.jsonl`; any watched job reaching a state needing attention (FAILED, COMPLETED, TIMEOUT, CANCELLED, OUT_OF_MEMORY, NODE_FAIL) writes `ALERT.md` with the job's log tail and clears itself when all watched jobs are healthy. A live in-session watcher also polls every 10 minutes and wakes the session the moment job 2079044 ends. Rule recorded in AGENTS.md item 7 and RULES.md: any new session reads `ALERT.md` first, diagnoses from the tail, records the fix in PLAN.md, and resubmits only under the two-failure rule. New long jobs get added to `watch.json`. First manual poll verified working (job 2079044 PENDING logged).
+
 ## Current request: upload a video, index it, ask questions
 
 ### Reported failure: long-video index stops at48/205
