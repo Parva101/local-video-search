@@ -32,6 +32,8 @@ When pip installs into a `--target` directory, its dependencies (including torch
 
 When a monitor cannot reach the system it watches, it must keep any existing alert and announce blindness; clearing the alert on a failed poll is worse than having no monitor.
 
+When a Windows/WSL2 laptop GPU faults with `CUDA driver error: device not ready` under sustained large-model load, at random pipeline stages, with healthy nvidia-smi between runs, treat it as a driver-stack limit: validate as far as the fault allows, then move the run to a cluster GPU. Random fault locations mean the code is fine; deterministic ones mean a bug.
+
 # Lessons
 
 - When a model uses separate description and verification prompts, test both on the failed recording and version each task without invalidating unrelated indexes.

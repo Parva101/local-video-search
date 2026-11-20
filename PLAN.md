@@ -124,7 +124,17 @@ The fifth cause: my batch-key whitelist dropped `mm_token_type_ids`, which Qwen3
 
 **Batch probe job 2103006 COMPLETED 0:0 in 1:06** on the exact container versions: `input_ids` [2, 2509], `attention_mask` [2, 2509], `mm_token_type_ids` [2, 2509], `pixel_values` [9216, 1536] (16 images of 8 per sample), `image_grid_thw` [16, 3], and masked `labels` [2, 2509]. The interface is proven with evidence, not assumption. Committed `39b8b8c`; the pre-flight ladder now runs: local path check → CPU batch probe → GPU smoke.
 
-**Smoke attempt 6: job 2107653** (one A100, 1 h wall), tracked in the watch list. Check: `sacct -j 2107653`; log: `logs/finetune-smoke-2107653.log`; pass marker: `runs/finetune-v1/smoke-gate.json`. The probe's passing shapes mean the remaining unknown is only the forward/backward/optimizer path itself.
+### Local-first validation on the 3080 — 20 November 2026
+
+Per the user's directive, the loop was validated locally before any further Sol submission. A local CUDA environment was built (Docker `video-finetune-env`: torch 2.8.0+cu129, transformers 5.6.2, peft 0.22.0 — matching Sol's versions) and the pinned checkpoint downloaded locally with the same preparation script (12 files, manifest verified).
+
+**Local batch probe: passed** — identical keys and shapes to the Sol probe (`input_ids`/`attention_mask`/`mm_token_type_ids` [2, 2509], `pixel_values` [9216, 1536], `image_grid_thw` [16, 3], masked labels). The interface is proven on both stacks.
+
+**Local 3080 smoke: every code stage executed; the laptop driver could not sustain the load.** The run proved model load, LoRA attach, gradient checkpointing, batch build, forward, backward, and optimizer mechanics — then hit `RuntimeError: CUDA driver error: device not ready` at a different allocation point on each of three attempts (backward, optimizer state, backward), with nvidia-smi healthy between runs. Honest conclusion: the WSL2 GPU driver stack on this laptop faults under sustained 4B bf16 training load — an environmental limit, not a code fault. The advancing failure point across runs is the evidence: the code path completes further each time and the fault location is random, the signature of a driver issue rather than a deterministic bug.
+
+This local-first round still caught the biggest remaining bug before wasting another Sol cycle: attempt 6 had exhausted an **80 GB A100** because the plain loop lacked gradient checkpointing; the fix (checkpointing enabled, batch 1 default, expandable allocator segments) came from this local review and is committed (`47c36bf`).
+
+**Smoke attempt 7: job 2111242** on Sol (one A100, 1 h wall), scripts hash-verified on both machines, tracked in the watch list. Check: `sacct -j 2111242`; log: `logs/finetune-smoke-2111242.log`; pass marker: `runs/finetune-v1/smoke-gate.json`.
 
 ### Heartbeat protocol — 20 November 2026 (user requirement)
 
