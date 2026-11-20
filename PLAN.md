@@ -73,6 +73,12 @@ Steps, in order, for the next session:
 4. One A100 job within the 960-minute class QoS; report the job ID and leave it running.
 5. Honest acceptance gate: match or beat hosted Gemma on the frozen coffee fixtures and pilot controls at equal tasks, with pinned weights. Keep the hosted path on failure and record the negative result. No SOTA wording; the claim target is best-in-class among local pinned systems for this pipeline.
 
+### Campaign progress — 20 November 2026
+
+Prep job 2068865 COMPLETED in 38 s: all 12 pinned checkpoint files downloaded and hashed (base-model-manifest.json verified; shards 4.97 + 3.91 GB). Media assembled locally: the four uploaded source videos copied from the Docker volume (225 MB) plus the workspace coffee demo; 284 description rows and 32 verification rows reference them. Dataset builder (`scripts/build_finetune_dataset.py`, committed) extracts the recorded sample frames and emits chat samples with the app's Qwen-serving prompt text; coffee rows plus every tenth window are held out for eval. LoRA trainer and Slurm job committed (`scripts/sol/finetune_vlm.py`, `finetune-vlm.sbatch`): isolated peft/trl installs, smoke-first (20 steps), adapters saved per run.
+
+Next, in order: (1) dataset build completes locally (frame extraction running); (2) scp `dataset/` to `$FINETUNE_ROOT` on Sol; (3) submit the smoke job (`FINETUNE_MODE=smoke`, one A100, 2 h wall), verify its log, leave any long run for the user to check; (4) after smoke passes, submit the full run (`FINETUNE_MODE=train`, 8 h wall); (5) eval the adapter on the held-out coffee fixtures against the hosted Gemma records — the acceptance gate.
+
 ## Current request: upload a video, index it, ask questions
 
 ### Reported failure: long-video index stops at48/205
