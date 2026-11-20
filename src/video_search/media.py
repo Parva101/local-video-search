@@ -162,6 +162,7 @@ def probe(path: Path) -> dict:
         raise MediaError("invalid_probe", "Media probe returned invalid JSON.", path=str(path)) from exc
     streams = document.get("streams", [])
     video = next((stream for stream in streams if stream.get("codec_type") == "video" and not stream.get("disposition", {}).get("attached_pic")), None)
+    audio = next((stream for stream in streams if stream.get("codec_type") == "audio"), None)
     if video is None:
         raise MediaError("no_video", "Source has no video stream.", path=str(path))
     start = _number(video.get("start_time"))
@@ -173,7 +174,7 @@ def probe(path: Path) -> dict:
         duration_source = "video_packets"
     if not math.isfinite(duration) or duration <= 0:
         raise MediaError("invalid_duration", "Video duration must be finite and positive.", path=str(path))
-    return {
+    metadata = {
         "duration_seconds": duration,
         "duration_source": duration_source,
         "source_start_seconds": origin,
@@ -183,8 +184,13 @@ def probe(path: Path) -> dict:
         "codec": video.get("codec_name"),
         "width": video.get("width"),
         "height": video.get("height"),
-        "has_audio": any(stream.get("codec_type") == "audio" for stream in streams),
+        "has_audio": audio is not None,
     }
+    if audio is not None:
+        # None when ffprobe reports no start_time; the transcript path then keeps the assumed-zero rule.
+        metadata["audio_start_seconds"] = _number(audio.get("start_time"))
+        metadata["audio_stream_index"] = audio["index"]
+    return metadata
 
 
 def windows(duration: float, length: float = 10, overlap: float = 2) -> list[tuple[float, float]]:

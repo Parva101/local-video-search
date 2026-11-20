@@ -405,7 +405,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         path = media.source_file(config.media_root, item["source_path"], upload_root=config.upload_read_root)
         if media.fingerprint(path) != (item["size"], item["mtime_ns"]):
             raise HTTPException(409, "Source changed; import the new file before speech indexing")
-        return store.enqueue_transcript(config.database_url, str(recording_id), speech.asr_spec())
+        return store.enqueue_transcript(config.database_url, str(recording_id),
+                                        speech.asr_spec(item["metadata"].get("audio_start_seconds")))
 
     @app.get("/transcript-indexes")
     def transcript_indexes(request: Request, recording_id: UUID | None = None,

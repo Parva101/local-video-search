@@ -45,11 +45,23 @@ def subtitle_spec(kind: str, content: str) -> dict:
     }
 
 
-def asr_spec() -> dict:
+def audio_stream_origin(value: object) -> float | None:
+    """The recorded audio-stream origin when it is a finite nonnegative number, else None."""
+    try:
+        origin = float(value)
+    except (TypeError, ValueError):
+        return None
+    return origin if math.isfinite(origin) and origin >= 0 else None
+
+
+def asr_spec(audio_start: object = None) -> dict:
     return {
         "source": "asr", "model_id": ASR_MODEL_ID, "revision": ASR_REVISION,
         "dimensions": 384, "text_encoder": TEXT_SPEC["model_id"], "text_encoder_revision": TEXT_SPEC["revision"],
-        "audio": "ffmpeg-mono-16khz-pcm-v1", "origin_rule": "audio-stream-start-assumed-zero-v1",
+        "audio": "ffmpeg-mono-16khz-pcm-v1",
+        # Whisper times are audio-stream-relative; the rule records whether the stream's source origin was added.
+        "origin_rule": ("audio-stream-origin-corrected-v2" if audio_stream_origin(audio_start) is not None
+                        else "audio-stream-start-assumed-zero-v1"),
         "runtime": f"torch-cpu-float32-chunked-30s-v1",
     }
 

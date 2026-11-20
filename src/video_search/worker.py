@@ -99,9 +99,10 @@ def process_transcript(settings, job, check_lease):
     job_id, token = str(job["id"]), str(job["lease_token"])
     build_id = str(job["transcript_build_id"])
     build = store.get_transcript_build(settings.database_url, build_id)
-    if build["spec"] != speech.asr_spec():
-        raise TranscriptError("incompatible_index", "Worker cannot build this transcript specification")
     recording = store.get_recording(settings.database_url, str(build["recording_id"]))
+    audio_start = recording["metadata"].get("audio_start_seconds")
+    if build["spec"] != speech.asr_spec(audio_start):
+        raise TranscriptError("incompatible_index", "Worker cannot build this transcript specification")
     if not recording["metadata"].get("has_audio"):
         raise media.MediaError("no_audio", "This recording has no audio stream to transcribe",
                                path=job["source_path"])
@@ -128,7 +129,14 @@ def process_transcript(settings, job, check_lease):
         raise TranscriptError("empty_transcript", "The speech model returned no usable segments")
     # Chunk ends can round slightly past the audio; clamp to the imported duration.
     duration = float(recording["metadata"]["duration_seconds"])
-    segments = [(start, min(end, duration), text) for start, end, text in segments if start < duration]
+    # Whisper times are audio-stream-relative; add the recorded origin to get source-relative times.
+    origin = speech.audio_stream_origin(audio_start)
+    if origin is None:
+        logger.warning("transcript_origin_assumed_zero", extra={"fields": {
+            "job_id": job_id, "build_id": build_id, "audio_start_seconds": audio_start}})
+        origin = 0.0
+    segments = [(start + origin, min(end + origin, duration), text)
+                for start, end, text in segments if start + origin < duration]
     if not segments:
         raise TranscriptError("empty_transcript", "No transcribed segment lies inside the recording duration")
     if media.fingerprint(path) != expected:
