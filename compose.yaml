@@ -34,6 +34,8 @@ x-app: &app
 services:
   db:
     image: pgvector/pgvector:0.8.7-pg17
+    # Bounded memory; pgvector stays within a 2 GiB working set for a personal library.
+    mem_limit: 2g
     environment:
       POSTGRES_USER: video
       POSTGRES_PASSWORD: video-local
@@ -62,6 +64,12 @@ services:
       - uploads:/uploads
     ports:
       - "127.0.0.1:8000:8000"
+    # Query-time SigLIP + text encoder + optional reranker fit in 3 GiB.
+    mem_limit: 3g
+    # Immutable root filesystem; frames and probe scratch go to the tmpfs /tmp below.
+    read_only: true
+    tmpfs:
+      - /tmp:mode=1777,size=1g
     healthcheck:
       test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
       interval: 5s
@@ -71,6 +79,15 @@ services:
     <<: *app
     command: [python, -m, video_search.worker]
     restart: "on-failure:3"
+    # Indexing loads SigLIP + text encoder + Whisper and buffers a 16 kHz wav; 4 GiB.
+    mem_limit: 4g
+    # SIGTERM finishes the current job; ffmpeg audio extraction alone can run 600 s.
+    # A killed job resumes from its remaining windows after the 60 s lease expires.
+    stop_grace_period: 10m
+    # Immutable root filesystem; frame sampling and wav scratch go to the tmpfs /tmp below.
+    read_only: true
+    tmpfs:
+      - /tmp:mode=1777,size=1g
   test-db:
     profiles: [test]
     image: pgvector/pgvector:0.8.7-pg17

@@ -1,4 +1,6 @@
-FROM python:3.12-slim-bookworm AS dependencies
+# Base pinned to the multi-arch index digest of python:3.12-slim-bookworm
+# (3.12.16-slim-bookworm, verified 20 Nov 2026 via docker buildx imagetools and the registry API).
+FROM python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df AS dependencies
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=1
 RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg \
     && rm -rf /var/lib/apt/lists/*
