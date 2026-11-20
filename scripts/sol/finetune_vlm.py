@@ -74,10 +74,10 @@ def main():
     base = load_manifest(args.base_manifest)
     event("base_verified", checkpoint=str(base))
 
-    from transformers import AutoProcessor, Qwen3VLForConditionalGeneration
+    from transformers import AutoProcessor, AutoModelForMultimodalLM
 
     processor = AutoProcessor.from_pretrained(base, local_files_only=True, trust_remote_code=False)
-    model = Qwen3VLForConditionalGeneration.from_pretrained(
+    model = AutoModelForMultimodalLM.from_pretrained(
         base, local_files_only=True, trust_remote_code=False, use_safetensors=True,
         torch_dtype=torch.bfloat16, device_map=None,
     ).cuda().eval()
