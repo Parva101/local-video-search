@@ -13,7 +13,7 @@ import psycopg
 from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 
-SCHEMA_VERSION = 6
+SCHEMA_VERSION = 7
 
 
 class LeaseLost(RuntimeError):
@@ -38,11 +38,12 @@ def init_db(database_url):
             (1,),
         )
         version = conn.execute("SELECT version FROM schema_version").fetchone()["version"]
-        if version not in (1, 2, 3, 4, 5, SCHEMA_VERSION):
+        if version not in (1, 2, 3, 4, 5, 6, SCHEMA_VERSION):
             raise RuntimeError(f"Unsupported schema version {version}; expected {SCHEMA_VERSION}")
         conn.execute(Path(__file__).with_name("schema.sql").read_text(encoding="utf-8"))
         for target, filename in ((2, "002_visual.sql"), (3, "003_descriptions.sql"), (4, "004_uploads.sql"),
-                                 (5, "005_capture_date.sql"), (6, "006_transcripts.sql")):
+                                 (5, "005_capture_date.sql"), (6, "006_transcripts.sql"),
+                                 (7, "007_performance.sql")):
             if version < target:
                 conn.execute(Path(__file__).with_name("migrations").joinpath(filename).read_text(encoding="utf-8"))
                 conn.execute("UPDATE schema_version SET version = %s", (target,))

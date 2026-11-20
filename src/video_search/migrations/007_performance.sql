@@ -1,0 +1,55 @@
+-- 007_performance.sql - additive indexes for the search hot paths (schema v7).
+--
+-- INSPECTION (before this migration; see schema.sql and 002-006):
+--   * windows                already has PK (recording_id, start_seconds, end_seconds),
+--                           so a separate btree on (recording_id, start_seconds) would
+--                           duplicate the PK's leading prefix: every bulk-import INSERT
+--                           would maintain a second, strictly worse btree, and no query
+--                           could ever prefer it (the PK also covers end_seconds, which
+--                           list_windows and count_windows read). NOT created.
+--   * transcript_segments   same situation: PK (build_id, start_seconds, end_seconds)
+--                           already serves every (build_id, start_seconds) access shape,
+--                           including ASR's bulk segment INSERT path. NOT created.
+--   * visual_builds / description_builds  the three search WHERE clauses filter
+--                           (config_key = key AND state = 'ready' / '<> ready'), but the
+--                           only indexes were PK(id) and UNIQUE(recording_id, config_key);
+--                           neither leads with config_key, so the predicate could only run
+--                           as a heap filter - on a memoized PK probe in the cold plan,
+--                           on a whole-table seq scan in the warm plan. These two
+--                           composites are the genuinely missing access paths and are
+--                           the whole content of this file.
+--   * pgvector ANN indexes (HNSW/IVF) were considered and rejected: search_visual orders
+--                           by (embedding <=> q, r.id, w.start_seconds, b.id) and pgvector
+--                           indexes are approximate, so they would change result contents
+--                           and order - a behavior contract change, out of scope here.
+--
+-- MEASUREMENT (honest, demo scale, controlled): EXPLAIN (ANALYZE, BUFFERS) on the live
+-- app database (8 recordings, 214 visual_windows, 489 description_windows, 1 ready
+-- transcript build with 6 segments; default all-videos scope, limit 10, budget 40).
+-- Method: warm-cache runs on both sides, toggling ONLY the two indexes of this file
+-- (the queries were run twice per side and the second run kept). A first cold-cache
+-- run before the upgrade (5.3 / 49.5 / 1.9 ms, buffers read from disk) is excluded as
+-- cold-cache noise, not an index effect.
+--   search_visual      without indexes: Execution Time 1.580 ms; with: 1.532 ms.
+--   search_descriptions without indexes: Execution Time 29.578 ms; with: 25.495 ms.
+--   search_speech      without indexes: Execution Time 1.041 ms; with: 0.837 ms.
+--   Plan shapes are IDENTICAL on both sides for all three queries (verified by diffing
+--   the plans with timing/buffer lines removed). The differences above are single-run
+--   noise. CONCLUSION AT THIS SCALE: no measurable win, and none is claimed - the
+--   planner correctly prefers sequential scans on 4- and 8-row build tables.
+--   Servability check (forced, enable_seqscan=off; a usability check, not a win):
+--   the search predicate "config_key = .. AND state = 'ready'" is served by both new
+--   indexes with both columns as Index Cond. The indexes exist for libraries with many
+--   recordings (one build row per recording per config key), where they let the planner
+--   probe the build side by (config_key, state) equality instead of filtering whole-table
+--   or PK-probe scans, as it must today.
+--   The dominant measured cost in search_descriptions (roughly 25-30 ms of it) is the
+--   lexical CTE recomputing to_tsvector per scoped row; the existing GIN index cannot
+--   serve a filter applied inside a CTE scan. Fixing that means changing search SQL,
+--   not adding indexes, and stays outside this migration.
+--
+-- IDEMPOTENCY: both statements use IF NOT EXISTS, so replaying this migration on an
+-- upgraded database is a no-op. No tables or columns are added, dropped or altered.
+
+CREATE INDEX IF NOT EXISTS visual_builds_config_state ON visual_builds (config_key, state);
+CREATE INDEX IF NOT EXISTS description_builds_config_state ON description_builds (config_key, state);
