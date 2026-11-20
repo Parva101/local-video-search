@@ -95,7 +95,18 @@ Smoke 2079044 FAILED 1:0 after 4:08, and the monitor caught it automatically. Th
 
 Honest two-failure reading: the two smoke failures have different, precisely diagnosed causes — the first was environment contamination, the second a container type. This is a designed re-plan for a newly identified cause, not a blind third retry: the fix converts the loaded rows with `datasets.Dataset.from_list` (datasets 5.2.0 is already in the venv), committed as `7b4f48c` and hash-verified on both machines. **Smoke attempt 3: job 2080864** (one A100, 1 h wall). The monitor watch list now tracks 2080864; the alert for 2079044 clears on the next healthy poll. Check: `sacct -j 2080864`; log: `logs/finetune-smoke-2080864.log`; pass marker: `runs/finetune-v1/smoke-gate.json`. If this attempt fails on a further cause, stop and re-plan the training stack itself (for example a purpose-built training image) instead of iterating on the same one.
 
+### Heartbeat protocol — 20 November 2026 (user requirement)
+
+The agent cannot self-wake; a session turn needs one message. So the user's role is reduced to a single-word heartbeat, and any session receiving it executes this playbook in order without asking anything:
+
+1. Read `.codex-backups/sol-monitor/ALERT.md` and the tail of `monitor.jsonl`.
+2. If smoke 2080864 (or its successor) is **running or queued**: report the state; nothing else to do.
+3. If it **passed** (`runs/finetune-v1/smoke-gate.json` exists): verify the gate, then submit the full run — `cd /scratch/psheta12/video-search-finetune-20261120 && FINETUNE_ROOT=$PWD FINETUNE_MODE=train sbatch --account=class_cse59889474fall2026 --time=08:00:00 project/scripts/sol/finetune-vlm.sbatch` — add the new job to `watch.json`, report job ID, log path and check command, and leave it running.
+4. If it **failed**: diagnose from the alert's log tail; a third distinct cause means stop and re-plan the training stack (purpose-built image) instead of resubmitting.
+5. When the full run completes: fetch the adapter hashes, run the acceptance eval (held-out coffee fixtures and pilot controls against the hosted records), record the verdict honestly in PLAN/DECISIONS, and only on a pass wire it into the app's Qwen client as a pinned revision.
+
 ### Automated Sol monitoring — 20 November 2026 (user requirement)
+
 
 Long jobs are never left unwatched. `scripts/monitor_sol_jobs.ps1` (committed) polls the jobs in `.codex-backups/sol-monitor/watch.json` and is registered as the Windows scheduled task **VideoSearchSolMonitor** (every 10 minutes, 30-day repetition). Each poll appends to `monitor.jsonl`; any watched job reaching a state needing attention (FAILED, COMPLETED, TIMEOUT, CANCELLED, OUT_OF_MEMORY, NODE_FAIL) writes `ALERT.md` with the job's log tail and clears itself when all watched jobs are healthy. Rule recorded in AGENTS.md item 7 and RULES.md: any new session reads `ALERT.md` first, diagnoses from the tail, records the fix in PLAN.md, and resubmits only under the two-failure rule. New long jobs get added to `watch.json`. The monitor proved itself on the night of 19-20 November: it caught smoke failure 2079044 automatically, with the log tail ready for diagnosis.
 
