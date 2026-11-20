@@ -426,6 +426,7 @@ function answerCard(candidate, checked, rank) {
     times.append(time);
   }
   card.append(times);
+  card.append(node("p", "small muted", `Model checked ${checked.samples.length} ${checked.samples.length === 1 ? "frame" : "frames"} in this source check.`));
   const details = node("details", "answer-details");
   details.append(node("summary", "", checked.reference ? "Search seed description & checked scope" : "Search description & checked scope"));
   details.append(node("p", "", candidate.description?.summary || "No description was returned."));
@@ -492,7 +493,12 @@ function transcriptCard(item) {
   button.addEventListener("click", () => playAt(item.media_url, item.start_seconds, item.end_seconds));
   times.append(button);
   card.append(times);
-  card.append(node("p", "small muted", `From ${item.source_path.split("/").pop()}. Transcript text is an automatic estimate or supplied subtitles, not a model-verified visual check.`));
+  const build = state.transcriptBuilds.find((entry) => entry.id === item.build_id);
+  const origin = build?.spec?.source === "asr" ? "local ASR"
+      : build?.spec?.source === "subtitle" ? `supplied subtitles (${build.spec.format})` : "";
+  card.append(node("p", "small muted", origin
+      ? `From ${item.source_path.split("/").pop()} · transcript from ${origin}. ${build.spec.source === "subtitle" ? "Subtitle text is supplied, not a model-verified visual check." : "ASR text is an automatic estimate, not a model-verified visual check."}`
+      : `From ${item.source_path.split("/").pop()}. Transcript text is an automatic estimate or supplied subtitles, not a model-verified visual check.`));
   return card;
 }
 
@@ -524,7 +530,7 @@ byId("query-form").addEventListener("submit", async (event) => {
       const scope = scopeDates(query);
       const result = await post("/search", {query, path: "speech", limit: 12, ...target, ...((scope.start || scope.end) ? {start_date: scope.start, end_date: scope.end} : {})});
       if (!result.results.length) {
-        byId("answer-list").append(node("p", "empty-small", "No transcript matches. Recordings without a speech index were not searched."));
+        byId("answer-list").append(node("p", "empty-small", "No transcript matches. Build a speech index with the 'Index speech (local ASR)' button in your library; recordings without one were not searched."));
       }
       for (const item of result.results) byId("answer-list").append(transcriptCard(item));
       byId("query-progress").textContent = `${result.results.length} transcript ${result.results.length === 1 ? "match" : "matches"}. Transcript text is an estimate or supplied subtitles; it is not a model-verified visual check.${scope.mode !== "all" ? ` Time scope: ${scope.start || "…"}${scope.end && scope.end !== scope.start ? ` to ${scope.end}` : ""}${scope.fromText ? " (detected in your question)" : ""}.` : ""}`;

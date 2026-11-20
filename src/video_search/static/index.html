@@ -6,8 +6,8 @@
   <meta name="color-scheme" content="light">
   <title>Local Video Search</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="/static/app.css?v=0.6">
-  <script src="/static/app.js?v=0.6" defer></script>
+  <link rel="stylesheet" href="/static/app.css?v=0.7">
+  <script src="/static/app.js?v=0.7" defer></script>
 </head>
 <body>
   <header class="masthead">
@@ -53,7 +53,7 @@
             </select>
             <p id="path-note" class="small muted">Speech search returns transcript matches with playback; descriptions get model-checked evidence.</p>
             <label class="check-row" for="count-mode"><input id="count-mode" type="checkbox"> Count all occurrences in the selected video (experimental)</label>
-            <label class="check-row" for="all-videos"><input id="all-videos" type="checkbox"> Search every indexed video in this library</label>
+            <label class="check-row" for="all-videos"><input id="all-videos" type="checkbox"> Search every indexed video in this library (checks every recording, slower)</label>
             <label for="search-policy" class="small">Search method</label>
             <select id="search-policy" name="policy" aria-describedby="policy-note">
               <option value="adaptive">Distinct moments and follow-up checks (experimental)</option>
