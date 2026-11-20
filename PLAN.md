@@ -101,7 +101,16 @@ Smoke 2080864 FAILED 1:0 after 1:50 on a third distinct cause: `datasets.Dataset
 
 Re-planned stack, committed `c9c401c` and hash-verified on both machines: the trainer is now a **plain PyTorch loop** — peft LoRA (proven: 40.3M trainable params), a collator we control, prompt-masked labels with right padding, OneCycleLR, gradient clipping, epoch checkpoints — with **no trl and no datasets anywhere in the path**. The whole integration-failure class is removed rather than patched a fourth time. Smoke limit raised to 192 samples so the 20-step gate is reachable in one epoch.
 
-**Smoke attempt 4: job 2093596** (one A100, 1 h wall), tracked in the monitor watch list. Check: `sacct -j 2093596`; log: `logs/finetune-smoke-2093596.log`; pass marker: `runs/finetune-v1/smoke-gate.json`. A fourth distinct cause stops everything for a ground-up rethink, not another iteration.
+### Fourth failure: my own path bug; ground-up audit and local pre-flight — 20 November 2026
+
+Smoke 2093596 FAILED 1:0 after 2:48 on a fourth distinct cause, this one mine: the dataset was built on Windows, so image paths in the JSONL carried backslashes, and the loader also joined the `frames/` prefix twice (`dataset/frames/frames\00009\00.jpg`). Per the escalation rule, this triggered the ground-up audit rather than another patch-and-pray:
+
+- Source fixed: the builder now emits posix paths (`as_posix()`).
+- Loader made platform-proof: any separator is normalized, the frames prefix stripped, paths resolved against the dataset root, and the run **refuses to start if any image does not resolve**.
+- File-handle pressure fixed too: images open lazily per batch and close after the processor call.
+- **Local pre-flight added**: the exact `load_rows` code ran against the local dataset copy before submission — all 258 train + 58 eval rows load and every path resolves. Data-path issues can no longer reach Sol; if anything is off, the job fails in seconds on the CPU, before the GPU is touched.
+
+Committed `7c2815f`, hash-verified on both machines. **Smoke attempt 5: job 2094734** (one A100, 1 h wall), tracked in the watch list. Check: `sacct -j 2094734`; log: `logs/finetune-smoke-2094734.log`; pass marker: `runs/finetune-v1/smoke-gate.json`.
 
 ### Heartbeat protocol — 20 November 2026 (user requirement)
 
@@ -662,3 +671,4 @@ Steps, each with its proof (all done):
 3. Send-time behavior: find again, restore, focus, verify the foreground window, then one ENTER; any failure sends no key; system sleep blocked while waiting. Proof: real run `--in 6s` — window found, focused, "ENTER sent" at the target second. One bug fixed on first retry: SetThreadExecutionState is a kernel32 export, not user32.
 4. Honest limits given: PC on and unlocked, terminal left open, hands off the keyboard at send time.
 5. Live test on the OpenCode desktop app, 20 November 2026 ~01:06: armed `--in 2m` against "Scheduled keyboard Enter sender — OpenCode"; the log proves focus and ENTER at 01:06:01; the user's "hi got the msg?" arrived as the next turn after the fire. One finder change was required and made for this test: terminal windows are valid targets (only the tool's own console is skipped). End-to-end proof completes when the user confirms that text was the unsubmitted input-box content.
+6. Title-mutation failure and fix, 20 November 2026: the 01:50 clock-time run refused to send (log: no window matches the arm-time title; OpenCode had renamed the same window, hwnd unchanged). Fix, user-approved: pin the handle at arm time, use it at send time while alive, fall back to title search only if the pinned window is gone. Proof: reproduced the failure on a sacrificial window renamed mid-countdown from "PinTestWindow-1234" to "PinTestWindow-9999" — the tool used the pinned handle, focused the renamed window, and the window's own keydown log recorded "ENTER received 07:49:19.339" at the fire second. Re-arm for the real payload is on hold for the user's word.
