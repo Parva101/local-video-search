@@ -239,7 +239,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def health(request: Request):
         if not store.ready(request.app.state.settings.database_url):
             raise HTTPException(503, "Database schema is not ready")
-        return {"status": "ready"}
+        depth = store.job_queue_depth(request.app.state.settings.database_url)
+        return {"status": "ready", "schema_version": store.SCHEMA_VERSION,
+                "job_queue": {"queued": depth.get("queued", 0), "running": depth.get("running", 0)}}
 
     @app.get("/", include_in_schema=False)
     def home():
@@ -277,6 +279,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get("/jobs")
     def jobs(request: Request, limit: int = Query(default=100, ge=1, le=1000)):
+        """List jobs, newest first. Page cap: limit 1..1000 (default 100)."""
         return store.list_jobs(request.app.state.settings.database_url, limit)
 
     @app.get("/jobs/{job_id}")
@@ -302,6 +305,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     @app.get("/recordings")
     def recordings(request: Request, limit: int = Query(default=100, ge=1, le=1000)):
+        """List recordings, newest first. Page cap: limit 1..1000 (default 100)."""
         return store.list_recordings(request.app.state.settings.database_url, limit)
 
     @app.post("/recordings/capture-dates/from-files")
@@ -340,6 +344,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/visual-indexes")
     def indexes(request: Request, recording_id: UUID | None = None,
                 limit: int = Query(default=100, ge=1, le=1000)):
+        """List visual index builds, newest first. Page cap: limit 1..1000 (default 100)."""
         return store.list_visual_builds(request.app.state.settings.database_url,
                                         str(recording_id) if recording_id else None, limit)
 
@@ -363,6 +368,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/description-indexes")
     def description_indexes(request: Request, recording_id: UUID | None = None,
                             limit: int = Query(default=100, ge=1, le=1000)):
+        """List description index builds, newest first. Page cap: limit 1..1000 (default 100)."""
         return store.list_description_builds(request.app.state.settings.database_url,
                                             str(recording_id) if recording_id else None, limit)
 
@@ -404,6 +410,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.get("/transcript-indexes")
     def transcript_indexes(request: Request, recording_id: UUID | None = None,
                            limit: int = Query(default=100, ge=1, le=1000)):
+        """List transcript index builds, newest first. Page cap: limit 1..1000 (default 100)."""
         return store.list_transcript_builds(request.app.state.settings.database_url,
                                             str(recording_id) if recording_id else None, limit)
 
@@ -428,6 +435,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             recordings = [item for item in recordings if str(item["id"]) in wanted]
         events, checked, uncertain, skipped_undated, partition_total = [], 0, 0, 0, 0
         stop_reason = "scope_exhausted"
+        partition_progress = []
         for recording in recordings:
             capture = recording["capture_date"]
             if (body.start_date is not None or body.end_date is not None) and capture is None:
@@ -441,9 +449,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             total = store.count_windows(config.database_url, recording_id,
                                         body.start_seconds, body.end_seconds)
             partition_total += total
+            partition_checked = 0
             if checked >= body.max_checks or total == 0:
                 if checked >= body.max_checks:
                     stop_reason = "budget_exhausted"
+                partition_progress.append({"recording_id": recording_id, "total": total, "checked": partition_checked})
                 continue
             offset = 0
             while checked < body.max_checks:
@@ -461,6 +471,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                         continue
                     verification = analysis.verify(config, recording, body.query, start, end, 0)
                     checked += 1
+                    partition_checked += 1
                     status = verification["result"]["status"]
                     if status == "match":
                         _merge_event(events, recording_id, start, end,
@@ -468,6 +479,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     elif status == "insufficient_evidence":
                         uncertain += 1
                 offset += len(windows)
+            partition_progress.append({"recording_id": recording_id, "total": total, "checked": partition_checked})
             if checked >= body.max_checks and partition_total > checked:
                 stop_reason = "budget_exhausted"
         complete = stop_reason != "budget_exhausted"
@@ -476,6 +488,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             "result_type": "observed_event_count",
             "partitions": {"total": partition_total, "checked": checked, "uncertain": uncertain,
                            "skipped_undated": skipped_undated, "complete": complete},
+            "partition_progress": partition_progress,
             "stop_reason": stop_reason,
             "elapsed_seconds": time.perf_counter() - started,
             "honesty_note": ("The count covers only checked partitions; unchecked or uncertain intervals are not "
@@ -627,6 +640,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def windows(recording_id: UUID, request: Request,
                 limit: int = Query(default=100, ge=1, le=1000),
                 offset: int = Query(default=0, ge=0)):
+        """List one recording's windows in time order. Page cap: limit 1..1000, offset 0+."""
         recording_or_404(request, recording_id)
         return store.list_windows(request.app.state.settings.database_url, str(recording_id), limit, offset)
 

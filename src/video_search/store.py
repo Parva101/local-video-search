@@ -3,6 +3,7 @@
 import hashlib
 import json
 import math
+import re
 from datetime import date, datetime, timedelta, timezone
 from contextlib import contextmanager
 from pathlib import Path
@@ -126,9 +127,19 @@ def _check_page(limit, offset=0):
 
 
 def list_jobs(database_url, limit=100):
+    """List jobs, newest first. Page cap: limit 1..1000."""
     _check_page(limit)
     with _connect(database_url) as conn:
         return conn.execute("SELECT * FROM jobs ORDER BY created_at DESC, id LIMIT %s", (limit,)).fetchall()
+
+
+def job_queue_depth(database_url):
+    """Count queued and running jobs for the health endpoint."""
+    with _connect(database_url) as conn:
+        rows = conn.execute(
+            "SELECT state, count(*) AS depth FROM jobs WHERE state IN ('queued', 'running') GROUP BY state"
+        ).fetchall()
+    return {row["state"]: row["depth"] for row in rows}
 
 
 def claim_job(database_url, lease_seconds=60):
@@ -274,6 +285,7 @@ def get_recording(database_url, recording_id):
 
 
 def list_recordings(database_url, limit=100):
+    """List recordings, newest first. Page cap: limit 1..1000."""
     _check_page(limit)
     with _connect(database_url) as conn:
         return conn.execute(
@@ -323,6 +335,7 @@ def capture_dates_from_files(database_url, utc_offset_minutes, recording_ids=Non
 
 
 def list_windows(database_url, recording_id, limit=100, offset=0):
+    """List one recording's windows in time order. Page cap: limit 1..1000, offset 0+."""
     _check_page(limit, offset)
     with _connect(database_url) as conn:
         return conn.execute(
@@ -396,6 +409,7 @@ def get_visual_build(database_url, build_id):
 
 
 def list_visual_builds(database_url, recording_id=None, limit=100):
+    """List visual index builds, newest first. Page cap: limit 1..1000."""
     _check_page(limit)
     with _connect(database_url) as conn:
         return conn.execute(_VISUAL_BUILDS + " WHERE (%s::uuid IS NULL OR b.recording_id = %s) ORDER BY b.created_at DESC, b.id LIMIT %s",
@@ -574,6 +588,7 @@ def get_description_build(database_url, build_id):
 
 
 def list_description_builds(database_url, recording_id=None, limit=100):
+    """List description index builds, newest first. Page cap: limit 1..1000."""
     _check_page(limit)
     with _connect(database_url) as conn:
         return conn.execute(_DESCRIPTION_BUILDS + " WHERE (%s::uuid IS NULL OR b.recording_id = %s) ORDER BY b.created_at DESC, b.id LIMIT %s",
@@ -763,6 +778,7 @@ def get_transcript_build(database_url, build_id):
 
 
 def list_transcript_builds(database_url, recording_id=None, limit=100):
+    """List transcript index builds, newest first. Page cap: limit 1..1000."""
     _check_page(limit)
     with _connect(database_url) as conn:
         return conn.execute(_TRANSCRIPT_BUILDS + " WHERE (%s::uuid IS NULL OR b.recording_id = %s) ORDER BY b.created_at DESC, b.id LIMIT %s",
@@ -868,7 +884,10 @@ def search_speech(database_url, query, query_vector, limit=10, recording_ids=Non
     """Search ready transcript segments (ASR or supplied subtitles) with dense and lexical ranks.
 
     All transcript segments share the pinned 384-dimensional text embedding space, so every
-    ready build is searched rather than one configuration key.
+    ready build is searched rather than one configuration key. When the query contains a
+    double-quoted phrase, the longest quoted phrase gets a bounded boost: lexical matches
+    whose text contains that phrase (case-insensitive) take the top lexical positions.
+    Queries without quoted text rank exactly as before.
     """
     _check_page(limit)
     vector = _vector_literal(query_vector, 384)
@@ -888,6 +907,9 @@ def search_speech(database_url, query, query_vector, limit=10, recording_ids=Non
     scope_params = (recording_ids, recording_ids, start_seconds, start_seconds, end_seconds, end_seconds)
     params = scope_params + (start_date, start_date, end_date, end_date)
     budget = min(100, limit * 4)
+    quoted = [item.strip() for item in re.findall(r'"([^"]*)"', query)]
+    quoted = [item for item in quoted if item]
+    phrase = max(quoted, key=len) if quoted else None
     with _connect(database_url) as conn:
         results = conn.execute("""WITH scoped AS (
             SELECT s.*, b.recording_id, r.source_path, r.size, r.mtime_ns FROM transcript_segments s
@@ -900,7 +922,8 @@ def search_speech(database_url, query, query_vector, limit=10, recording_ids=Non
         ), lexical AS (
             SELECT build_id, start_seconds, end_seconds,
                 ts_rank_cd(to_tsvector('english', text), plainto_tsquery('english', %s)) AS lexical_rank,
-                row_number() OVER (ORDER BY ts_rank_cd(to_tsvector('english', text), plainto_tsquery('english', %s)) DESC,
+                row_number() OVER (ORDER BY (strpos(lower(text), lower(%s::text)) > 0) DESC,
+                                   ts_rank_cd(to_tsvector('english', text), plainto_tsquery('english', %s)) DESC,
                                    recording_id, start_seconds) AS lexical_position
             FROM scoped WHERE to_tsvector('english', text) @@ plainto_tsquery('english', %s)
             ORDER BY lexical_position LIMIT %s
@@ -917,7 +940,7 @@ def search_speech(database_url, query, query_vector, limit=10, recording_ids=Non
             r.vector_rank, coalesce(r.lexical_rank, 0) AS lexical_rank, r.lexical_position, r.rrf_score
           FROM ranked r JOIN scoped s USING (build_id, start_seconds, end_seconds)
           ORDER BY r.rrf_score DESC, vector_similarity DESC, s.recording_id, s.start_seconds, s.build_id LIMIT %s""",
-                               (*params, vector, budget, query, query, query, budget, vector, limit)).fetchall()
+                               (*params, vector, budget, query, phrase, query, query, budget, vector, limit)).fetchall()
         coverage = conn.execute("""SELECT count(DISTINCT r.id) AS total_recordings,
             count(DISTINCT r.id) FILTER (WHERE EXISTS (SELECT 1 FROM transcript_builds t
                 WHERE t.recording_id = r.id AND t.state = 'ready')) AS ready_recordings,

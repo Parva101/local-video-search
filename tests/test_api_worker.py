@@ -17,7 +17,10 @@ def test_library_identity_requires_absolute_host_path(tmp_path):
 def test_import_worker_playback_and_repeat(database_url, video_file):
     settings = Settings(database_url, video_file.parent)
     with TestClient(create_app(settings)) as client:
-        assert client.get("/health").json() == {"status": "ready"}
+        health = client.get("/health").json()
+        assert health["status"] == "ready"
+        assert health["schema_version"] == store.SCHEMA_VERSION
+        assert set(health["job_queue"]) == {"queued", "running"}
         submitted = client.post("/imports", json={"path": "."})
         assert submitted.status_code == 202, submitted.text
         assert submitted.headers["X-Request-ID"]
