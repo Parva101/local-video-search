@@ -10,6 +10,7 @@ Search your own video archive. Point the app at a folder of recordings — CCTV 
 - **Calendar scoping**: per-recording capture dates, today/this-week/this-month scopes, and date-filtered searches.
 - **Occurrence counting**: budget-bounded scans that count verified events and honestly report partial coverage.
 - **Evidence you can check**: every answer links to source footage at the cited time; saved traces; explicit "not proven absent" limits everywhere.
+- **Sample questions**: a catalog of practical questions with the exact API JSON — see [docs/SAMPLE-QUESTIONS.md](docs/SAMPLE-QUESTIONS.md).
 
 ## Quick start
 
@@ -367,6 +368,34 @@ Folder scans accept up to 10,000 supported files per request and reject links/ju
 
 
 This is a local development service. The bundled database credentials are local defaults. Do not publish its ports or use it as a shared hosted service without access control.
+
+
+
+## Operations
+
+**Where the data lives.** Three Docker volumes hold all app state: `database` (PostgreSQL: recordings, jobs, embeddings and saved traces), `models` (the pinned encoder caches) and `uploads` (browser uploads). Your source folder stays outside Docker, mounted read-only. `docker compose down` keeps these volumes; `docker compose down -v` deletes them.
+
+**Backup.** The database has no published port, so dump it inside the `db` container. A dump contains descriptions and traces of your footage; treat it as private data.
+
+```sh
+docker compose exec db pg_dump -U video -d video -f /tmp/video-backup.sql
+docker compose cp db:/tmp/video-backup.sql ./video-backup.sql
+```
+
+**Restore.** Restore into a fresh database volume; this replaces the current database. Keep the same `VIDEO_DIRECTORY` in `.env`: the database records that directory identity, and startup fails on a mismatch by design.
+
+```sh
+docker compose down
+docker volume rm local-video-search_database
+docker compose up -d --wait db
+docker compose cp ./video-backup.sql db:/tmp/video-backup.sql
+docker compose exec db psql -U video -d video -f /tmp/video-backup.sql
+docker compose up -d --wait
+```
+
+With a custom Compose project name (`docker compose -p`), prefix the volume name with that project. The `models` and `uploads` volumes need no dump: keep them, or download the pinned models again.
+
+**Monitoring.** A Windows scheduled task, `VideoSearchSolMonitor`, polls every 10 minutes for long-running Sol research jobs via [scripts/monitor_sol_jobs.ps1](scripts/monitor_sol_jobs.ps1). It appends to `.codex-backups/sol-monitor/monitor.jsonl` and writes an `ALERT.md` with a log tail when a watched job needs attention. It does not watch the app containers; for those, use the log commands in [Restart and failures](#restart-and-failures).
 
 
 
