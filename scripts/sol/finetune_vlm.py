@@ -91,9 +91,12 @@ def main():
     model.train()
 
     frames_root = args.data / "frames"
-    train_rows = load_dataset(args.data / "train.jsonl", frames_root,
-                              limit=64 if args.smoke else None)
-    eval_rows = load_dataset(args.data / "eval.jsonl", frames_root, limit=8 if args.smoke else None)
+    from datasets import Dataset
+
+    train_rows = Dataset.from_list(load_dataset(args.data / "train.jsonl", frames_root,
+                                                limit=64 if args.smoke else None))
+    eval_rows = Dataset.from_list(load_dataset(args.data / "eval.jsonl", frames_root,
+                                               limit=8 if args.smoke else None))
     event("data_loaded", train=len(train_rows), eval=len(eval_rows), smoke=args.smoke)
 
     from trl import SFTConfig, SFTTrainer
