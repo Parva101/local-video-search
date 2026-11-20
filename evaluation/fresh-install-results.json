@@ -1,0 +1,155 @@
+{
+  "task": "Fresh-install validation: a true clean-volume install exactly as a GitHub user would experience it, before broad announcements.",
+  "date": "2026-11-20",
+  "operator": "Fresh-install engineer (role 36)",
+  "environment": {
+    "host": "Windows (Docker Desktop, Linux engine)",
+    "repo": "github.com/Parva101/local-video-search working tree",
+    "compose_file": "compose.yaml",
+    "main_project": "local-video-search",
+    "throwaway_project": "fresh-install",
+    "api_port": "127.0.0.1:8000 (main api stopped for the test window)"
+  },
+  "baseline_main_app_before_test": {
+    "health": {"status": "ready", "schema_version": 7, "job_queue": {"queued": 0, "running": 0}},
+    "recordings_count": 8,
+    "windows_total": 442,
+    "library_fingerprint_sha256": "9e0d260022da84c300b117ca5f85334ff0cf2c2f193c706bfb7e606c382c51a4",
+    "fingerprint_method": "SHA-256 over newline-joined sorted 'recording_id:sha256' pairs from GET /recordings?limit=1000"
+  },
+  "steps": [
+    {
+      "step": 1,
+      "action": "Stop the main app without deleting data",
+      "command": "docker compose stop api worker",
+      "result": "api and worker stopped; db left running with its data volume untouched; port 8000 freed; no 'down -v' run at any point on the main project",
+      "main_volumes_kept": ["local-video-search_database", "local-video-search_models", "local-video-search_uploads"]
+    },
+    {
+      "step": 2,
+      "action": "Create proof root and two generated test videos",
+      "commands": [
+        "ffmpeg -f lavfi -i color=c=red:s=320x240:d=4:r=10 -pix_fmt yuv420p -movflags +faststart red-clip.mp4",
+        "ffmpeg -f lavfi -i color=c=blue:s=320x240:d=4:r=10 -pix_fmt yuv420p -movflags +faststart blue-clip.mp4"
+      ],
+      "result": "two ~4 s solid-color clips (2754 and 2755 bytes) in C:/Users/parvs/AppData/Local/Temp/opencode/fresh-install-proof/videos"
+    },
+    {
+      "step": 3,
+      "action": "Copy .env to a temp env with VIDEO_DIRECTORY pointed at the proof root",
+      "result": "temp env file with VIDEO_DIRECTORY=C:/Users/parvs/AppData/Local/Temp/opencode/fresh-install-proof/videos; other variables copied unchanged (API key value not recorded here)",
+      "command": "docker compose -p fresh-install --env-file <temp env> up --build -d --wait",
+      "timings_seconds": {"up_build_wait_wall": 15.2},
+      "clean_volume_proof": "fresh-install_uploads, fresh-install_database and fresh-install_models volumes created new by this project; the models volume started empty (no downloaded models); the fresh project never touched local-video-search volumes",
+      "image_caveat": "all image layers were CACHED on this machine; a brand-new machine adds the first-build image pull (README: PyTorch, app packages, FFmpeg, PostgreSQL with pgvector). The 15.2 s timing proves compose bring-up, not cold download time."
+    },
+    {
+      "step": 4,
+      "action": "Verify fresh install health (fresh database from zero migrations)",
+      "request": "GET /health",
+      "response": {"status": "ready", "schema_version": 7, "job_queue": {"queued": 0, "running": 0}},
+      "note": "schema 7 created from zero on the new fresh-install_database volume"
+    },
+    {
+      "step": 5,
+      "action": "Import the proof folder",
+      "request": "POST /imports {\"path\":\".\"}",
+      "timings_seconds": {"post": 2.16, "wait_until_both_succeeded": 2.1},
+      "response_summary": {
+        "count": 2,
+        "jobs": [
+          {"source_path": "blue-clip.mp4", "state": "succeeded", "attempts": 1, "recording_id": "934c5616-c34d-46f3-8391-9caafb6306cd"},
+          {"source_path": "red-clip.mp4", "state": "succeeded", "attempts": 1, "recording_id": "3cbb4551-67bc-48bb-9952-42d148604342"}
+        ]
+      }
+    },
+    {
+      "step": 6,
+      "action": "Request visual index on the red-clip recording (models volume empty by design; models NOT downloaded)",
+      "request": "POST /recordings/3cbb4551-67bc-48bb-9952-42d148604342/visual-index",
+      "timings_seconds": {"wait_to_failed_state": 8.2},
+      "result": {
+        "build_id": "765f6174-382f-4d2c-b167-27cbb2926eca",
+        "state": "failed",
+        "completed_windows": 0,
+        "total_windows": 1,
+        "job_error": {
+          "code": "model_not_installed",
+          "message": "Run python -m video_search.encoder download before indexing or searching"
+        },
+        "worker_log_event": "visual_index_failed with the same code and message, job_id 847e5f01-fdce-4b07-9fcb-8ad01c8a8441"
+      }
+    },
+    {
+      "step": 7,
+      "action": "Search the fresh install",
+      "request": "POST /search {\"query\":\"a red frame\",\"path\":\"visual\",\"limit\":3}",
+      "timings_seconds": {"request": 6.89},
+      "result": {
+        "http_status": 503,
+        "body": {
+          "code": "model_not_installed",
+          "message": "Run python -m video_search.encoder download before indexing or searching",
+          "request_id": "81153df6-dcff-423f-ae44-64f869a4affb"
+        }
+      },
+      "recording_states_after": [
+        {"source_path": "red-clip.mp4", "search_index_status": "failed", "windows_count": 1},
+        {"source_path": "blue-clip.mp4", "search_index_status": "not_built", "windows_count": 1}
+      ]
+    },
+    {
+      "step": 8,
+      "action": "Tear down the throwaway project completely",
+      "command": "docker compose -p fresh-install --env-file <temp env> down -v",
+      "result": "containers removed; fresh-install_uploads, fresh-install_models and fresh-install_database volumes removed; fresh-install_default network removed; no fresh-install resources remain"
+    },
+    {
+      "step": 9,
+      "action": "Remove temp artifacts",
+      "result": "temp env file, proof videos directory and request files deleted"
+    },
+    {
+      "step": 10,
+      "action": "Restart and verify the main app",
+      "commands": ["docker compose up -d --wait"],
+      "timings_seconds": {"restart_wall": 6.9},
+      "health_after_restart": {"status": "ready", "schema_version": 7},
+      "library_integrity": {
+        "recordings_count": 8,
+        "windows_total": 442,
+        "library_fingerprint_sha256": "9e0d260022da84c300b117ca5f85334ff0cf2c2f193c706bfb7e606c382c51a4",
+        "fingerprint_matches_baseline": true,
+        "functional_search_check": {
+          "request": "POST /search {\"query\":\"a cup under a coffee machine\",\"path\":\"visual\",\"limit\":1}",
+          "http_status": 200,
+          "seconds": 5.6,
+          "result": "real visual candidate returned for the qwen-coffee-demo recording; the main search path works end to end after restart"
+        }
+      },
+      "note": "compose up printed a pre-existing warning that the local-video-search_models volume was not created by Compose; health, search and data were unaffected and it was not touched (outside this lane)"
+    }
+  ],
+  "first_run_ux_gaps": [
+    "Visual indexing and visual search both require the separate one-time SigLIP2 download step. With a clean models volume, POST visual-index fails with code 'model_not_installed' and message 'Run python -m video_search.encoder download before indexing or searching', and POST /search returns HTTP 503 with the same message. This is explicit and actionable, not a silent empty result — but a first-run user who skips the download step cannot search at all.",
+    "The README quick start does document the download command as its second step, so the gap is expectation-setting, not a missing instruction.",
+    "Import and folder scan work with zero models: a fresh user can bring the app up and import videos immediately; only model-dependent paths fail honestly."
+  ],
+  "timings_summary_seconds": {
+    "compose_up_build_wait": 15.2,
+    "imports_post": 2.16,
+    "imports_wait_both_succeeded": 2.1,
+    "visual_index_attempt_to_failed": 8.2,
+    "search_request_to_503": 6.89,
+    "teardown_down_v": 8.0,
+    "main_app_restart": 6.9,
+    "main_app_functional_search": 5.6
+  },
+  "honest_limits": [
+    "Image layers were cached on this machine; the 15.2 s up time does not measure a cold first build with PyTorch and package downloads.",
+    "The proof library was two 4-second solid-color clips; it proves the import path and error behavior, not search quality.",
+    "Models were intentionally not downloaded, so no successful visual search was performed inside the fresh project; the success-path search was proven on the main app instead.",
+    "The main db was stopped only indirectly (never stopped; it kept running during the whole test) — data volume never at risk."
+  ],
+  "verdict": "PASS: a GitHub user's clean-volume install works from zero — compose up --build brings a fresh database to schema 7 in 15.2 s, imports two videos in ~2 s, and every model-dependent path fails with the explicit 'model_not_installed' message pointing at the documented download step. The main app restarted healthy with its library byte-identical (8 recordings, 442 windows, fingerprint match) and functional search. Pre-announcement validation for the fresh-machine Compose run is satisfied on this machine; the cold-image-download timing remains the only unmeasured component."
+}
