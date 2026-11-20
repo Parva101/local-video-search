@@ -110,7 +110,13 @@ Smoke 2093596 FAILED 1:0 after 2:48 on a fourth distinct cause, this one mine: t
 - File-handle pressure fixed too: images open lazily per batch and close after the processor call.
 - **Local pre-flight added**: the exact `load_rows` code ran against the local dataset copy before submission — all 258 train + 58 eval rows load and every path resolves. Data-path issues can no longer reach Sol; if anything is off, the job fails in seconds on the CPU, before the GPU is touched.
 
-Committed `7c2815f`, hash-verified on both machines. **Smoke attempt 5: job 2094734** (one A100, 1 h wall), tracked in the watch list. Check: `sacct -j 2094734`; log: `logs/finetune-smoke-2094734.log`; pass marker: `runs/finetune-v1/smoke-gate.json`.
+Committed `7c2815f`, hash-verified on both machines. ### Attempt 5 failed at 08:59; Sol SSH outage blocks diagnosis — 20 November 2026
+
+Smoke 2094734 FAILED 1:0 after 2:34 (recorded by the monitor at 08:59). Diagnosis is blocked: Sol's SSH endpoint stopped answering (banner-exchange timeouts from both the monitor's scheduled polls and direct attempts), so the log tail on scratch is unreachable until ASU recovers. The failure after a passing local path pre-flight points at the next untested stage — batch construction or the first forward pass.
+
+A real monitor bug was found and fixed (`8c54568`): the old script cleared ALERT.md whenever a poll failed, which silently erased the 08:59 failure alert during the outage. Failed polls now preserve any existing alert, and three consecutive failures announce monitor blindness. The first successful poll after recovery re-raises the attempt-5 alert with its log tail, because 2094734 stays in the watch list.
+
+Next, in order: when Sol answers, fetch `logs/finetune-smoke-2094734.log`, diagnose the fifth cause, and apply the escalation rule honestly — a fifth distinct cause in my own loop means the smoke is still doing its job, but the campaign pauses for a written decision on whether the plain-loop approach needs a different base plan rather than another fix.
 
 ### Heartbeat protocol — 20 November 2026 (user requirement)
 

@@ -1,3 +1,7 @@
+When a scheduled sender targets a window by title and the wait is long, pin the window handle at arm time and use that handle at send time; window titles mutate (OpenCode renames its session window as the chat grows), and a send-time title lookup fails on the renamed window.
+
+When a ctypes call fails with "function not found", check the function's documented owning DLL first; SetThreadExecutionState lives in kernel32, not user32.
+
 When a clean Apptainer environment runs a Slurm GPU job, explicitly forward the scheduler's CUDA_VISIBLE_DEVICES mask.
 
 When the user asks for performance research, rank paper-backed ideas first; implement only the selected experiments and judge them against a strong control.
@@ -25,6 +29,8 @@ When a rebuilt container serves changed static assets, force-refresh the cached 
 When a pip pin conflicts with a dependency's own requirement (nncore's opencv-python next to our headless pin), both get installed into one target and the collision wins silently at import; constrain the dependency or install it with --no-deps.
 
 When pip installs into a `--target` directory, its dependencies (including torch) land there and PYTHONPATH shadowing breaks the container's compiled operators; build a venv with `--system-site-packages` inside the container and pin the container's versions as constraints so incompatibilities fail at install time.
+
+When a monitor cannot reach the system it watches, it must keep any existing alert and announce blindness; clearing the alert on a failed poll is worse than having no monitor.
 
 # Lessons
 
