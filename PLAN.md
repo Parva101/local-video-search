@@ -136,6 +136,12 @@ This local-first round still caught the biggest remaining bug before wasting ano
 
 **Smoke attempt 7: job 2111242** on Sol (one A100, 1 h wall), scripts hash-verified on both machines, tracked in the watch list. Check: `sacct -j 2111242`; log: `logs/finetune-smoke-2111242.log`; pass marker: `runs/finetune-v1/smoke-gate.json`.
 
+### SMOKE PASSED — full training submitted — 20 November 2026
+
+**Smoke attempt 7 (job 2111242) COMPLETED 0:0 in 3:54.** The gate file proves it: 20 optimizer steps over 192 train samples, and a 161 MB LoRA adapter saved (`runs/finetune-v1/adapter-smoke/`, safetensors + configs). Seven smoke attempts in total, each failure a distinct, precisely diagnosed cause — environment shadowing, trl API, Arrow schema, path separators, the processor key contract, missing gradient checkpointing — with the last two fixes coming from the user-directed local 3080 validation. The complete training path now runs end to end: load, LoRA attach, checkpointing, batch, forward, backward, optimizer, scheduler, adapter save.
+
+**Full run submitted: job 2111550** (`FINETUNE_MODE=train`, 2 epochs over 258 samples, one A100, 2 h wall — the smoke's pace projects minutes of actual training). Tracked in the watch list; log: `logs/finetune-train-2111550.log`. On completion, the heartbeat protocol runs the acceptance eval: the adapter against the held-out coffee fixtures and pilot controls versus the hosted Gemma records, recorded honestly in PLAN/DECISIONS, and only a pass wires it into the app's Qwen client as a pinned revision.
+
 ### Heartbeat protocol — 20 November 2026 (user requirement)
 
 The agent cannot self-wake; a session turn needs one message. So the user's role is reduced to a single-word heartbeat, and any session receiving it executes this playbook in order without asking anything:
