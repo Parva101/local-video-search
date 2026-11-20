@@ -1,0 +1,185 @@
+{
+  "purpose": "Real Qwen inference and backend engineering smoke test; not a public benchmark or training result.",
+  "model_id": "Qwen/Qwen3.6-27B",
+  "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+  "container_oci_digest": "sha256:51fdfe717fa0505c177dddc46bd38c22fc1f2156ba14d1b1cd63f78eaa60fd32",
+  "container_sha256": "56027dde1469ff1b6a0b11916277977469924797b49ea14a9ca052c112fa9cf7",
+  "versions": {
+    "vllm": "0.20.0+cu129",
+    "transformers": "5.6.2",
+    "torch": "2.11.0+cu129",
+    "huggingface-hub": "1.12.0"
+  },
+  "prepare_job_id": "587887",
+  "driver_version": "615.71.09",
+  "settings": {
+    "dtype": "bfloat16",
+    "tensor_parallel_size": 1,
+    "max_model_len": 8192,
+    "max_num_seqs": 1,
+    "enforce_eager": true,
+    "gpu_memory_utilization": 0.9,
+    "max_images": 8,
+    "min_pixels": 65536,
+    "max_pixels": 262144,
+    "structured_outputs_backend": "xgrammar",
+    "disable_any_whitespace": true,
+    "python_user_site_enabled": false
+  },
+  "gpu_observations": [
+    {
+      "job_id": "588274",
+      "gpu_indices": [
+        "0"
+      ],
+      "name": "NVIDIA A100-SXM4-80GB",
+      "total_memory_mib": 81920,
+      "peak_used_mib": 73521.0,
+      "peak_used_gib": 71.7978515625,
+      "sample_count": 934,
+      "weights_load_seconds": [
+        122.9
+      ],
+      "reported_model_memory_gib": [
+        51.08
+      ]
+    },
+    {
+      "job_id": "589241",
+      "gpu_indices": [
+        "0"
+      ],
+      "name": "NVIDIA A100-SXM4-80GB",
+      "total_memory_mib": 81920,
+      "peak_used_mib": 73559.0,
+      "peak_used_gib": 71.8349609375,
+      "sample_count": 353,
+      "weights_load_seconds": [
+        49.25
+      ],
+      "reported_model_memory_gib": [
+        51.08
+      ]
+    }
+  ],
+  "compact_runtime_successful_requests": [
+    {
+      "task": "describe",
+      "start_seconds": 8.0,
+      "end_seconds": 18.0,
+      "elapsed_seconds": 12.547732715000166,
+      "usage": {
+        "total_tokens": 1994,
+        "prompt_tokens": 1818,
+        "completion_tokens": 176,
+        "prompt_tokens_details": null
+      },
+      "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b"
+    },
+    {
+      "task": "describe",
+      "start_seconds": 16.0,
+      "end_seconds": 22.0,
+      "elapsed_seconds": 13.581817852998938,
+      "usage": {
+        "total_tokens": 2011,
+        "prompt_tokens": 1821,
+        "completion_tokens": 190,
+        "prompt_tokens_details": null
+      },
+      "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b"
+    },
+    {
+      "task": "describe",
+      "start_seconds": 0.0,
+      "end_seconds": 10.0,
+      "elapsed_seconds": 16.388383199999225,
+      "usage": {
+        "total_tokens": 1999,
+        "prompt_tokens": 1812,
+        "completion_tokens": 187,
+        "prompt_tokens_details": null
+      },
+      "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b"
+    },
+    {
+      "task": "verify",
+      "case_id": "cup-visible",
+      "elapsed_seconds": 12.747292984999149,
+      "usage": {
+        "prompt_tokens": 1862,
+        "total_tokens": 1959,
+        "completion_tokens": 97,
+        "prompt_tokens_details": null
+      },
+      "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4"
+    },
+    {
+      "task": "verify",
+      "case_id": "person-absent",
+      "elapsed_seconds": 4.898545734000436,
+      "usage": {
+        "prompt_tokens": 1853,
+        "total_tokens": 1913,
+        "completion_tokens": 60,
+        "prompt_tokens_details": null
+      },
+      "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4"
+    }
+  ],
+  "request_latency_note": "Includes HTTP transfer, model work and response validation. Five calls are not a throughput benchmark.",
+  "compact_description_index_seconds": 51.45056,
+  "median_successful_request_seconds": 12.747292984999149,
+  "index_windows": 3,
+  "index_frame_slots": 24,
+  "index_job_id": "eec56990-75b1-4d68-bb4f-83184b9ded93",
+  "quality": {
+    "provisional_positive_queries": 2,
+    "recall_at_1_iou_0_3": {
+      "visual": 0.0,
+      "description": 0.5,
+      "hybrid": 0.0
+    },
+    "verification_statuses_correct": 2,
+    "verification_cases": 2
+  },
+  "limits": [
+    "Labels were assigned by the coding assistant, without independent human review.",
+    "One 22-second recording with only three windows cannot establish general quality.",
+    "Sparse frames cannot prove absence in unsampled time.",
+    "The initial caption asserted an action involving a static white marking; human review is needed.",
+    "Equal rank fusion lost the cup result that description search ranked first."
+  ],
+  "source_code_sha256": {
+    "src/video_search/__init__.py": "e759aa22b3f95a2578b79f6a2dfba807d3bd89fb8bce6bfdf900ee763b5593be",
+    "src/video_search/analysis.py": "bd86dd9831df76b2540258c758d92e0d04967b8ba54ff338bed4707f9441d742",
+    "src/video_search/api.py": "dd9d9514de6ea10e3f63b132f777ac7ae83bb821e40c16a5dc40d910fcc88ae1",
+    "src/video_search/config.py": "1fd6ece8f2eeb21ea6bab76529144c86bef2cbf0e5aad9c628941778eb364838",
+    "src/video_search/encoder.py": "e70c5cd8e9211041ab88bfb0eea1eac08819563e9dad705bb7ad1e032b1b839d",
+    "src/video_search/frames.py": "73c363152b21da9d414c73f47c7b26b460db0e753262688d6658a8b2cebc5612",
+    "src/video_search/log.py": "7473a7ac6ef71e4cc028790dbae4c0463ebd263c7f7eca0f28cf927a5844e9c2",
+    "src/video_search/media.py": "8f772d4a0730b0ce8443f45be203997808d2b3cc4f02dbb9f35e69051c4adb6e",
+    "src/video_search/migrations/002_visual.sql": "7519b4f34b37f79136c7795e3259f94e6e21fca3a200c0213ff41ff23253ddde",
+    "src/video_search/migrations/003_descriptions.sql": "204a5664b639e6429bdd8d585bccc912bd46d7658f8c7f8404ebb7ec045ca212",
+    "src/video_search/schema.sql": "4c97f0020327aed5cab6ca9e28cadfd9c5712acf7646a16ced9b953910f70a9a",
+    "src/video_search/store.py": "4a05588bb46c55b9985fe5aa3e65d50fb06ea93a9122daacbb7fcf38e7676aa0",
+    "src/video_search/text_encoder.py": "3a758ed9ba87c2b0dd79cb73b8c2705449446e71cb559263637cc2a884a83bcd",
+    "src/video_search/vlm.py": "6faf72641bd843b977981774a48841182ef05f941c78b25310f64db437650080",
+    "src/video_search/worker.py": "f49b0742dd20e910191d3676be0a5f54056609960120882a5d629a6238309a1b",
+    "scripts/sol/prepare-qwen.sbatch": "7f4eaacd03a9e8f83512160f206bf7a1539d40c30a59832f8707c6dbd4f0a975",
+    "scripts/sol/prepare_qwen.py": "697651886da966c7a223fe4a1c5299c1a4f1cc5610f5ab80f8485d387f7ed3f3",
+    "scripts/sol/serve-qwen.sbatch": "f767f4773a876d3a3080bac7d00675ec7e17ba43c3a33e90a7ec7b77151bf28b"
+  },
+  "active_sol_jobs_after_cleanup": 0,
+  "model_endpoint_cleared": true,
+  "offline_restart_check": {
+    "search_worked": true,
+    "saved_verifications_worked": true,
+    "live_verification_status": 503,
+    "live_verification_code": "vlm_not_configured",
+    "description_top_interval": [
+      16,
+      22
+    ]
+  }
+}

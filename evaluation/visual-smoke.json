@@ -1,0 +1,20 @@
+{
+  "name": "synthetic-color-timeline-v1",
+  "purpose": "Engineering smoke test only; not a public benchmark",
+  "source_filename": "visual-smoke.mp4",
+  "frame_rate": 4,
+  "width": 64,
+  "height": 64,
+  "segments": [
+    {"color": "red", "start_seconds": 0, "end_seconds": 8},
+    {"color": "blue", "start_seconds": 8, "end_seconds": 16},
+    {"color": "green", "start_seconds": 16, "end_seconds": 24}
+  ],
+  "queries": [
+    {"query": "a red image", "start_seconds": 0, "end_seconds": 8},
+    {"query": "a blue image", "start_seconds": 8, "end_seconds": 16},
+    {"query": "a green image", "start_seconds": 16, "end_seconds": 24}
+  ],
+  "iou_threshold": 0.5,
+  "k": 1
+}

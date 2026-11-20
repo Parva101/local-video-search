@@ -1,0 +1,82 @@
+{
+  "purpose": "Bounded Qwen runtime tests; no training.",
+  "jobs": [
+    {
+      "job_id": "587931",
+      "state": "FAILED",
+      "started_at": "2026-11-06T07:59:04.000Z",
+      "ended_at": "2026-11-06T07:59:24.000Z",
+      "elapsed_seconds": 20,
+      "time_limit_minutes": 20,
+      "requested": {
+        "cpu": 8,
+        "mem_mb": 98304,
+        "node": 1,
+        "billing": 60,
+        "gres/gpu": 1,
+        "gres/gpu:a100": 1
+      },
+      "allocated": {
+        "cpu": 8,
+        "mem_mb": 98304,
+        "energy": 28177,
+        "node": 1,
+        "billing": 60,
+        "gres/gpu": 1,
+        "gres/gpu:a100": 1
+      }
+    },
+    {
+      "job_id": "588274",
+      "state": "CANCELLED",
+      "started_at": "2026-11-06T08:02:03.000Z",
+      "ended_at": "2026-11-06T08:17:37.000Z",
+      "elapsed_seconds": 934,
+      "time_limit_minutes": 20,
+      "requested": {
+        "cpu": 8,
+        "mem_mb": 98304,
+        "node": 1,
+        "billing": 60,
+        "gres/gpu": 1,
+        "gres/gpu:a100": 1
+      },
+      "allocated": {
+        "cpu": 8,
+        "mem_mb": 98304,
+        "energy": 1625022,
+        "node": 1,
+        "billing": 60,
+        "gres/gpu": 1,
+        "gres/gpu:a100": 1
+      }
+    },
+    {
+      "job_id": "589241",
+      "state": "CANCELLED",
+      "started_at": "2026-11-06T08:17:42.000Z",
+      "ended_at": "2026-11-06T08:23:35.000Z",
+      "elapsed_seconds": 353,
+      "time_limit_minutes": 20,
+      "requested": {
+        "cpu": 8,
+        "mem_mb": 98304,
+        "node": 1,
+        "billing": 60,
+        "gres/gpu": 1,
+        "gres/gpu:a100": 1
+      },
+      "allocated": {
+        "cpu": 8,
+        "mem_mb": 98304,
+        "energy": 634365,
+        "node": 1,
+        "billing": 60,
+        "gres/gpu": 1,
+        "gres/gpu:a100": 1
+      }
+    }
+  ],
+  "total_allocated_gpu_seconds": 1307,
+  "active_sol_jobs_after_cleanup": 0
+}

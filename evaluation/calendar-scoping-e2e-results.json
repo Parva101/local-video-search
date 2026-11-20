@@ -1,0 +1,37 @@
+{
+  "flow": "file-derived capture dates -> keyword-detected time scope -> scoped evidence search -> negative scope",
+  "recorded_date": "2026-11-19 (America/Phoenix)",
+  "migration": {
+    "from": "schema v4",
+    "to": "schema v5",
+    "change": "recordings.capture_date and recordings.capture_date_source (additive)",
+    "live_upgrade": "the running application database upgraded at container startup; all recordings and indexes unchanged"
+  },
+  "bulk_file_dates": {
+    "recordings_updated": 7,
+    "utc_offset_minutes": -420,
+    "rule": "dates derive from each recording's stored modification time; only recordings without a date are updated; a user-set date is never overwritten"
+  },
+  "positive_case": {
+    "query": "Did the robot move a cup under the machine today?",
+    "scope": "detected from the question: 2026-11-19",
+    "result": "match in one source check of 8 frames at 17.88-20.14 seconds",
+    "note_shown": "Time scope: 2026-11-19 (detected in your question). Recordings without a capture date were skipped."
+  },
+  "negative_case": {
+    "scope_selected": "yesterday (2026-11-18)",
+    "result": "no indexed candidates, zero source checks",
+    "note_shown": "No more candidates remain in this search... Time scope: 2026-11-18. Recordings without a capture date were skipped.",
+    "honesty": "the page still states that no match does not prove absence"
+  },
+  "tests": {
+    "focused": "8 passed, 1 model-gated skip (Docker)",
+    "full_model_enabled_regression": "524 passed, 2 private-checkout skips, 2 existing warnings"
+  },
+  "limits": [
+    "Capture dates are calendar days, not instants; a recording spanning midnight is counted on its start date only.",
+    "File-modification times are an approximation of capture time; users can override any recording's date.",
+    "Free-text detection covers only today, yesterday, this/last week and this/last month, and shows the applied scope; explicit selector choices remain authoritative.",
+    "Recordings without a capture date are skipped by scoped searches and reported in coverage."
+  ]
+}

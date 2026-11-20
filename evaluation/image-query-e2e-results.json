@@ -1,0 +1,48 @@
+{
+  "flow": "browser upload -> hosted description index -> visual index -> reference-image + text query -> one source check -> playback",
+  "recorded_date": "2026-11-19 (America/Phoenix)",
+  "recording": {
+    "source": "qwen-coffee-demo.mp4, fresh browser upload through /uploads",
+    "duration_seconds": 22.0,
+    "windows": 3,
+    "description_index": "hosted gemma4-31b-it, ready before the query",
+    "visual_index": "built through the new browser control before the query"
+  },
+  "query": "A robot moves a clear cup under the machine.",
+  "reference_image": {
+    "origin": "frame extracted from the same recording at 18.5 seconds",
+    "format": "PNG",
+    "bytes": 308912
+  },
+  "retrieval": {
+    "path": "hybrid",
+    "vector_recipe": "unit-sum-text-image-l2-v1",
+    "query_image_preprocess": "pil-rgb-max512-v1",
+    "ui_behavior": "attaching an image switched the request to the hybrid path and disabled the reranked and extent policy options"
+  },
+  "result": {
+    "status": "match",
+    "observation": "A robot arm moves a clear cup and places it under the machine's dispenser between 17.88 and 20.14 seconds.",
+    "interval_seconds": [17.88, 20.14],
+    "source_checks": 1,
+    "frames": 8,
+    "stop_reason": "match_found"
+  },
+  "playback": {
+    "seek_seconds": 17.88,
+    "ready_state": 4
+  },
+  "browser": {
+    "console_errors": 0
+  },
+  "tests": {
+    "focused_image_query_tests": "3 passed (Docker, RUN_MODEL_TESTS=1)",
+    "full_model_enabled_regression": "521 passed, 2 private-checkout skips, 2 existing warnings"
+  },
+  "limits": [
+    "The reference image steers retrieval only; the source check verifies the text query against sampled frames and never receives the image.",
+    "Image similarity is not proof of identity or action.",
+    "Sparse samples do not prove absence from the rest of a recording.",
+    "One recording and one query; not a benchmark or accuracy claim."
+  ]
+}

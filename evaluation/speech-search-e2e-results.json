@@ -1,0 +1,47 @@
+{
+  "flow": "local Whisper ASR -> transcript segments -> browser speech search -> transcript playback",
+  "recorded_date": "2026-11-19 (America/Phoenix)",
+  "migration": {
+    "from": "schema v5",
+    "to": "schema v6",
+    "change": "transcript_builds and transcript_segments; jobs kind 'transcript'",
+    "live_upgrade": "the running application database upgraded at container startup; all recordings and indexes unchanged"
+  },
+  "asr": {
+    "model": "openai/whisper-base",
+    "revision": "e37978b90ca9030d5170a5c07aadb050351a65bb",
+    "runtime": "local CPU, transformers, chunked 30-second windows",
+    "recording": "qvhighlights-pizza-example.mp4, 150.02 seconds of real recorded audio",
+    "trigger": "the browser 'Index speech (local ASR)' control",
+    "wall_seconds": 76,
+    "segments": 6,
+    "sample_transcript": "It literally just came out of the oven (147.08-149.04 s)",
+    "origin_rule": "audio-stream-start-assumed-zero-v1; segment ends are clamped to the imported duration"
+  },
+  "browser_search": {
+    "query": "the bread came out of the oven at the market",
+    "path": "speech",
+    "top_match": "It literally just came out of the oven",
+    "top_interval_seconds": [147.08, 149.04],
+    "matches": 6,
+    "playback_seek_seconds": 147.08,
+    "honest_note_shown": "Transcript text is an estimate or supplied subtitles; it is not a model-verified visual check.",
+    "console_errors": 0
+  },
+  "subtitles": {
+    "api": "POST /recordings/{id}/subtitles with srt or vtt content",
+    "behavior": "parsed, validated against the recording duration, embedded with the pinned MiniLM encoder, published as a ready build; identical re-import is idempotent",
+    "test_coverage": "parser units, store-level search, and a real-model subtitle search test all pass"
+  },
+  "tests": {
+    "speech_suite": "5 passed (Docker, RUN_MODEL_TESTS=1, including real ASR on a generated spoken fixture)",
+    "full_model_enabled_regression": "529 passed, 2 private-checkout skips, 2 existing warnings"
+  },
+  "limits": [
+    "Whisper timestamps assume the audio stream starts at source time zero; recordings with a nonzero audio origin are not offset-corrected yet.",
+    "ASR text is an estimate; names and exact wording can be wrong. Supplied subtitles stay a separate labeled source.",
+    "Speech results carry no visual verification; the source check path remains visual-only.",
+    "Transcript jobs restart the whole recording on retry; there is no per-segment checkpoint.",
+    "One 150-second recording; not a word-error-rate benchmark."
+  ]
+}

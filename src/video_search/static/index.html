@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Local Video Search</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/app.css?v=0.6">
+  <script src="/static/app.js?v=0.6" defer></script>
+</head>
+<body>
+  <header class="masthead">
+    <a class="brand" href="/" aria-label="Local Video Search home"><span class="brand-mark" aria-hidden="true">V</span>Local Video Search</a>
+    <span class="local-badge"><span aria-hidden="true"></span>Local workspace</span>
+  </header>
+  <main>
+    <div class="page-heading"><div><p class="eyebrow">YOUR VIDEO LIBRARY</p><h1>Find the moment.</h1><p class="intro">Upload a video. Ask what happened. Check the footage.</p></div><span id="model-name" class="model-name">Connecting…</span></div>
+    <div id="page-error" class="error" role="alert" hidden></div>
+    <div class="workspace">
+      <aside class="library-panel" aria-label="Video library">
+        <section class="upload-section" aria-labelledby="upload-heading">
+          <div class="section-heading"><span class="step-number">01</span><h2 id="upload-heading">Add a video</h2></div>
+          <form id="upload-form">
+            <label class="file-label" for="video-file"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 16V4m-4 4 4-4 4 4M4 15v5h16v-5"/></svg><span>Choose a video file</span></label>
+            <input id="video-file" name="video" type="file" accept=".mp4,.mkv,.mov,.avi,.webm,.m4v,.mts,.m2ts,.mpeg,.mpg" aria-describedby="file-note file-name" required>
+            <p id="file-name" class="file-name">No file selected</p>
+            <p id="file-note" class="small muted">Checking the upload limit…</p>
+            <button id="upload-button" type="submit" class="primary full" disabled>Upload &amp; index</button>
+          </form>
+          <div id="upload-progress-wrap" class="upload-progress" hidden><label for="upload-progress" id="upload-progress-label">Uploading</label><progress id="upload-progress" max="100" value="0"></progress></div>
+          <p id="upload-message" class="small status-message" role="status" aria-live="polite"></p>
+          <div id="upload-error" class="error" role="alert" hidden></div>
+          <p class="privacy-note">The video stays on this computer. Selected frames are sent to ASU’s hosted model for indexing and answers.</p>
+        </section>
+        <section class="recordings-section" aria-labelledby="library-heading">
+          <div class="section-heading library-heading"><h2 id="library-heading">Your videos</h2><span id="library-count" class="count">0</span><button id="file-dates-button" class="secondary small-button" type="button" title="Set capture dates from each file's modification time for recordings that have no date yet.">Use file dates</button></div>
+          <div id="recordings" class="recordings"><p class="empty-small">Loading your library…</p></div>
+          <div id="pending-jobs" class="pending-jobs" aria-live="polite"></div>
+        </section>
+      </aside>
+      <div class="main-panel">
+        <section class="question-section" aria-labelledby="question-heading">
+          <div class="section-heading"><span class="step-number">02</span><h2 id="question-heading">Ask about the footage</h2></div>
+          <p id="selected-video" class="selection-note">Select an indexed video from your library.</p>
+          <form id="query-form">
+            <label for="query" class="sr-only">Your question</label>
+            <textarea id="query" name="query" rows="2" maxlength="1000" placeholder="Find when the robot places the cup under the coffee machine." required aria-describedby="query-note"></textarea>
+            <label for="search-path" class="small">Search path</label>
+            <select id="search-path" name="path" aria-describedby="path-note">
+              <option value="description">Descriptions with model checks</option>
+              <option value="speech">Speech and subtitles</option>
+            </select>
+            <p id="path-note" class="small muted">Speech search returns transcript matches with playback; descriptions get model-checked evidence.</p>
+            <label class="check-row" for="count-mode"><input id="count-mode" type="checkbox"> Count all occurrences in the selected video (experimental)</label>
+            <label class="check-row" for="all-videos"><input id="all-videos" type="checkbox"> Search every indexed video in this library</label>
+            <label for="search-policy" class="small">Search method</label>
+            <select id="search-policy" name="policy" aria-describedby="policy-note">
+              <option value="adaptive">Distinct moments and follow-up checks (experimental)</option>
+              <option value="reranked">Local reranking and follow-up checks (experimental)</option>
+              <option value="extent">Event start and end with local reranking (experimental)</option>
+              <option value="ranked">Ranked results (baseline)</option>
+            </select>
+            <p id="policy-note" class="small muted">All methods use up to three source checks. Event search can check nearby frames to estimate the start and end.</p>
+            <label for="time-scope" class="small">Time scope</label>
+            <select id="time-scope" name="scope" aria-describedby="scope-note">
+              <option value="all">All recorded time</option>
+              <option value="today">Today</option>
+              <option value="yesterday">Yesterday</option>
+              <option value="week">Last 7 days</option>
+              <option value="month">Last 30 days</option>
+              <option value="custom">Custom range…</option>
+            </select>
+            <div id="scope-custom" class="scope-custom" hidden><input id="scope-start" type="date" aria-label="Scope start date"><span class="small muted">to</span><input id="scope-end" type="date" aria-label="Scope end date"></div>
+            <p id="scope-note" class="small muted">Scopes use each recording's capture date. Set dates in your library; recordings without a date are skipped.</p>
+            <label class="file-label compact" for="query-image"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.2"/><path d="m5 17 4-4 3 3 3-3 4 4"/></svg><span>Attach a reference image (optional)</span></label>
+            <input id="query-image" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="query-image-name">
+            <p id="query-image-name" class="file-name">No image attached. With an image, search combines image similarity and description text.</p>
+            <div class="query-footer"><p id="query-note" class="small muted">Visible actions and objects. Speech and exact counts are not supported yet.</p><button id="ask-button" type="submit" class="primary" disabled>Find &amp; check <span aria-hidden="true">↗</span></button></div>
+          </form>
+          <p id="query-progress" class="small status-message" role="status" aria-live="polite"></p>
+          <div id="query-error" class="error" role="alert" hidden></div>
+        </section>
+        <section class="results-section" aria-labelledby="results-heading">
+          <div class="section-heading"><span class="step-number">03</span><h2 id="results-heading">Answers &amp; evidence</h2></div>
+          <p class="evidence-note">Answers use up to three checks of sampled source frames. A follow-up check examines an uncertain moment or nearby event edges. Check the video: the model can miss or misread events. No match does not prove absence from the full video.</p>
+          <div id="answer-list" class="answers" aria-live="polite"><div class="empty-answer"><span class="empty-glyph" aria-hidden="true">⌕</span><h3>Your evidence will appear here</h3><p>Ask a question to find and check relevant moments.</p></div></div>
+          <div id="player-wrap" class="player-wrap" hidden><div class="player-heading"><h3>Source footage</h3><span id="player-caption" class="small muted"></span></div><video id="player" controls preload="metadata" playsinline aria-label="Source video"></video><p id="playback-error" class="error" role="alert" hidden></p></div>
+        </section>
+      </div>
+    </div>
+    <footer>Local storage · Source timestamps · Model answers you can check</footer>
+  </main>
+</body>
+</html>

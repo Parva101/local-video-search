@@ -1,0 +1,12 @@
+.env
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.codex-backups/
+media/*
+!media/.gitkeep
+
+# Browser captures can contain private footage and model traces.
+.playwright-cli/

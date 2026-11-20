@@ -1,0 +1,34 @@
+{
+  "flow": "browser count mode -> partition-by-partition hosted verification -> merged occurrences -> honest partial-scan reporting",
+  "recorded_date": "2026-11-19 (America/Phoenix)",
+  "endpoint": "POST /count-events",
+  "semantics": {
+    "partitions": "the recording's registered windows, in source order",
+    "verification": "the existing visual source check (eight sampled frames) per partition, zero extra context",
+    "merge_rule": "verified occurrences whose spans overlap within half a second become one event; each event keeps every supporting verification ID",
+    "budget": "max_checks (default 60, at most 500) bounds hosted checks; exhausted scans report partial counts",
+    "uncertain": "insufficient_evidence partitions are counted and reported, never treated as absence",
+    "date_scope": "the same capture-date scoping as search; undated recordings are skipped and reported"
+  },
+  "real_browser_run": {
+    "recording": "qwen-coffee-demo.mp4 fresh upload, 22.0 seconds, 3 windows",
+    "query": "the robot arm moves a cup",
+    "result": "1 occurrence",
+    "partitions": "3 of 3 checked, complete scan",
+    "event_span_seconds": [16.4, 20.1],
+    "merge_behavior": "the same cup action was reported by two adjacent overlapping windows and merged into one event",
+    "note_shown": "The count covers only checked partitions; unchecked or uncertain intervals are not proven absent, and nearby separate events can merge into one occurrence.",
+    "console_errors": 0
+  },
+  "tests": {
+    "count_suite": "6 passed ungated against a labelled local VLM fixture (validation, merge, separate events, partial budget, uncertain partitions, date-scope skip)",
+    "full_model_enabled_regression": "535 passed, 2 private-checkout skips, 2 existing warnings"
+  },
+  "limits": [
+    "A count is an observed count over checked partitions, never proof of the true total; partial scans say so.",
+    "Occurrences within half a second merge into one event; two distinct events closer than that cannot be separated by this rule.",
+    "Sparse eight-frame sampling can miss brief actions inside a checked partition.",
+    "Long recordings need many hosted checks; the budget stops scans and reports what remains.",
+    "One 22-second demo; not a counting-accuracy benchmark."
+  ]
+}

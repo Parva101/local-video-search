@@ -1,0 +1,160 @@
+{
+  "name": "synthetic-color-timeline-v1",
+  "scope": "Synthetic engineering smoke test; not a public benchmark",
+  "spec": {
+    "model_id": "google/siglip2-base-patch16-224",
+    "revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+    "dimensions": 768,
+    "preprocess_version": "ffmpeg-max512-siglip-native-pil-rgb-v1",
+    "sampling_version": "window-sixth-mid-five-sixths-after-or-window-first-pts-v1",
+    "frames_per_window": 3,
+    "pooling": "mean-l2-frame-then-l2-window",
+    "runtime": "torch-2.9.0-transformers-4.57.6-pillow-12.1.0-cpu-float32-v1"
+  },
+  "source_sha256": "fe303f965f8eaf69f326630840d124f1cc9582b524726ee212f41932e4c29b37",
+  "source_seconds": 24,
+  "recording_id": "4aa9e25b-3324-4b5e-9500-5764325637f4",
+  "build_id": "e2395750-b9d1-4fe0-9fee-89c06dc2c120",
+  "source_code_sha256": "09eb968a5cef1f2ce7d99beb849d3b2d1850ec33ed212c311058be15080ccb86",
+  "corpus_recordings": 2,
+  "ready_recordings": 1,
+  "index_wall_seconds": 8.261259300001257,
+  "top1_iou_at_0_5": 1.0,
+  "mean_iou": 0.8666666666666667,
+  "queries": [
+    {
+      "query": "a red image",
+      "expected": [
+        0,
+        8
+      ],
+      "predicted": [
+        0.0,
+        10.0
+      ],
+      "correct_recording": true,
+      "iou": 0.8,
+      "similarity": 0.13005976051626456,
+      "timing": {
+        "encode_seconds": 5.481168059000083,
+        "search_seconds": 0.02139798400003201,
+        "total_seconds": 5.502566793999904
+      },
+      "samples": [
+        {
+          "selection": "at_or_after_request",
+          "pts_seconds": 1.75,
+          "source_seconds": 1.75,
+          "requested_seconds": 1.6666666666666665
+        },
+        {
+          "selection": "at_or_after_request",
+          "pts_seconds": 5.0,
+          "source_seconds": 5.0,
+          "requested_seconds": 5.0
+        },
+        {
+          "selection": "at_or_after_request",
+          "pts_seconds": 8.5,
+          "source_seconds": 8.5,
+          "requested_seconds": 8.333333333333334
+        }
+      ]
+    },
+    {
+      "query": "a blue image",
+      "expected": [
+        8,
+        16
+      ],
+      "predicted": [
+        8.0,
+        18.0
+      ],
+      "correct_recording": true,
+      "iou": 0.8,
+      "similarity": 0.12670757631704688,
+      "timing": {
+        "encode_seconds": 0.08348385099998268,
+        "search_seconds": 0.020159267999588337,
+        "total_seconds": 0.10364381999988836
+      },
+      "samples": [
+        {
+          "selection": "at_or_after_request",
+          "pts_seconds": 9.75,
+          "source_seconds": 9.75,
+          "requested_seconds": 9.666666666666666
+        },
+        {
+          "selection": "at_or_after_request",
+          "pts_seconds": 13.0,
+          "source_seconds": 13.0,
+          "requested_seconds": 13.0
+        },
+        {
+          "selection": "at_or_after_request",
+          "pts_seconds": 16.5,
+          "source_seconds": 16.5,
+          "requested_seconds": 16.333333333333336
+        }
+      ]
+    },
+    {
+      "query": "a green image",
+      "expected": [
+        16,
+        24
+      ],
+      "predicted": [
+        16.0,
+        24.0
+      ],
+      "correct_recording": true,
+      "iou": 1.0,
+      "similarity": 0.14148041605949402,
+      "timing": {
+        "encode_seconds": 0.07898435300012352,
+        "search_seconds": 0.01851363700006914,
+        "total_seconds": 0.09749868200015044
+      },
+      "samples": [
+        {
+          "selection": "at_or_after_request",
+          "pts_seconds": 17.5,
+          "source_seconds": 17.5,
+          "requested_seconds": 17.333333333333332
+        },
+        {
+          "selection": "at_or_after_request",
+          "pts_seconds": 20.0,
+          "source_seconds": 20.0,
+          "requested_seconds": 20.0
+        },
+        {
+          "selection": "at_or_after_request",
+          "pts_seconds": 22.75,
+          "source_seconds": 22.75,
+          "requested_seconds": 22.666666666666668
+        }
+      ]
+    }
+  ],
+  "warm_query_samples": 9,
+  "warm_p50_seconds": 0.08944501500036495,
+  "warm_max_seconds": 0.10542830400027015,
+  "warm_query_seconds": [
+    0.09952207800006363,
+    0.09866038699965429,
+    0.08549368600006346,
+    0.08944501500036495,
+    0.10542830400027015,
+    0.08758611400025984,
+    0.09331729099994845,
+    0.08358925699985775,
+    0.084975231000044
+  ],
+  "restart_persistence_verified": true,
+  "cold_query_after_restart_seconds": 4.416287816000022,
+  "timing_conditions": "Warm queries measured after test completion and API/worker restart; API server timing excludes HTTP transport. Initial indexing ran alongside a test-image build. Small synthetic sample, not a throughput benchmark."
+}

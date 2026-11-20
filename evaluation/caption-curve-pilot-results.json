@@ -1,0 +1,76 @@
+{
+  "bootstrap_unit": "source-video; 2000 resamples; seed 20261114",
+  "candidate_oracle_R1_IoU_0.5": 0.6956521739130435,
+  "candidate_oracle_mean_IoU": 0.5723377015616192,
+  "evaluation_status": "exploratory-previously-exposed-69-query-subset",
+  "freeze_sha256": "96255f3ed5f8da96c77b14d4c4df4ababaae265825af204a21260ec26bf3d807",
+  "limits": [
+    "Caption estimates, not per-frame evidence; same old cached inputs.",
+    "Previously exposed pilot; no independent test, novelty or SOTA claim.",
+    "Single-interval decoder can merge repeated events; relative scores cannot prove absence.",
+    "No source inspection calls; original caption/index costs belong to the previous pilot."
+  ],
+  "manifest_sha256": "f4934cc3ae8ae4a1b6a598457929921ca6cceb57b39732d2980626c99bfcc2b6",
+  "methods": {
+    "curve_contrast": {
+      "R1_IoU_0.3": 0.6666666666666666,
+      "R1_IoU_0.5": 0.43478260869565216,
+      "R1_IoU_0.7": 0.17391304347826086,
+      "mean_IoU": 0.41314141316188724
+    },
+    "curve_selected": {
+      "R1_IoU_0.3": 0.6376811594202898,
+      "R1_IoU_0.5": 0.43478260869565216,
+      "R1_IoU_0.7": 0.2028985507246377,
+      "mean_IoU": 0.4066051466394683
+    },
+    "curve_smoothed": {
+      "R1_IoU_0.3": 0.6666666666666666,
+      "R1_IoU_0.5": 0.43478260869565216,
+      "R1_IoU_0.7": 0.18840579710144928,
+      "mean_IoU": 0.4152106030524715
+    },
+    "curve_unsmoothed": {
+      "R1_IoU_0.3": 0.6811594202898551,
+      "R1_IoU_0.5": 0.43478260869565216,
+      "R1_IoU_0.7": 0.15942028985507245,
+      "mean_IoU": 0.4098964767301526
+    },
+    "raw": {
+      "R1_IoU_0.3": 0.6521739130434783,
+      "R1_IoU_0.5": 0.391304347826087,
+      "R1_IoU_0.7": 0.057971014492753624,
+      "mean_IoU": 0.36991516175032846
+    },
+    "reranked": {
+      "R1_IoU_0.3": 0.6521739130434783,
+      "R1_IoU_0.5": 0.42028985507246375,
+      "R1_IoU_0.7": 0.043478260869565216,
+      "mean_IoU": 0.3589495284000195
+    }
+  },
+  "metrics_are_fractions": true,
+  "new_model_calls": 0,
+  "query_count": 69,
+  "selected_configuration": {
+    "background_weight": 0,
+    "sigma_seconds": 2
+  },
+  "selected_minus_reranked": {
+    "R1_IoU_0.5_delta_95_percent": [
+      -0.09090909090909091,
+      0.1095890410958904
+    ],
+    "mean_IoU_delta_95_percent": [
+      0.005564309383165618,
+      0.08711731747655964
+    ]
+  },
+  "sources": {
+    "decoder": "dd94ebfff770ed4aee6672cab7803f5bde1694abe3edbab5ff5ac5699e009e3a",
+    "evaluator": "dd867b680289b1c40bc73ef55450694384cc1b2678954708146223c4634534fb",
+    "runner": "1338eec960b7fac705a5d89d3624a968024be48508dad7649439eade1e7523c8"
+  },
+  "version": "caption-curve-experiment-v1",
+  "video_count": 25
+}

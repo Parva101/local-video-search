@@ -1,0 +1,10 @@
+.git
+.codex-backups
+.playwright-cli
+.venv
+__pycache__
+.pytest_cache
+media
+research
+*.egg-info
+.env

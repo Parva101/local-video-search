@@ -1,0 +1,808 @@
+{
+  "artifact_version": "charades-point-aware-exploratory-v1",
+  "cache_audit": {
+    "current_protocol_hash": "727f8b038840b1bc4b2352346e87cfb0f1294a7f51efe312cb112229256915f8",
+    "current_vlm_sha256": "dbabbee3ef3107670c6383e785722847ff8078281bca52a23494413d2bc1ffdc",
+    "migration_model_calls": 0,
+    "mode": "only-unlocalized-context-branch-changed",
+    "parent_protocol_hash": "1b0a4a43a5885c1462f4a25e4bcce45097d7c8bfd775c855f0d7e8c4e57a0387",
+    "parent_vlm_sha256": "ac89c91a07fb1874896ea640f4ca973a51dd6306fb43e3fe18d8f5af8acd90aa",
+    "raw_results_changed": false,
+    "reused_cases": {
+      "development": 53,
+      "test": 87
+    }
+  },
+  "comparison_notes": [
+    "Only extent versus uniform_extent isolates source-inspection selection under the same frame-labeling task. Ranked verification uses a different structured source-assessment prompt.",
+    "Points are evidence, not interval hypotheses; remove them before interval ranking. Remaining nonzero spans retain their order; point-only queries get zero IoU.",
+    "Primary formulas are VSLNet-compatible R@1 at IoU .3/.5/.7 and mean top1 IoU; plain R@5 does not reproduce legacy TALL temporal NMS."
+  ],
+  "cost": {
+    "accounting_note": "Global SQLite rows count every real upstream attempt once. Evidence-generation work includes already charged cached calls. Parent/child protocol costs overlap and are not additive; failed historical attempts stay charged.",
+    "cumulative_upstream_elapsed_seconds": 5901.15791033796,
+    "development_evidence_generation_attempts": 53,
+    "development_reused_attempts": 53,
+    "evaluation_evidence_generation_attempts": 414,
+    "evaluation_fresh_attempts": 240,
+    "evaluation_reused_attempts": 174,
+    "global_unique_external_attempts": 1460,
+    "hard_attempt_cap": 1500,
+    "http_status_counts": {
+      "200": 1460
+    },
+    "index_attempts": 186,
+    "latency_scope": "Original successful controller/source-check invocation only. Shared retrieval and index work are excluded. Cached cases retain their original measured latency; this is not fresh-run or full end-to-end latency.",
+    "nonreused_historical_attempts": 803,
+    "provider_reported_completion_tokens": 85463,
+    "provider_reported_prompt_tokens": 3923931,
+    "provider_usage_reported_attempts": 1460,
+    "public_controls_and_exact_source_probe_attempts": 4,
+    "remaining": 40
+  },
+  "data": {
+    "annotation_hashes": {
+      "duration_metadata": "42de4feae0ae2705d847776393637edafce6d8d47cfbf9ed19b8cd182d370155",
+      "test": "fab341679c20b0917173dcffffde367a71113fe63f3a645558cef2ebfbfefb55",
+      "train": "e966fc1970cf6bc4cc73db2dd4fc10e148313810a372eef488defb0dd2ee359f"
+    },
+    "annotation_repository": "https://github.com/26hzhang/VSLNet/tree/3793c625f2e251a5f19a0d59f0c83b12e386f808/data/dataset/charades",
+    "annotation_revision": "3793c625f2e251a5f19a0d59f0c83b12e386f808",
+    "archive_url": "https://ai2-public-datasets.s3-us-west-2.amazonaws.com/charades/Charades_v1_480.zip",
+    "data_redistributed": false,
+    "dataset": "Charades-STA deterministic source-group pilot",
+    "development_queries": 53,
+    "development_videos": 20,
+    "evaluation_clip_seconds_max": 42.8,
+    "evaluation_clip_seconds_min": 16.705727,
+    "evaluation_queries": 69,
+    "evaluation_videos": 25,
+    "license_note": "Media, labels and derived descriptions/traces remain private; review the recovered Charades research license.",
+    "media_bytes": 79522570,
+    "provenance_limit": "Pinned paper-author annotation copy, not byte-compared with the unavailable original TALL release.",
+    "selection_rule": "Ascending SHA256(local-video-search-charades-pilot-v1:{split}:{video_id}); 20 train and 25 test videos, all selected queries.",
+    "videos": 45
+  },
+  "date": "2026-11-08",
+  "diagnostics": {
+    "extent": {
+      "context_unlocalized_checks": 1
+    },
+    "ranked_fixed": {
+      "context_unlocalized_checks": 0
+    },
+    "uniform_extent": {
+      "context_unlocalized_checks": 1
+    }
+  },
+  "engineering_checks": {
+    "context_abstention_network_fixture_passed": true,
+    "exact_failed_source_new_point_contract_probe_passed": true,
+    "existing_warnings": 2,
+    "live_browser_double_submit_one_request": true,
+    "live_browser_empty_input": true,
+    "live_browser_trace_playback_refresh_mobile": true,
+    "model_enabled_regression_tests_passed": 377,
+    "network_fixture_external_model_calls": 0,
+    "older_failed_windows_preserved": 48,
+    "original_description_rows_unchanged": 281,
+    "original_ready_build_windows": 205,
+    "point_display_network_fixture_passed": true
+  },
+  "historical_runs": [
+    {
+      "completed_cases": 53,
+      "error_records": 0,
+      "extent_prompt": "source-sample-extent-json-v5",
+      "note": "Historical state retained; overlapping cached work is not additive.",
+      "phase": "development",
+      "protocol_hash": "1b0a4a43a5885c1462f4a25e4bcce45097d7c8bfd775c855f0d7e8c4e57a0387",
+      "run_variant": "point-aware-pilot-v1",
+      "verification_prompt": "visible-evidence-gemma-verification-json-v2"
+    },
+    {
+      "completed_cases": 8,
+      "error_records": 1,
+      "extent_prompt": "source-sample-extent-json-v4",
+      "note": "Historical state retained; overlapping cached work is not additive.",
+      "phase": "development",
+      "protocol_hash": "4e22aefff6d7a61a501e92792e9ea3084f4c8291d5721059df912fc6df7a05e7",
+      "run_variant": "original",
+      "verification_prompt": "visible-evidence-gemma-verification-json-v1"
+    },
+    {
+      "completed_cases": 44,
+      "error_records": 1,
+      "extent_prompt": "source-sample-extent-json-v2",
+      "note": "Historical state retained; overlapping cached work is not additive.",
+      "phase": "development",
+      "protocol_hash": "753d4e7bf316c3790944bffb7063457d1950ba74775e2c0788b7ca875b5cba67",
+      "run_variant": "original",
+      "verification_prompt": "visible-evidence-gemma-verification-json-v1"
+    },
+    {
+      "completed_cases": 56,
+      "error_records": 1,
+      "extent_prompt": "source-sample-extent-json-v1",
+      "note": "Historical state retained; overlapping cached work is not additive.",
+      "phase": "development",
+      "protocol_hash": "90736ec96212dbf46705b231891a5386998bb43210bf1c6984038fc5255a42f4",
+      "run_variant": "original",
+      "verification_prompt": "visible-evidence-gemma-verification-json-v1"
+    },
+    {
+      "completed_cases": 40,
+      "error_records": 1,
+      "extent_prompt": "source-sample-extent-json-v3",
+      "note": "Historical state retained; overlapping cached work is not additive.",
+      "phase": "development",
+      "protocol_hash": "e77f0f79f0b724cfa9793f05a16543c647111e927a80df45e145400464d3f48d",
+      "run_variant": "original",
+      "verification_prompt": "visible-evidence-gemma-verification-json-v1"
+    },
+    {
+      "completed_cases": 53,
+      "error_records": 0,
+      "extent_prompt": "source-sample-extent-json-v5",
+      "note": "Historical state retained; overlapping cached work is not additive.",
+      "phase": "development",
+      "protocol_hash": "f4312ec9886fd122007465f32ee63c838650b9a8828eff6b4a3b05fd71285112",
+      "run_variant": "original",
+      "verification_prompt": "visible-evidence-gemma-verification-json-v1"
+    },
+    {
+      "completed_cases": 87,
+      "error_records": 1,
+      "extent_prompt": "source-sample-extent-json-v5",
+      "note": "Historical state retained; overlapping cached work is not additive.",
+      "phase": "test",
+      "protocol_hash": "1b0a4a43a5885c1462f4a25e4bcce45097d7c8bfd775c855f0d7e8c4e57a0387",
+      "run_variant": "point-aware-pilot-v1",
+      "verification_prompt": "visible-evidence-gemma-verification-json-v2"
+    },
+    {
+      "completed_cases": 63,
+      "error_records": 2,
+      "extent_prompt": "source-sample-extent-json-v5",
+      "note": "Historical state retained; overlapping cached work is not additive.",
+      "phase": "test",
+      "protocol_hash": "f4312ec9886fd122007465f32ee63c838650b9a8828eff6b4a3b05fd71285112",
+      "run_variant": "original",
+      "verification_prompt": "visible-evidence-gemma-verification-json-v1"
+    }
+  ],
+  "limits": [
+    "Exploratory after prior test-input/protocol exposure; not a pristine untouched test or full-dataset SOTA result.",
+    "Selected short indoor recordings do not establish long-CCTV, multi-video corpus, identity, speech or counting performance.",
+    "Few independent source videos and an unpinned hosted model limit confidence; fingerprint equality does not prove unchanged weights or absence of training-data overlap.",
+    "Event completeness is a model-estimated bracket state. Localization-error proxies do not validate semantic completeness or continuous visibility.",
+    "No model training, full published-method reproduction, novelty proof, speech search, reliable counts, reference-image query or Decider evaluation is claimed."
+  ],
+  "protocol": {
+    "budget_note": "Evaluation caps at 2 checks/16 slots; development caps at 1/8. Distinct-window exhaustion can reduce actual use; report matched-work cases separately.",
+    "candidate_limit": 24,
+    "condition_order_seed": "charades-paired-order-v1",
+    "conditions": [
+      "ranked_fixed",
+      "uniform_extent",
+      "extent"
+    ],
+    "development_conditions": [
+      "extent"
+    ],
+    "development_design": "All development queries validate main extent at one check; all evaluation queries compare all three methods at two checks. Prior protocol exposure is recorded; earlier attempts remain charged.",
+    "development_max_checks": 1,
+    "evaluation_status": "exploratory-after-prior-protocol-exposure",
+    "extent_policy": "seed-anchor-event-brackets-v1",
+    "extent_prompt": "source-sample-extent-json-v5",
+    "identity": "73e6d6cd329c03e710493e434818f3d49df3ed93c77cad444ea8d907a5787af2",
+    "localization_rule": "Context support without a present input sample is an explicit localization abstention; raw judgments are retained.",
+    "max_checks": 2,
+    "max_frame_slots": 16,
+    "model_limit": "Hosted revision is unpinned. Fingerprint equality detects some server changes, not unknown training contamination.",
+    "parent_point_protocol_sha256": "9a4ffdaf39f66f3f9bfcc0cdb737c495aa8578b9a7b1f313976f6c1d7849d9a9",
+    "path": "description",
+    "perception_identity": {
+      "fingerprint": "vllm-0.26.0-tp4-24487d56",
+      "model": "gemma4-31b-it",
+      "revision": "hosted-unpinned"
+    },
+    "prediction_protocol": "Source intervals in model/controller order; points are evidence, not interval hypotheses: remove them before assigning interval ranks; remaining nonzero spans keep relative model/check order. Point-only, partial and null-only answers abstain. No GT merging, clipping or invented duration.",
+    "primary_metrics": "R@1 at IoU .3/.5/.7 and mean top1 IoU; legacy TALL R@5 NMS is not reproduced",
+    "prior_protocol_sha256": "8a1ad2879b2a616653419026df9a97d16a95caaa291007d0d8e00ab08b7c490e",
+    "rerank": true,
+    "reranker": {
+      "max_candidates": 24,
+      "max_tokens": 512,
+      "model_id": "cross-encoder/ms-marco-MiniLM-L6-v2",
+      "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+      "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32-threads4",
+      "score_definition": "raw-classifier-logit-descending-not-probability",
+      "text_recipe": "query-paired-with-summary-actions-objects-space-joined-v1"
+    },
+    "run_variant": "point-aware-context-v2",
+    "runtime": {
+      "ffmpeg": "ffmpeg version 5.1.9-0+deb12u1 Copyright (c) 2000-2026 the FFmpeg developers",
+      "python": "3.12.16",
+      "torch": "2.9.0+cpu",
+      "transformers": "4.57.6"
+    },
+    "source_sha256": {
+      "analysis.py": "4251f16cd758500de2100a841c0607269a78f151665c1bd3816a685e7e95dd4c",
+      "api.py": "4327c65b561b8642c70a78324adbf8c71c2070286dc027683ebb4c2ded0f51c4",
+      "benchmark_budget.py": "a9b07660a6bc2811630c4e896f43149fc6330c4499fd3871899943f4cd4b0129",
+      "benchmark_compare.py": "4a8803f431da4696b3fdd00ce40b135d62317e0da5f6667a41198b2437f73879",
+      "benchmark_run.py": "61fe97f7b29263a632f401de8b7f26fb0138dd3a23a369146de45f8796496452",
+      "evaluation.py": "dd867b680289b1c40bc73ef55450694384cc1b2678954708146223c4634534fb",
+      "evidence.py": "95e45e9872d312fdab22c5e3c034e82bcfd8b4b537a15cacc1f8bc2f2e056d53",
+      "extent.py": "8432273a3352e7990db4facd7fd596631f29733a9a37a2fe4d6bd58b2a84d27e",
+      "frames.py": "73c363152b21da9d414c73f47c7b26b460db0e753262688d6658a8b2cebc5612",
+      "media.py": "2c29fe48590f0343f30951a8d10aa2e8ff1f15b78bcf3e99631e01d88f330285",
+      "reranker.py": "a8faf7f897d35cb0cd88904e77c286bfb0803acaa8090482c405d14dfee38c7d",
+      "store.py": "5bcca50fffad86a88dd9ead019ebbf07f67251879dd350111ba7e5313a35cffc",
+      "text_encoder.py": "3a758ed9ba87c2b0dd79cb73b8c2705449446e71cb559263637cc2a884a83bcd",
+      "vlm.py": "dbabbee3ef3107670c6383e785722847ff8078281bca52a23494413d2bc1ffdc"
+    },
+    "target_protocol": "VSLNet max(0,start), min(raw_end,reference_duration); raw labels preserved",
+    "task": "supplied-video temporal grounding",
+    "verification_prompt": "visible-evidence-gemma-verification-json-v2",
+    "version": "charades-event-extent-pilot-v1"
+  },
+  "protocol_hash": "727f8b038840b1bc4b2352346e87cfb0f1294a7f51efe312cb112229256915f8",
+  "results": {
+    "development": {
+      "comparison_version": "charades-source-paired-point-evidence-v2",
+      "conditions": {
+        "extent": {
+          "abstention_rate": 0.41509433962264153,
+          "boundary_diagnostics": {
+            "complete_claim_localization_failure_rate": 0.8571428571428571,
+            "note": "This is a top-one localization proxy at IoU0.5, not semantic false-completeness ground truth or a count of every event.",
+            "offset_coverage_all_queries": 0.0,
+            "offset_coverage_given_observed": 0.0,
+            "offset_midpoint_mae_seconds": 7.141795250599016,
+            "offset_observed_queries": 14,
+            "onset_coverage_all_queries": 0.018867924528301886,
+            "onset_coverage_given_observed": 0.05263157894736842,
+            "onset_midpoint_mae_seconds": 4.864011107632832,
+            "onset_observed_queries": 19,
+            "top1_complete_claims": 7
+          },
+          "cost": {
+            "actual_full_budget_queries": 53,
+            "actual_three_check_queries": 0,
+            "http_attempts": 53,
+            "input_frame_slots": 424,
+            "latency_p50_seconds": 4.200846861000173,
+            "latency_p95_seconds": 6.092384147999473,
+            "latency_scope": "source-check/controller stage; excludes retrieval and indexing",
+            "logical_calls": 53,
+            "note": "Actual source-check/controller work, excluding retrieval and the shared index. Repeated reference inputs and retries consume slots; provider retry compute is unknown.",
+            "sent_frame_slots": 424,
+            "unique_frames_sum_per_case": 424
+          },
+          "model_supported_query_rate": 0.5849056603773585,
+          "partial_proposals": 8,
+          "point_evidence_count": 0,
+          "point_only_queries": 0,
+          "primary_percent": {
+            "R1@IoU=0.3": 28.30188679245283,
+            "R1@IoU=0.5": 18.867924528301888,
+            "R1@IoU=0.7": 5.660377358490567,
+            "mIoU": 17.89022106576282
+          },
+          "query_count": 53,
+          "rank5_diagnostic_percent": {
+            "0.3": 28.30188679245283,
+            "0.5": 18.867924528301888,
+            "0.7": 5.660377358490567
+          },
+          "strata": {
+            "event_duration": {
+              "over_10_seconds": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 23.529411764705884,
+                  "R1@IoU=0.7": 0.0,
+                  "mIoU": 16.5120237542902
+                },
+                "query_count": 17,
+                "video_count": 9
+              },
+              "over_5_to_10_seconds": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 12.5,
+                  "R1@IoU=0.7": 9.375,
+                  "mIoU": 16.609648162617223
+                },
+                "query_count": 32,
+                "video_count": 17
+              },
+              "up_to_5_seconds": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 50.0,
+                  "R1@IoU=0.7": 0.0,
+                  "mIoU": 33.99214286468618
+                },
+                "query_count": 4,
+                "video_count": 2
+              }
+            },
+            "reference_edge": {
+              "interior": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 17.391304347826086,
+                  "R1@IoU=0.7": 6.521739130434782,
+                  "mIoU": 16.91171206049526
+                },
+                "query_count": 46,
+                "video_count": 18
+              },
+              "touches_reference_edge": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 28.571428571428573,
+                  "R1@IoU=0.7": 0.0,
+                  "mIoU": 24.320423100378168
+                },
+                "query_count": 7,
+                "video_count": 5
+              }
+            }
+          },
+          "unresolved_proposals": 1
+        }
+      },
+      "configured_cap": {
+        "max_checks": 1,
+        "max_frames": 8
+      },
+      "dataset": "charades-sta-fixed-pilot-v1",
+      "limits": "Selected pilot only; few independent source groups and an unpinned hosted model limit confidence. Boundary completeness is a model estimate; speech and reliable counts are not evaluated.",
+      "paired_comparisons": {},
+      "point_evidence_note": "Point counts are raw zero-duration baseline match entries, including repeated timestamps. They remain evidence, never temporal interval predictions. Only nonzero intervals receive interval ranks; filtering preserves their relative order. A point-only query is a localization abstention with zero IoU.",
+      "protocol_note": "R1 and mIoU use VSLNet-compatible formulas and explicit author-processed targets. Plain rank5 is diagnostic; legacy TALL uses temporal NMS. No trained baseline or full benchmark reproduction is claimed.",
+      "query_count": 53,
+      "retrieval": {
+        "raw": {
+          "R1_percent": {
+            "0.3": 52.83018867924528,
+            "0.5": 45.28301886792453,
+            "0.7": 16.9811320754717
+          },
+          "mIoU_percent": 37.583044060523186,
+          "note": "Retrieval only, before source checks. Same candidate pool; offline index cost is separate.",
+          "query_count": 53
+        },
+        "reranked": {
+          "R1_percent": {
+            "0.3": 54.71698113207547,
+            "0.5": 45.28301886792453,
+            "0.7": 16.9811320754717
+          },
+          "mIoU_percent": 37.73993864969661,
+          "note": "Retrieval only, before source checks. Same candidate pool; offline index cost is separate.",
+          "query_count": 53
+        }
+      },
+      "split": "development",
+      "strata_definition": "Predeclared diagnostics from canonical target duration: <=5s, >5..10s, >10s. Reference-edge touching means target start0 or target end at annotation duration within absolute1e-6s. Empty bins are omitted; these groups do not change selection or primary scoring.",
+      "task": "supplied-video temporal grounding",
+      "video_count": 20
+    },
+    "evaluation": {
+      "comparison_version": "charades-source-paired-point-evidence-v2",
+      "conditions": {
+        "extent": {
+          "abstention_rate": 0.37681159420289856,
+          "boundary_diagnostics": {
+            "complete_claim_localization_failure_rate": 0.5454545454545454,
+            "note": "This is a top-one localization proxy at IoU0.5, not semantic false-completeness ground truth or a count of every event.",
+            "offset_coverage_all_queries": 0.028985507246376812,
+            "offset_coverage_given_observed": 0.125,
+            "offset_midpoint_mae_seconds": 5.7386911554437035,
+            "offset_observed_queries": 16,
+            "onset_coverage_all_queries": 0.028985507246376812,
+            "onset_coverage_given_observed": 0.06060606060606061,
+            "onset_midpoint_mae_seconds": 3.4334069130521523,
+            "onset_observed_queries": 33,
+            "top1_complete_claims": 11
+          },
+          "cost": {
+            "actual_full_budget_queries": 69,
+            "actual_three_check_queries": 0,
+            "http_attempts": 138,
+            "input_frame_slots": 1104,
+            "latency_p50_seconds": 9.540561688998423,
+            "latency_p95_seconds": 14.366589401199233,
+            "latency_scope": "source-check/controller stage; excludes retrieval and indexing",
+            "logical_calls": 138,
+            "note": "Actual source-check/controller work, excluding retrieval and the shared index. Repeated reference inputs and retries consume slots; provider retry compute is unknown.",
+            "sent_frame_slots": 1104,
+            "unique_frames_sum_per_case": 1068
+          },
+          "model_supported_query_rate": 0.6231884057971014,
+          "partial_proposals": 13,
+          "point_evidence_count": 0,
+          "point_only_queries": 0,
+          "primary_percent": {
+            "R1@IoU=0.3": 49.275362318840585,
+            "R1@IoU=0.5": 33.33333333333333,
+            "R1@IoU=0.7": 13.043478260869565,
+            "mIoU": 28.857638500252413
+          },
+          "query_count": 69,
+          "rank5_diagnostic_percent": {
+            "0.3": 49.275362318840585,
+            "0.5": 33.33333333333333,
+            "0.7": 13.043478260869565
+          },
+          "strata": {
+            "event_duration": {
+              "over_10_seconds": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 14.285714285714286,
+                  "R1@IoU=0.7": 14.285714285714286,
+                  "mIoU": 16.089953680780017
+                },
+                "query_count": 7,
+                "video_count": 6
+              },
+              "over_5_to_10_seconds": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 39.21568627450981,
+                  "R1@IoU=0.7": 13.72549019607843,
+                  "mIoU": 32.47811066047263
+                },
+                "query_count": 51,
+                "video_count": 22
+              },
+              "up_to_5_seconds": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 18.181818181818183,
+                  "R1@IoU=0.7": 9.090909090909092,
+                  "mIoU": 20.196703369804723
+                },
+                "query_count": 11,
+                "video_count": 7
+              }
+            },
+            "reference_edge": {
+              "interior": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 28.571428571428573,
+                  "R1@IoU=0.7": 4.761904761904762,
+                  "mIoU": 24.428243554949034
+                },
+                "query_count": 42,
+                "video_count": 19
+              },
+              "touches_reference_edge": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 40.74074074074074,
+                  "R1@IoU=0.7": 25.925925925925927,
+                  "mIoU": 35.747808415168784
+                },
+                "query_count": 27,
+                "video_count": 13
+              }
+            }
+          },
+          "unresolved_proposals": 0
+        },
+        "ranked_fixed": {
+          "abstention_rate": 0.6521739130434783,
+          "boundary_diagnostics": {
+            "complete_claim_localization_failure_rate": null,
+            "note": "This is a top-one localization proxy at IoU0.5, not semantic false-completeness ground truth or a count of every event.",
+            "offset_coverage_all_queries": 0.0,
+            "offset_coverage_given_observed": null,
+            "offset_midpoint_mae_seconds": null,
+            "offset_observed_queries": 0,
+            "onset_coverage_all_queries": 0.0,
+            "onset_coverage_given_observed": null,
+            "onset_midpoint_mae_seconds": null,
+            "onset_observed_queries": 0,
+            "top1_complete_claims": 0
+          },
+          "cost": {
+            "actual_full_budget_queries": 69,
+            "actual_three_check_queries": 0,
+            "http_attempts": 138,
+            "input_frame_slots": 1104,
+            "latency_p50_seconds": 7.95658317500056,
+            "latency_p95_seconds": 11.218519456600188,
+            "latency_scope": "source-check/controller stage; excludes retrieval and indexing",
+            "logical_calls": 138,
+            "note": "Actual source-check/controller work, excluding retrieval and the shared index. Repeated reference inputs and retries consume slots; provider retry compute is unknown.",
+            "sent_frame_slots": 1104,
+            "unique_frames_sum_per_case": null
+          },
+          "model_supported_query_rate": 0.34782608695652173,
+          "partial_proposals": 0,
+          "point_evidence_count": 5,
+          "point_only_queries": 3,
+          "primary_percent": {
+            "R1@IoU=0.3": 15.942028985507244,
+            "R1@IoU=0.5": 1.4492753623188406,
+            "R1@IoU=0.7": 0.0,
+            "mIoU": 8.918563442332976
+          },
+          "query_count": 69,
+          "rank5_diagnostic_percent": {
+            "0.3": 15.942028985507244,
+            "0.5": 1.4492753623188406,
+            "0.7": 0.0
+          },
+          "strata": {
+            "event_duration": {
+              "over_10_seconds": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 0.0,
+                  "R1@IoU=0.7": 0.0,
+                  "mIoU": 6.951456317875669
+                },
+                "query_count": 7,
+                "video_count": 6
+              },
+              "over_5_to_10_seconds": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 1.9607843137254901,
+                  "R1@IoU=0.7": 0.0,
+                  "mIoU": 10.943401504374036
+                },
+                "query_count": 51,
+                "video_count": 22
+              },
+              "up_to_5_seconds": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 0.0,
+                  "R1@IoU=0.7": 0.0,
+                  "mIoU": 0.7824733247972674
+                },
+                "query_count": 11,
+                "video_count": 7
+              }
+            },
+            "reference_edge": {
+              "interior": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 0.0,
+                  "R1@IoU=0.7": 0.0,
+                  "mIoU": 6.419443226866758
+                },
+                "query_count": 42,
+                "video_count": 19
+              },
+              "touches_reference_edge": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 3.7037037037037037,
+                  "R1@IoU=0.7": 0.0,
+                  "mIoU": 12.806083777502652
+                },
+                "query_count": 27,
+                "video_count": 13
+              }
+            }
+          },
+          "unresolved_proposals": 0
+        },
+        "uniform_extent": {
+          "abstention_rate": 0.391304347826087,
+          "boundary_diagnostics": {
+            "complete_claim_localization_failure_rate": 0.42857142857142855,
+            "note": "This is a top-one localization proxy at IoU0.5, not semantic false-completeness ground truth or a count of every event.",
+            "offset_coverage_all_queries": 0.028985507246376812,
+            "offset_coverage_given_observed": 0.16666666666666666,
+            "offset_midpoint_mae_seconds": 3.9822507072582716,
+            "offset_observed_queries": 12,
+            "onset_coverage_all_queries": 0.043478260869565216,
+            "onset_coverage_given_observed": 0.09090909090909091,
+            "onset_midpoint_mae_seconds": 3.3954902463854855,
+            "onset_observed_queries": 33,
+            "top1_complete_claims": 7
+          },
+          "cost": {
+            "actual_full_budget_queries": 69,
+            "actual_three_check_queries": 0,
+            "http_attempts": 138,
+            "input_frame_slots": 1104,
+            "latency_p50_seconds": 8.860108249000405,
+            "latency_p95_seconds": 13.998094505399783,
+            "latency_scope": "source-check/controller stage; excludes retrieval and indexing",
+            "logical_calls": 138,
+            "note": "Actual source-check/controller work, excluding retrieval and the shared index. Repeated reference inputs and retries consume slots; provider retry compute is unknown.",
+            "sent_frame_slots": 1104,
+            "unique_frames_sum_per_case": 1062
+          },
+          "model_supported_query_rate": 0.6086956521739131,
+          "partial_proposals": 13,
+          "point_evidence_count": 0,
+          "point_only_queries": 0,
+          "primary_percent": {
+            "R1@IoU=0.3": 44.927536231884055,
+            "R1@IoU=0.5": 30.434782608695656,
+            "R1@IoU=0.7": 10.144927536231885,
+            "mIoU": 26.61782411987012
+          },
+          "query_count": 69,
+          "rank5_diagnostic_percent": {
+            "0.3": 44.927536231884055,
+            "0.5": 30.434782608695656,
+            "0.7": 10.144927536231885
+          },
+          "strata": {
+            "event_duration": {
+              "over_10_seconds": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 0.0,
+                  "R1@IoU=0.7": 0.0,
+                  "mIoU": 8.319738694970761
+                },
+                "query_count": 7,
+                "video_count": 6
+              },
+              "over_5_to_10_seconds": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 39.21568627450981,
+                  "R1@IoU=0.7": 11.764705882352942,
+                  "mIoU": 31.502128674490137
+                },
+                "query_count": 51,
+                "video_count": 22
+              },
+              "up_to_5_seconds": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 9.090909090909092,
+                  "R1@IoU=0.7": 9.090909090909092,
+                  "mIoU": 15.616648273385989
+                },
+                "query_count": 11,
+                "video_count": 7
+              }
+            },
+            "reference_edge": {
+              "interior": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 30.952380952380953,
+                  "R1@IoU=0.7": 4.761904761904762,
+                  "mIoU": 24.271795083985136
+                },
+                "query_count": 42,
+                "video_count": 19
+              },
+              "touches_reference_edge": {
+                "primary_percent": {
+                  "R1@IoU=0.5": 29.62962962962963,
+                  "R1@IoU=0.7": 18.51851851851852,
+                  "mIoU": 30.26720262013566
+                },
+                "query_count": 27,
+                "video_count": 13
+              }
+            }
+          },
+          "unresolved_proposals": 1
+        }
+      },
+      "configured_cap": {
+        "max_checks": 2,
+        "max_frames": 16
+      },
+      "dataset": "charades-sta-fixed-pilot-v1",
+      "limits": "Selected pilot only; few independent source groups and an unpinned hosted model limit confidence. Boundary completeness is a model estimate; speech and reliable counts are not evaluated.",
+      "paired_comparisons": {
+        "extent_minus_ranked_fixed": {
+          "bootstrap_repetitions": 2000,
+          "bootstrap_seed": 20261108,
+          "matched_full_budget_queries": 69,
+          "matched_input_and_request_queries": 69,
+          "matched_three_check_queries": 0,
+          "metrics": {
+            "R1@IoU=0.3": {
+              "ci95_percentage_points": [
+                19.23076923076923,
+                49.021390374331546
+              ],
+              "delta_percentage_points": 33.333333333333336
+            },
+            "R1@IoU=0.5": {
+              "ci95_percentage_points": [
+                20.0,
+                43.75
+              ],
+              "delta_percentage_points": 31.884057971014492
+            },
+            "R1@IoU=0.7": {
+              "ci95_percentage_points": [
+                5.0,
+                20.513698630136982
+              ],
+              "delta_percentage_points": 13.043478260869565
+            },
+            "mIoU": {
+              "ci95_percentage_points": [
+                13.285916217476156,
+                27.327165131196
+              ],
+              "delta_percentage_points": 19.939075057919435
+            }
+          },
+          "note": "Paired bootstrap resamples whole source videos and retains all their queries. Equal caps are not equal actual work; this pilot does not establish SOTA.",
+          "queries": 69,
+          "small_group_warning": true,
+          "source_groups": 25
+        },
+        "extent_minus_uniform_extent": {
+          "bootstrap_repetitions": 2000,
+          "bootstrap_seed": 20261108,
+          "matched_full_budget_queries": 69,
+          "matched_input_and_request_queries": 69,
+          "matched_three_check_queries": 0,
+          "metrics": {
+            "R1@IoU=0.3": {
+              "ci95_percentage_points": [
+                0.0,
+                9.722222222222221
+              ],
+              "delta_percentage_points": 4.3478260869565215
+            },
+            "R1@IoU=0.5": {
+              "ci95_percentage_points": [
+                0.0,
+                7.6923076923076925
+              ],
+              "delta_percentage_points": 2.898550724637681
+            },
+            "R1@IoU=0.7": {
+              "ci95_percentage_points": [
+                0.0,
+                6.757329363261563
+              ],
+              "delta_percentage_points": 2.898550724637681
+            },
+            "mIoU": {
+              "ci95_percentage_points": [
+                0.6394991732815152,
+                4.290350814546212
+              ],
+              "delta_percentage_points": 2.2398143803822927
+            }
+          },
+          "note": "Paired bootstrap resamples whole source videos and retains all their queries. Equal caps are not equal actual work; this pilot does not establish SOTA.",
+          "queries": 69,
+          "small_group_warning": true,
+          "source_groups": 25
+        }
+      },
+      "point_evidence_note": "Point counts are raw zero-duration baseline match entries, including repeated timestamps. They remain evidence, never temporal interval predictions. Only nonzero intervals receive interval ranks; filtering preserves their relative order. A point-only query is a localization abstention with zero IoU.",
+      "protocol_note": "R1 and mIoU use VSLNet-compatible formulas and explicit author-processed targets. Plain rank5 is diagnostic; legacy TALL uses temporal NMS. No trained baseline or full benchmark reproduction is claimed.",
+      "query_count": 69,
+      "retrieval": {
+        "raw": {
+          "R1_percent": {
+            "0.3": 65.21739130434783,
+            "0.5": 39.130434782608695,
+            "0.7": 5.797101449275362
+          },
+          "mIoU_percent": 36.99151617503284,
+          "note": "Retrieval only, before source checks. Same candidate pool; offline index cost is separate.",
+          "query_count": 69
+        },
+        "reranked": {
+          "R1_percent": {
+            "0.3": 65.21739130434783,
+            "0.5": 42.028985507246375,
+            "0.7": 4.3478260869565215
+          },
+          "mIoU_percent": 35.89495284000195,
+          "note": "Retrieval only, before source checks. Same candidate pool; offline index cost is separate.",
+          "query_count": 69
+        }
+      },
+      "split": "held-out-pilot",
+      "strata_definition": "Predeclared diagnostics from canonical target duration: <=5s, >5..10s, >10s. Reference-edge touching means target start0 or target end at annotation duration within absolute1e-6s. Empty bins are omitted; these groups do not change selection or primary scoring.",
+      "task": "supplied-video temporal grounding",
+      "video_count": 25
+    }
+  },
+  "status": "complete-exploratory-pilot"
+}

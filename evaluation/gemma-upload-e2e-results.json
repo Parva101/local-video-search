@@ -1,0 +1,2346 @@
+{
+  "purpose": "Local upload -> durable import and Gemma indexing -> text retrieval -> source-frame checks -> timestamp playback. Engineering acceptance check, not a benchmark.",
+  "date": "2026-11-06",
+  "source_manifest": "evaluation/qwen-coffee-smoke.json",
+  "source_annotation_note": "Public 22-second robot-coffee recording; labels are provisional and not independently reviewed.",
+  "model_id": "gemma4-31b-it",
+  "upstream_revision": "hosted-unpinned",
+  "acceptance": {
+    "browser_upload": true,
+    "automatic_import_and_index_without_browser": true,
+    "description_windows": 3,
+    "upload_double_click_created_one_import": true,
+    "refresh_during_indexing": true,
+    "ready_after_service_restart": true,
+    "same_source_hash_after_restart": true,
+    "blank_and_whitespace_query_blocked": true,
+    "query_double_click_started_one_three_interval_check": true,
+    "positive_query_found_cup": true,
+    "negative_query_statuses": [
+      "no_match",
+      "no_match",
+      "no_match"
+    ],
+    "timestamp_playback": {
+      "current_time_seconds": 17.88,
+      "ready_state": 4,
+      "media_error": null,
+      "range_request_status": 206
+    },
+    "mobile_viewport": {
+      "width": 390,
+      "document_scroll_width": 390
+    },
+    "final_browser_console_errors": 0,
+    "original_recordings_preserved": 3,
+    "existing_recording_count_after_demo_upload": 4,
+    "regression_tests": {
+      "passed": 136,
+      "warnings": 2,
+      "seconds": 44.57,
+      "exit_code": 0,
+      "real_embedding_models": true,
+      "warning_note": "Existing SentencePiece Swig type deprecation warnings."
+    }
+  },
+  "quality_limits": [
+    "Two description windows have empty action/object lists despite descriptive summaries.",
+    "Negative answers returned no_match with literal insufficient_evidence observations. Preserve this conflict; do not treat expected statuses as full semantic correctness.",
+    "The UI checks up to three retrieved intervals with eight frames each, not every frame of the full video.",
+    "Speech search, reliable event counts and broad archive answer synthesis remain unimplemented.",
+    "No CCTV benchmark accuracy or production load claim. Two GiB upload ceiling is configured but a multi-gigabyte live upload was not run."
+  ],
+  "implementation_notes": [
+    "Hosted Gemma uses named identity, strict JSON schema, reasoning none, helper add-ons off and 600-second request timeout. Model redirects are rejected.",
+    "Schema v4 persists the desired index spec on browser imports; import and child-index enqueue commit together.",
+    "Uploads use a separate persistent volume, read-only to worker and source readers, writable only at the API upload mount.",
+    "Internal /__uploads/ marker cannot collide with relative library paths. One in-development demo path was corrected explicitly with database backup; three original records stayed unchanged."
+  ],
+  "retrieval": [
+    {
+      "results": [
+        {
+          "build_id": "cb175fe9-ce58-4892-8c96-57d1847017ca",
+          "recording_id": "059df0fa-ab45-4391-ab6b-da5e5873c991",
+          "source_path": "/__uploads/e21d6ee2-32b4-4ed4-8a1c-71c8f0ea513d/qwen-coffee-demo.mp4",
+          "size": 4607959,
+          "mtime_ns": 1793987077720957387,
+          "start_seconds": 16.0,
+          "end_seconds": 22.0,
+          "samples": [
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 16.38,
+              "source_seconds": 16.38,
+              "requested_seconds": 16.375
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 17.14,
+              "source_seconds": 17.14,
+              "requested_seconds": 17.125
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 17.88,
+              "source_seconds": 17.88,
+              "requested_seconds": 17.875
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 18.64,
+              "source_seconds": 18.64,
+              "requested_seconds": 18.625
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 19.38,
+              "source_seconds": 19.38,
+              "requested_seconds": 19.375
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 20.14,
+              "source_seconds": 20.14,
+              "requested_seconds": 20.125
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 20.88,
+              "source_seconds": 20.88,
+              "requested_seconds": 20.875
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 21.64,
+              "source_seconds": 21.64,
+              "requested_seconds": 21.625
+            }
+          ],
+          "description": {
+            "_trace": {
+              "model": "gemma4-31b-it",
+              "usage": {
+                "co2_g": 0.236356,
+                "energy_wh": 0.701353,
+                "total_tokens": 2533,
+                "prompt_tokens": 2407,
+                "completion_tokens": 126,
+                "prompt_tokens_details": {
+                  "cached_tokens": 0,
+                  "multimodal_tokens": {
+                    "image": 2144
+                  },
+                  "created_cache_tokens": 2304
+                }
+              },
+              "revision": "hosted-unpinned",
+              "request_id": "ebb96f8a-ad39-4115-ba83-a05f0e686953",
+              "http_status": 200,
+              "frame_sha256": [
+                "70d27d952bfaf5e020aea6bb96f5b0f000a632b1cf0a12ee222a832f86e38257",
+                "2a9810901c76315002d72b63fc982282a0ffff2b418626b7f929f905a61d48ef",
+                "8c1233f5eed16f8567d2731a4f4ab38501ef1c7eb791d337b9ee5142abfd91ea",
+                "f651b98e9b048f8aa1db02e5655f3f75401171fffc18d5b3f65b2e81648d436f",
+                "20156fc0d384fd2c9278e220e494413a6723f3a2be7bc13f51b05a7d8c70b74d",
+                "b8064a2cc103eb81698b45ce732b238ff47d4a90cdaf902d6761f478866a0ae2",
+                "d32c30bbf09957f9c6ed37250977c4fc021bfe68001b4a389c3f5db27e1c7aa7",
+                "ed98221fa876a0c9935e696327eee91b4602182ee1275414c8a55ddade1f634c"
+              ],
+              "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+              "prompt_version": "visible-evidence-v1",
+              "elapsed_seconds": 5.45606981800006,
+              "gateway_request_id": "9ff6404f-5701-43d0-8086-c7519f980aaf",
+              "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+              "upstream_request_id": null,
+              "structured_output_policy": "asu-json-schema-gemma-v1"
+            },
+            "actions": [],
+            "objects": [],
+            "summary": "The provided frames show a robotic arm moving a clear plastic cup from a position on the right side of the table to a drip tray of a coffee machine between 16.38s and 20.14s. From 20.88s to 21.64s, the robotic arm moves away from the coffee machine. A second robotic gripper remains stationary on the left side of the table throughout the sequence.",
+            "uncertainties": []
+          },
+          "vector_similarity": 0.7358884057932155,
+          "vector_rank": 1,
+          "lexical_rank": 0.01125,
+          "lexical_position": 1,
+          "rrf_score": 0.03278688524590164,
+          "source_status": "available",
+          "verified": false,
+          "media_url": "/recordings/059df0fa-ab45-4391-ab6b-da5e5873c991/media"
+        },
+        {
+          "build_id": "cb175fe9-ce58-4892-8c96-57d1847017ca",
+          "recording_id": "059df0fa-ab45-4391-ab6b-da5e5873c991",
+          "source_path": "/__uploads/e21d6ee2-32b4-4ed4-8a1c-71c8f0ea513d/qwen-coffee-demo.mp4",
+          "size": 4607959,
+          "mtime_ns": 1793987077720957387,
+          "start_seconds": 8.0,
+          "end_seconds": 18.0,
+          "samples": [
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 8.64,
+              "source_seconds": 8.64,
+              "requested_seconds": 8.625
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 9.88,
+              "source_seconds": 9.88,
+              "requested_seconds": 9.875
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 11.14,
+              "source_seconds": 11.14,
+              "requested_seconds": 11.125
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 12.38,
+              "source_seconds": 12.38,
+              "requested_seconds": 12.375
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 13.64,
+              "source_seconds": 13.64,
+              "requested_seconds": 13.625
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 14.88,
+              "source_seconds": 14.88,
+              "requested_seconds": 14.875
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 16.14,
+              "source_seconds": 16.14,
+              "requested_seconds": 16.125
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 17.38,
+              "source_seconds": 17.38,
+              "requested_seconds": 17.375
+            }
+          ],
+          "description": {
+            "_trace": {
+              "model": "gemma4-31b-it",
+              "usage": {
+                "co2_g": 0.306611,
+                "energy_wh": 0.909825,
+                "total_tokens": 2575,
+                "prompt_tokens": 2404,
+                "completion_tokens": 171,
+                "prompt_tokens_details": {
+                  "cached_tokens": 0,
+                  "multimodal_tokens": {
+                    "image": 2144
+                  },
+                  "created_cache_tokens": 2304
+                }
+              },
+              "revision": "hosted-unpinned",
+              "request_id": "0d253f54-392e-4a3d-9263-aaded7a88007",
+              "http_status": 200,
+              "frame_sha256": [
+                "df61098d436c511359b82af204614564c7579e5f1c10129b02c8cb266964a56a",
+                "3b956d54762160f2104d30ddc4e606b40758bddfc292f8a18f25104833474a69",
+                "3ec4f92642cc3ec036af7faba804a0cb516e00e6180c22a3159b019cf6413143",
+                "bc1c33cd54385b8c809501c3eb1743bd3a0a6145161913cd982f86aa133cfa0f",
+                "56fed19fab84c890486302fb0eeddba59e0aff0047e7795d39cfdb5a9f7f916b",
+                "71c8c1ac803aa9f710198298846f914cb3aa114c6d1696d1e08806c51df328e6",
+                "67633179b37caccc5620092d5519490f48974b03c6546219b1a9793364378929",
+                "b088aa766e157580cedcae351695cf505d96e9106baf89dffbd42eb69476d7a1"
+              ],
+              "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+              "prompt_version": "visible-evidence-v1",
+              "elapsed_seconds": 6.909318723000069,
+              "gateway_request_id": "4a790ffa-27a6-4515-9570-74e501366beb",
+              "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+              "upstream_request_id": null,
+              "structured_output_policy": "asu-json-schema-gemma-v1"
+            },
+            "actions": [],
+            "objects": [],
+            "summary": "The provided frames show a robotic arm interacting with a coffee machine and a plastic cup on a black surface. From 8.64s to 11.14s, a robotic gripper holds a coffee pod and places it into the coffee machine. By 12.38s, the pod is inserted, and the gripper moves away. From 13.64s to 16.14s, the gripper remains stationary while another robotic arm on the right begins to move. At 17.38s, the right robotic arm moves toward the plastic cup.",
+            "uncertainties": [
+              "The exact nature of the white strip on the table is unclear."
+            ]
+          },
+          "vector_similarity": 0.7274879217147827,
+          "vector_rank": 2,
+          "lexical_rank": 0.0,
+          "lexical_position": null,
+          "rrf_score": 0.016129032258064516,
+          "source_status": "available",
+          "verified": false,
+          "media_url": "/recordings/059df0fa-ab45-4391-ab6b-da5e5873c991/media"
+        },
+        {
+          "build_id": "cb175fe9-ce58-4892-8c96-57d1847017ca",
+          "recording_id": "059df0fa-ab45-4391-ab6b-da5e5873c991",
+          "source_path": "/__uploads/e21d6ee2-32b4-4ed4-8a1c-71c8f0ea513d/qwen-coffee-demo.mp4",
+          "size": 4607959,
+          "mtime_ns": 1793987077720957387,
+          "start_seconds": 0.0,
+          "end_seconds": 10.0,
+          "samples": [
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 0.64,
+              "source_seconds": 0.64,
+              "requested_seconds": 0.625
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 1.88,
+              "source_seconds": 1.88,
+              "requested_seconds": 1.875
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 3.14,
+              "source_seconds": 3.14,
+              "requested_seconds": 3.125
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 4.38,
+              "source_seconds": 4.38,
+              "requested_seconds": 4.375
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 5.64,
+              "source_seconds": 5.64,
+              "requested_seconds": 5.625
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 6.88,
+              "source_seconds": 6.88,
+              "requested_seconds": 6.875
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 8.14,
+              "source_seconds": 8.14,
+              "requested_seconds": 8.125
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 9.38,
+              "source_seconds": 9.38,
+              "requested_seconds": 9.375
+            }
+          ],
+          "description": {
+            "_trace": {
+              "model": "gemma4-31b-it",
+              "usage": {
+                "co2_g": 0.546236,
+                "energy_wh": 1.620879,
+                "total_tokens": 2550,
+                "prompt_tokens": 2398,
+                "completion_tokens": 152,
+                "prompt_tokens_details": {
+                  "cached_tokens": 0,
+                  "multimodal_tokens": {
+                    "image": 2144
+                  },
+                  "created_cache_tokens": 2304
+                }
+              },
+              "revision": "hosted-unpinned",
+              "request_id": "b75d3ba7-9784-4287-9aba-a2fe526bd76f",
+              "http_status": 200,
+              "frame_sha256": [
+                "b59e1fc368edaf48569a9a359e13b9dcecb5c2bd533e6fa071ea5c03ce12c5ee",
+                "69df14aa9147ee096b0d0e28d6e5bac689449a9723e7c969f76c1952c2cbabd4",
+                "4c75086d560d2548a26e5020aaff99468fe93dab8dd6dafd8c7b14652b69c647",
+                "05838b8df67dcbf9231bdad18c6384f67214db7e7a96839580818d6f9fb3cd4d",
+                "dce1eacea601131e608042ec946de5dab5457e3ceb893c02562949eedf9ffc1e",
+                "9bdd86f0475d9817f83fd8ecd371662398b98890d88fb9f3c4744aab1e6b4032",
+                "7d589b6c836b87b7be703953ac2fcd61c3c4dd0de78bd359e763e0682b8c807a",
+                "6070303a554999ae163e5097b24a8faa154c1e01f651f0da0ad711ea300b3bea"
+              ],
+              "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+              "prompt_version": "visible-evidence-v1",
+              "elapsed_seconds": 11.871810849000212,
+              "gateway_request_id": "2467efd8-ecfa-4c10-9a62-1fe1c09b3518",
+              "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+              "upstream_request_id": null,
+              "structured_output_policy": "asu-json-schema-gemma-v1"
+            },
+            "actions": [],
+            "objects": [],
+            "summary": "The video shows two robotic arms interacting with a small circular object on a black surface. From 0.64s to 4.38s, the arms move toward and grasp the circular object. At 5.64s, the right arm moves away while the left arm holds the object. By 8.14s, the left arm moves the object toward a silver machine at the top of the frame, and by 9.38s, it positions the object near the machine's opening.",
+            "uncertainties": [
+              "The exact nature of the circular object is unclear."
+            ]
+          },
+          "vector_similarity": 0.44687796970838245,
+          "vector_rank": 3,
+          "lexical_rank": 0.0,
+          "lexical_position": null,
+          "rrf_score": 0.015873015873015872,
+          "source_status": "available",
+          "verified": false,
+          "media_url": "/recordings/059df0fa-ab45-4391-ab6b-da5e5873c991/media"
+        }
+      ],
+      "coverage": {
+        "total_recordings": 1,
+        "total_windows": 3,
+        "ready_recordings": 1,
+        "ready_windows": 3,
+        "incomplete_builds": [],
+        "incomplete_builds_count": 0
+      },
+      "spec": {
+        "model_id": "gemma4-31b-it",
+        "revision": "hosted-unpinned",
+        "prompt_version": "visible-evidence-v1",
+        "frames_per_window": 8,
+        "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+        "temperature": 0,
+        "seed": 0,
+        "structured_output_policy": "asu-json-schema-gemma-v1",
+        "description_max_tokens": 1024,
+        "verification_max_tokens": 2048,
+        "reasoning_effort": "none",
+        "helper_addons": "off",
+        "dimensions": 384,
+        "embedding": {
+          "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+          "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+          "dimensions": 384,
+          "pooling": "attention-mask-mean-l2",
+          "max_tokens": 256,
+          "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32"
+        },
+        "sampling_version": "eight-slots-sorted-actual-pts-v1",
+        "runtime": "openai-structured-vision-v1"
+      },
+      "query": "A robot moves a clear cup under the coffee machine.",
+      "path": "description",
+      "result_type": "unverified_multimodal_candidates",
+      "timing": {
+        "encode_seconds": 0.007217458000013721,
+        "search_seconds": 0.023883917000148358,
+        "total_seconds": 0.03110137500016208
+      }
+    },
+    {
+      "results": [
+        {
+          "build_id": "cb175fe9-ce58-4892-8c96-57d1847017ca",
+          "recording_id": "059df0fa-ab45-4391-ab6b-da5e5873c991",
+          "source_path": "/__uploads/e21d6ee2-32b4-4ed4-8a1c-71c8f0ea513d/qwen-coffee-demo.mp4",
+          "size": 4607959,
+          "mtime_ns": 1793987077720957387,
+          "start_seconds": 0.0,
+          "end_seconds": 10.0,
+          "samples": [
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 0.64,
+              "source_seconds": 0.64,
+              "requested_seconds": 0.625
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 1.88,
+              "source_seconds": 1.88,
+              "requested_seconds": 1.875
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 3.14,
+              "source_seconds": 3.14,
+              "requested_seconds": 3.125
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 4.38,
+              "source_seconds": 4.38,
+              "requested_seconds": 4.375
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 5.64,
+              "source_seconds": 5.64,
+              "requested_seconds": 5.625
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 6.88,
+              "source_seconds": 6.88,
+              "requested_seconds": 6.875
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 8.14,
+              "source_seconds": 8.14,
+              "requested_seconds": 8.125
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 9.38,
+              "source_seconds": 9.38,
+              "requested_seconds": 9.375
+            }
+          ],
+          "description": {
+            "_trace": {
+              "model": "gemma4-31b-it",
+              "usage": {
+                "co2_g": 0.546236,
+                "energy_wh": 1.620879,
+                "total_tokens": 2550,
+                "prompt_tokens": 2398,
+                "completion_tokens": 152,
+                "prompt_tokens_details": {
+                  "cached_tokens": 0,
+                  "multimodal_tokens": {
+                    "image": 2144
+                  },
+                  "created_cache_tokens": 2304
+                }
+              },
+              "revision": "hosted-unpinned",
+              "request_id": "b75d3ba7-9784-4287-9aba-a2fe526bd76f",
+              "http_status": 200,
+              "frame_sha256": [
+                "b59e1fc368edaf48569a9a359e13b9dcecb5c2bd533e6fa071ea5c03ce12c5ee",
+                "69df14aa9147ee096b0d0e28d6e5bac689449a9723e7c969f76c1952c2cbabd4",
+                "4c75086d560d2548a26e5020aaff99468fe93dab8dd6dafd8c7b14652b69c647",
+                "05838b8df67dcbf9231bdad18c6384f67214db7e7a96839580818d6f9fb3cd4d",
+                "dce1eacea601131e608042ec946de5dab5457e3ceb893c02562949eedf9ffc1e",
+                "9bdd86f0475d9817f83fd8ecd371662398b98890d88fb9f3c4744aab1e6b4032",
+                "7d589b6c836b87b7be703953ac2fcd61c3c4dd0de78bd359e763e0682b8c807a",
+                "6070303a554999ae163e5097b24a8faa154c1e01f651f0da0ad711ea300b3bea"
+              ],
+              "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+              "prompt_version": "visible-evidence-v1",
+              "elapsed_seconds": 11.871810849000212,
+              "gateway_request_id": "2467efd8-ecfa-4c10-9a62-1fe1c09b3518",
+              "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+              "upstream_request_id": null,
+              "structured_output_policy": "asu-json-schema-gemma-v1"
+            },
+            "actions": [],
+            "objects": [],
+            "summary": "The video shows two robotic arms interacting with a small circular object on a black surface. From 0.64s to 4.38s, the arms move toward and grasp the circular object. At 5.64s, the right arm moves away while the left arm holds the object. By 8.14s, the left arm moves the object toward a silver machine at the top of the frame, and by 9.38s, it positions the object near the machine's opening.",
+            "uncertainties": [
+              "The exact nature of the circular object is unclear."
+            ]
+          },
+          "vector_similarity": 0.11355952580095796,
+          "vector_rank": 1,
+          "lexical_rank": 0.0,
+          "lexical_position": null,
+          "rrf_score": 0.01639344262295082,
+          "source_status": "available",
+          "verified": false,
+          "media_url": "/recordings/059df0fa-ab45-4391-ab6b-da5e5873c991/media"
+        },
+        {
+          "build_id": "cb175fe9-ce58-4892-8c96-57d1847017ca",
+          "recording_id": "059df0fa-ab45-4391-ab6b-da5e5873c991",
+          "source_path": "/__uploads/e21d6ee2-32b4-4ed4-8a1c-71c8f0ea513d/qwen-coffee-demo.mp4",
+          "size": 4607959,
+          "mtime_ns": 1793987077720957387,
+          "start_seconds": 16.0,
+          "end_seconds": 22.0,
+          "samples": [
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 16.38,
+              "source_seconds": 16.38,
+              "requested_seconds": 16.375
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 17.14,
+              "source_seconds": 17.14,
+              "requested_seconds": 17.125
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 17.88,
+              "source_seconds": 17.88,
+              "requested_seconds": 17.875
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 18.64,
+              "source_seconds": 18.64,
+              "requested_seconds": 18.625
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 19.38,
+              "source_seconds": 19.38,
+              "requested_seconds": 19.375
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 20.14,
+              "source_seconds": 20.14,
+              "requested_seconds": 20.125
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 20.88,
+              "source_seconds": 20.88,
+              "requested_seconds": 20.875
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 21.64,
+              "source_seconds": 21.64,
+              "requested_seconds": 21.625
+            }
+          ],
+          "description": {
+            "_trace": {
+              "model": "gemma4-31b-it",
+              "usage": {
+                "co2_g": 0.236356,
+                "energy_wh": 0.701353,
+                "total_tokens": 2533,
+                "prompt_tokens": 2407,
+                "completion_tokens": 126,
+                "prompt_tokens_details": {
+                  "cached_tokens": 0,
+                  "multimodal_tokens": {
+                    "image": 2144
+                  },
+                  "created_cache_tokens": 2304
+                }
+              },
+              "revision": "hosted-unpinned",
+              "request_id": "ebb96f8a-ad39-4115-ba83-a05f0e686953",
+              "http_status": 200,
+              "frame_sha256": [
+                "70d27d952bfaf5e020aea6bb96f5b0f000a632b1cf0a12ee222a832f86e38257",
+                "2a9810901c76315002d72b63fc982282a0ffff2b418626b7f929f905a61d48ef",
+                "8c1233f5eed16f8567d2731a4f4ab38501ef1c7eb791d337b9ee5142abfd91ea",
+                "f651b98e9b048f8aa1db02e5655f3f75401171fffc18d5b3f65b2e81648d436f",
+                "20156fc0d384fd2c9278e220e494413a6723f3a2be7bc13f51b05a7d8c70b74d",
+                "b8064a2cc103eb81698b45ce732b238ff47d4a90cdaf902d6761f478866a0ae2",
+                "d32c30bbf09957f9c6ed37250977c4fc021bfe68001b4a389c3f5db27e1c7aa7",
+                "ed98221fa876a0c9935e696327eee91b4602182ee1275414c8a55ddade1f634c"
+              ],
+              "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+              "prompt_version": "visible-evidence-v1",
+              "elapsed_seconds": 5.45606981800006,
+              "gateway_request_id": "9ff6404f-5701-43d0-8086-c7519f980aaf",
+              "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+              "upstream_request_id": null,
+              "structured_output_policy": "asu-json-schema-gemma-v1"
+            },
+            "actions": [],
+            "objects": [],
+            "summary": "The provided frames show a robotic arm moving a clear plastic cup from a position on the right side of the table to a drip tray of a coffee machine between 16.38s and 20.14s. From 20.88s to 21.64s, the robotic arm moves away from the coffee machine. A second robotic gripper remains stationary on the left side of the table throughout the sequence.",
+            "uncertainties": []
+          },
+          "vector_similarity": 0.06608115136623427,
+          "vector_rank": 2,
+          "lexical_rank": 0.0,
+          "lexical_position": null,
+          "rrf_score": 0.016129032258064516,
+          "source_status": "available",
+          "verified": false,
+          "media_url": "/recordings/059df0fa-ab45-4391-ab6b-da5e5873c991/media"
+        },
+        {
+          "build_id": "cb175fe9-ce58-4892-8c96-57d1847017ca",
+          "recording_id": "059df0fa-ab45-4391-ab6b-da5e5873c991",
+          "source_path": "/__uploads/e21d6ee2-32b4-4ed4-8a1c-71c8f0ea513d/qwen-coffee-demo.mp4",
+          "size": 4607959,
+          "mtime_ns": 1793987077720957387,
+          "start_seconds": 8.0,
+          "end_seconds": 18.0,
+          "samples": [
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 8.64,
+              "source_seconds": 8.64,
+              "requested_seconds": 8.625
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 9.88,
+              "source_seconds": 9.88,
+              "requested_seconds": 9.875
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 11.14,
+              "source_seconds": 11.14,
+              "requested_seconds": 11.125
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 12.38,
+              "source_seconds": 12.38,
+              "requested_seconds": 12.375
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 13.64,
+              "source_seconds": 13.64,
+              "requested_seconds": 13.625
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 14.88,
+              "source_seconds": 14.88,
+              "requested_seconds": 14.875
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 16.14,
+              "source_seconds": 16.14,
+              "requested_seconds": 16.125
+            },
+            {
+              "selection": "at_or_after_request",
+              "pts_seconds": 17.38,
+              "source_seconds": 17.38,
+              "requested_seconds": 17.375
+            }
+          ],
+          "description": {
+            "_trace": {
+              "model": "gemma4-31b-it",
+              "usage": {
+                "co2_g": 0.306611,
+                "energy_wh": 0.909825,
+                "total_tokens": 2575,
+                "prompt_tokens": 2404,
+                "completion_tokens": 171,
+                "prompt_tokens_details": {
+                  "cached_tokens": 0,
+                  "multimodal_tokens": {
+                    "image": 2144
+                  },
+                  "created_cache_tokens": 2304
+                }
+              },
+              "revision": "hosted-unpinned",
+              "request_id": "0d253f54-392e-4a3d-9263-aaded7a88007",
+              "http_status": 200,
+              "frame_sha256": [
+                "df61098d436c511359b82af204614564c7579e5f1c10129b02c8cb266964a56a",
+                "3b956d54762160f2104d30ddc4e606b40758bddfc292f8a18f25104833474a69",
+                "3ec4f92642cc3ec036af7faba804a0cb516e00e6180c22a3159b019cf6413143",
+                "bc1c33cd54385b8c809501c3eb1743bd3a0a6145161913cd982f86aa133cfa0f",
+                "56fed19fab84c890486302fb0eeddba59e0aff0047e7795d39cfdb5a9f7f916b",
+                "71c8c1ac803aa9f710198298846f914cb3aa114c6d1696d1e08806c51df328e6",
+                "67633179b37caccc5620092d5519490f48974b03c6546219b1a9793364378929",
+                "b088aa766e157580cedcae351695cf505d96e9106baf89dffbd42eb69476d7a1"
+              ],
+              "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+              "prompt_version": "visible-evidence-v1",
+              "elapsed_seconds": 6.909318723000069,
+              "gateway_request_id": "4a790ffa-27a6-4515-9570-74e501366beb",
+              "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+              "upstream_request_id": null,
+              "structured_output_policy": "asu-json-schema-gemma-v1"
+            },
+            "actions": [],
+            "objects": [],
+            "summary": "The provided frames show a robotic arm interacting with a coffee machine and a plastic cup on a black surface. From 8.64s to 11.14s, a robotic gripper holds a coffee pod and places it into the coffee machine. By 12.38s, the pod is inserted, and the gripper moves away. From 13.64s to 16.14s, the gripper remains stationary while another robotic arm on the right begins to move. At 17.38s, the right robotic arm moves toward the plastic cup.",
+            "uncertainties": [
+              "The exact nature of the white strip on the table is unclear."
+            ]
+          },
+          "vector_similarity": 0.060500476628513655,
+          "vector_rank": 3,
+          "lexical_rank": 0.0,
+          "lexical_position": null,
+          "rrf_score": 0.015873015873015872,
+          "source_status": "available",
+          "verified": false,
+          "media_url": "/recordings/059df0fa-ab45-4391-ab6b-da5e5873c991/media"
+        }
+      ],
+      "coverage": {
+        "total_recordings": 1,
+        "total_windows": 3,
+        "ready_recordings": 1,
+        "ready_windows": 3,
+        "incomplete_builds": [],
+        "incomplete_builds_count": 0
+      },
+      "spec": {
+        "model_id": "gemma4-31b-it",
+        "revision": "hosted-unpinned",
+        "prompt_version": "visible-evidence-v1",
+        "frames_per_window": 8,
+        "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+        "temperature": 0,
+        "seed": 0,
+        "structured_output_policy": "asu-json-schema-gemma-v1",
+        "description_max_tokens": 1024,
+        "verification_max_tokens": 2048,
+        "reasoning_effort": "none",
+        "helper_addons": "off",
+        "dimensions": 384,
+        "embedding": {
+          "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+          "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+          "dimensions": 384,
+          "pooling": "attention-mask-mean-l2",
+          "max_tokens": 256,
+          "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32"
+        },
+        "sampling_version": "eight-slots-sorted-actual-pts-v1",
+        "runtime": "openai-structured-vision-v1"
+      },
+      "query": "A person wearing a red shirt is visible.",
+      "path": "description",
+      "result_type": "unverified_multimodal_candidates",
+      "timing": {
+        "encode_seconds": 0.0065312400001857895,
+        "search_seconds": 0.02284554899961222,
+        "total_seconds": 0.02937678899979801
+      }
+    }
+  ],
+  "runtime_and_saved_outputs": {
+    "recording": {
+      "id": "059df0fa-ab45-4391-ab6b-da5e5873c991",
+      "source_path": "/__uploads/e21d6ee2-32b4-4ed4-8a1c-71c8f0ea513d/qwen-coffee-demo.mp4",
+      "sha256": "6d8c9cd342be3985e59ff9e1d4738ad467c75cf190127e2e53530cdd4faed1b2",
+      "size": 4607959,
+      "mtime_ns": 1793987077720957387,
+      "created_at": "2026-11-06 17:44:37.906383+00:00",
+      "metadata": {
+        "codec": "h264",
+        "width": 640,
+        "height": 480,
+        "has_audio": false,
+        "time_base": "1/12800",
+        "duration_source": "video_stream",
+        "duration_seconds": 22.0,
+        "pipeline_version": "import-v1",
+        "video_stream_index": 0,
+        "search_index_status": "ready",
+        "timing_origin_known": true,
+        "source_start_seconds": 0.0,
+        "window_length_seconds": 10,
+        "window_overlap_seconds": 2
+      },
+      "windows_count": 3
+    },
+    "description_build": {
+      "id": "cb175fe9-ce58-4892-8c96-57d1847017ca",
+      "recording_id": "059df0fa-ab45-4391-ab6b-da5e5873c991",
+      "config_key": "357da34b331ed2ef20b1e67dbf69b1e0db5a92a206c03293c7b501b0dcbcb86a",
+      "spec": {
+        "seed": 0,
+        "runtime": "openai-structured-vision-v1",
+        "model_id": "gemma4-31b-it",
+        "revision": "hosted-unpinned",
+        "embedding": {
+          "pooling": "attention-mask-mean-l2",
+          "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32",
+          "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+          "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+          "dimensions": 384,
+          "max_tokens": 256
+        },
+        "dimensions": 384,
+        "temperature": 0,
+        "helper_addons": "off",
+        "prompt_version": "visible-evidence-v1",
+        "reasoning_effort": "none",
+        "sampling_version": "eight-slots-sorted-actual-pts-v1",
+        "frames_per_window": 8,
+        "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+        "description_max_tokens": 1024,
+        "verification_max_tokens": 2048,
+        "structured_output_policy": "asu-json-schema-gemma-v1"
+      },
+      "state": "ready",
+      "created_at": "2026-11-06 17:44:37.906383+00:00",
+      "updated_at": "2026-11-06 17:45:10.017683+00:00",
+      "source_path": "/__uploads/e21d6ee2-32b4-4ed4-8a1c-71c8f0ea513d/qwen-coffee-demo.mp4",
+      "job_id": "ce2fc714-daa2-48fc-980b-8bd4d51e1658",
+      "completed_windows": 3,
+      "total_windows": 3
+    },
+    "jobs": [
+      {
+        "id": "ce2fc714-daa2-48fc-980b-8bd4d51e1658",
+        "dedupe_key": "description:cb175fe9-ce58-4892-8c96-57d1847017ca",
+        "source_path": "/__uploads/e21d6ee2-32b4-4ed4-8a1c-71c8f0ea513d/qwen-coffee-demo.mp4",
+        "expected_size": 4607959,
+        "expected_mtime_ns": 1793987077720957387,
+        "state": "succeeded",
+        "attempts": 1,
+        "max_attempts": 3,
+        "lease_token": null,
+        "lease_until": null,
+        "error": null,
+        "result": {
+          "build_id": "cb175fe9-ce58-4892-8c96-57d1847017ca"
+        },
+        "created_at": "2026-11-06 17:44:37.906383+00:00",
+        "updated_at": "2026-11-06 17:45:10.017683+00:00",
+        "kind": "description",
+        "index_build_id": null,
+        "description_build_id": "cb175fe9-ce58-4892-8c96-57d1847017ca",
+        "auto_description_spec": null,
+        "original_filename": null
+      },
+      {
+        "id": "ac8110ed-33b0-4f75-80b5-83c5f0e905a8",
+        "dedupe_key": "6f6e49bb8ec5aa6d71dea94f01b4e7d2c4aba9f8c287c4fe2927e9f90ba902da",
+        "source_path": "/__uploads/e21d6ee2-32b4-4ed4-8a1c-71c8f0ea513d/qwen-coffee-demo.mp4",
+        "expected_size": 4607959,
+        "expected_mtime_ns": 1793987077720957387,
+        "state": "succeeded",
+        "attempts": 1,
+        "max_attempts": 3,
+        "lease_token": null,
+        "lease_until": null,
+        "error": null,
+        "result": {
+          "recording_id": "059df0fa-ab45-4391-ab6b-da5e5873c991",
+          "description_job_id": "ce2fc714-daa2-48fc-980b-8bd4d51e1658",
+          "description_build_id": "cb175fe9-ce58-4892-8c96-57d1847017ca"
+        },
+        "created_at": "2026-11-06 17:44:37.741177+00:00",
+        "updated_at": "2026-11-06 17:44:37.906383+00:00",
+        "kind": "import",
+        "index_build_id": null,
+        "description_build_id": null,
+        "auto_description_spec": {
+          "seed": 0,
+          "runtime": "openai-structured-vision-v1",
+          "model_id": "gemma4-31b-it",
+          "revision": "hosted-unpinned",
+          "embedding": {
+            "pooling": "attention-mask-mean-l2",
+            "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32",
+            "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+            "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+            "dimensions": 384,
+            "max_tokens": 256
+          },
+          "dimensions": 384,
+          "temperature": 0,
+          "helper_addons": "off",
+          "prompt_version": "visible-evidence-v1",
+          "reasoning_effort": "none",
+          "sampling_version": "eight-slots-sorted-actual-pts-v1",
+          "frames_per_window": 8,
+          "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+          "description_max_tokens": 1024,
+          "verification_max_tokens": 2048,
+          "structured_output_policy": "asu-json-schema-gemma-v1"
+        },
+        "original_filename": "qwen-coffee-demo.mp4"
+      }
+    ],
+    "descriptions": [
+      {
+        "start_seconds": 0.0,
+        "end_seconds": 10.0,
+        "samples": [
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 0.64,
+            "source_seconds": 0.64,
+            "requested_seconds": 0.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 1.88,
+            "source_seconds": 1.88,
+            "requested_seconds": 1.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 3.14,
+            "source_seconds": 3.14,
+            "requested_seconds": 3.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 4.38,
+            "source_seconds": 4.38,
+            "requested_seconds": 4.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 5.64,
+            "source_seconds": 5.64,
+            "requested_seconds": 5.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 6.88,
+            "source_seconds": 6.88,
+            "requested_seconds": 6.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 8.14,
+            "source_seconds": 8.14,
+            "requested_seconds": 8.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 9.38,
+            "source_seconds": 9.38,
+            "requested_seconds": 9.375
+          }
+        ],
+        "payload": {
+          "_trace": {
+            "model": "gemma4-31b-it",
+            "usage": {
+              "co2_g": 0.546236,
+              "energy_wh": 1.620879,
+              "total_tokens": 2550,
+              "prompt_tokens": 2398,
+              "completion_tokens": 152,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "multimodal_tokens": {
+                  "image": 2144
+                },
+                "created_cache_tokens": 2304
+              }
+            },
+            "revision": "hosted-unpinned",
+            "request_id": "b75d3ba7-9784-4287-9aba-a2fe526bd76f",
+            "http_status": 200,
+            "frame_sha256": [
+              "b59e1fc368edaf48569a9a359e13b9dcecb5c2bd533e6fa071ea5c03ce12c5ee",
+              "69df14aa9147ee096b0d0e28d6e5bac689449a9723e7c969f76c1952c2cbabd4",
+              "4c75086d560d2548a26e5020aaff99468fe93dab8dd6dafd8c7b14652b69c647",
+              "05838b8df67dcbf9231bdad18c6384f67214db7e7a96839580818d6f9fb3cd4d",
+              "dce1eacea601131e608042ec946de5dab5457e3ceb893c02562949eedf9ffc1e",
+              "9bdd86f0475d9817f83fd8ecd371662398b98890d88fb9f3c4744aab1e6b4032",
+              "7d589b6c836b87b7be703953ac2fcd61c3c4dd0de78bd359e763e0682b8c807a",
+              "6070303a554999ae163e5097b24a8faa154c1e01f651f0da0ad711ea300b3bea"
+            ],
+            "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+            "prompt_version": "visible-evidence-v1",
+            "elapsed_seconds": 11.871810849000212,
+            "gateway_request_id": "2467efd8-ecfa-4c10-9a62-1fe1c09b3518",
+            "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+            "upstream_request_id": null,
+            "structured_output_policy": "asu-json-schema-gemma-v1"
+          },
+          "actions": [],
+          "objects": [],
+          "summary": "The video shows two robotic arms interacting with a small circular object on a black surface. From 0.64s to 4.38s, the arms move toward and grasp the circular object. At 5.64s, the right arm moves away while the left arm holds the object. By 8.14s, the left arm moves the object toward a silver machine at the top of the frame, and by 9.38s, it positions the object near the machine's opening.",
+          "uncertainties": [
+            "The exact nature of the circular object is unclear."
+          ]
+        }
+      },
+      {
+        "start_seconds": 8.0,
+        "end_seconds": 18.0,
+        "samples": [
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 8.64,
+            "source_seconds": 8.64,
+            "requested_seconds": 8.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 9.88,
+            "source_seconds": 9.88,
+            "requested_seconds": 9.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 11.14,
+            "source_seconds": 11.14,
+            "requested_seconds": 11.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 12.38,
+            "source_seconds": 12.38,
+            "requested_seconds": 12.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 13.64,
+            "source_seconds": 13.64,
+            "requested_seconds": 13.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 14.88,
+            "source_seconds": 14.88,
+            "requested_seconds": 14.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 16.14,
+            "source_seconds": 16.14,
+            "requested_seconds": 16.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 17.38,
+            "source_seconds": 17.38,
+            "requested_seconds": 17.375
+          }
+        ],
+        "payload": {
+          "_trace": {
+            "model": "gemma4-31b-it",
+            "usage": {
+              "co2_g": 0.306611,
+              "energy_wh": 0.909825,
+              "total_tokens": 2575,
+              "prompt_tokens": 2404,
+              "completion_tokens": 171,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "multimodal_tokens": {
+                  "image": 2144
+                },
+                "created_cache_tokens": 2304
+              }
+            },
+            "revision": "hosted-unpinned",
+            "request_id": "0d253f54-392e-4a3d-9263-aaded7a88007",
+            "http_status": 200,
+            "frame_sha256": [
+              "df61098d436c511359b82af204614564c7579e5f1c10129b02c8cb266964a56a",
+              "3b956d54762160f2104d30ddc4e606b40758bddfc292f8a18f25104833474a69",
+              "3ec4f92642cc3ec036af7faba804a0cb516e00e6180c22a3159b019cf6413143",
+              "bc1c33cd54385b8c809501c3eb1743bd3a0a6145161913cd982f86aa133cfa0f",
+              "56fed19fab84c890486302fb0eeddba59e0aff0047e7795d39cfdb5a9f7f916b",
+              "71c8c1ac803aa9f710198298846f914cb3aa114c6d1696d1e08806c51df328e6",
+              "67633179b37caccc5620092d5519490f48974b03c6546219b1a9793364378929",
+              "b088aa766e157580cedcae351695cf505d96e9106baf89dffbd42eb69476d7a1"
+            ],
+            "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+            "prompt_version": "visible-evidence-v1",
+            "elapsed_seconds": 6.909318723000069,
+            "gateway_request_id": "4a790ffa-27a6-4515-9570-74e501366beb",
+            "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+            "upstream_request_id": null,
+            "structured_output_policy": "asu-json-schema-gemma-v1"
+          },
+          "actions": [],
+          "objects": [],
+          "summary": "The provided frames show a robotic arm interacting with a coffee machine and a plastic cup on a black surface. From 8.64s to 11.14s, a robotic gripper holds a coffee pod and places it into the coffee machine. By 12.38s, the pod is inserted, and the gripper moves away. From 13.64s to 16.14s, the gripper remains stationary while another robotic arm on the right begins to move. At 17.38s, the right robotic arm moves toward the plastic cup.",
+          "uncertainties": [
+            "The exact nature of the white strip on the table is unclear."
+          ]
+        }
+      },
+      {
+        "start_seconds": 16.0,
+        "end_seconds": 22.0,
+        "samples": [
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 16.38,
+            "source_seconds": 16.38,
+            "requested_seconds": 16.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 17.14,
+            "source_seconds": 17.14,
+            "requested_seconds": 17.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 17.88,
+            "source_seconds": 17.88,
+            "requested_seconds": 17.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 18.64,
+            "source_seconds": 18.64,
+            "requested_seconds": 18.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 19.38,
+            "source_seconds": 19.38,
+            "requested_seconds": 19.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 20.14,
+            "source_seconds": 20.14,
+            "requested_seconds": 20.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 20.88,
+            "source_seconds": 20.88,
+            "requested_seconds": 20.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 21.64,
+            "source_seconds": 21.64,
+            "requested_seconds": 21.625
+          }
+        ],
+        "payload": {
+          "_trace": {
+            "model": "gemma4-31b-it",
+            "usage": {
+              "co2_g": 0.236356,
+              "energy_wh": 0.701353,
+              "total_tokens": 2533,
+              "prompt_tokens": 2407,
+              "completion_tokens": 126,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "multimodal_tokens": {
+                  "image": 2144
+                },
+                "created_cache_tokens": 2304
+              }
+            },
+            "revision": "hosted-unpinned",
+            "request_id": "ebb96f8a-ad39-4115-ba83-a05f0e686953",
+            "http_status": 200,
+            "frame_sha256": [
+              "70d27d952bfaf5e020aea6bb96f5b0f000a632b1cf0a12ee222a832f86e38257",
+              "2a9810901c76315002d72b63fc982282a0ffff2b418626b7f929f905a61d48ef",
+              "8c1233f5eed16f8567d2731a4f4ab38501ef1c7eb791d337b9ee5142abfd91ea",
+              "f651b98e9b048f8aa1db02e5655f3f75401171fffc18d5b3f65b2e81648d436f",
+              "20156fc0d384fd2c9278e220e494413a6723f3a2be7bc13f51b05a7d8c70b74d",
+              "b8064a2cc103eb81698b45ce732b238ff47d4a90cdaf902d6761f478866a0ae2",
+              "d32c30bbf09957f9c6ed37250977c4fc021bfe68001b4a389c3f5db27e1c7aa7",
+              "ed98221fa876a0c9935e696327eee91b4602182ee1275414c8a55ddade1f634c"
+            ],
+            "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+            "prompt_version": "visible-evidence-v1",
+            "elapsed_seconds": 5.45606981800006,
+            "gateway_request_id": "9ff6404f-5701-43d0-8086-c7519f980aaf",
+            "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+            "upstream_request_id": null,
+            "structured_output_policy": "asu-json-schema-gemma-v1"
+          },
+          "actions": [],
+          "objects": [],
+          "summary": "The provided frames show a robotic arm moving a clear plastic cup from a position on the right side of the table to a drip tray of a coffee machine between 16.38s and 20.14s. From 20.88s to 21.64s, the robotic arm moves away from the coffee machine. A second robotic gripper remains stationary on the left side of the table throughout the sequence.",
+          "uncertainties": []
+        }
+      }
+    ],
+    "verifications": [
+      {
+        "id": "9018d07b-896d-45e0-9a5f-b4308fa3c1d4",
+        "query": "A robot moves a clear cup under the coffee machine.",
+        "start_seconds": 16.0,
+        "end_seconds": 22.0,
+        "spec": {
+          "seed": 0,
+          "model_id": "gemma4-31b-it",
+          "revision": "hosted-unpinned",
+          "temperature": 0,
+          "helper_addons": "off",
+          "prompt_version": "visible-evidence-v1",
+          "reasoning_effort": "none",
+          "sampling_version": "eight-slots-sorted-actual-pts-v1",
+          "frames_per_window": 8,
+          "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+          "description_max_tokens": 1024,
+          "verification_max_tokens": 2048,
+          "structured_output_policy": "asu-json-schema-gemma-v1",
+          "verification_schema_version": "status-intervals-v2"
+        },
+        "samples": [
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 16.38,
+            "source_seconds": 16.38,
+            "requested_seconds": 16.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 17.14,
+            "source_seconds": 17.14,
+            "requested_seconds": 17.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 17.88,
+            "source_seconds": 17.88,
+            "requested_seconds": 17.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 18.64,
+            "source_seconds": 18.64,
+            "requested_seconds": 18.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 19.38,
+            "source_seconds": 19.38,
+            "requested_seconds": 19.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 20.14,
+            "source_seconds": 20.14,
+            "requested_seconds": 20.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 20.88,
+            "source_seconds": 20.88,
+            "requested_seconds": 20.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 21.64,
+            "source_seconds": 21.64,
+            "requested_seconds": 21.625
+          }
+        ],
+        "response": {
+          "_trace": {
+            "model": "gemma4-31b-it",
+            "usage": {
+              "co2_g": 0.354291,
+              "energy_wh": 1.051308,
+              "total_tokens": 2589,
+              "prompt_tokens": 2447,
+              "completion_tokens": 142,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "multimodal_tokens": {
+                  "image": 2144
+                },
+                "created_cache_tokens": 2432
+              }
+            },
+            "revision": "hosted-unpinned",
+            "request_id": "d3906eb8-5ea8-478e-a5cc-31f8ea366b39",
+            "http_status": 200,
+            "frame_sha256": [
+              "70d27d952bfaf5e020aea6bb96f5b0f000a632b1cf0a12ee222a832f86e38257",
+              "2a9810901c76315002d72b63fc982282a0ffff2b418626b7f929f905a61d48ef",
+              "8c1233f5eed16f8567d2731a4f4ab38501ef1c7eb791d337b9ee5142abfd91ea",
+              "f651b98e9b048f8aa1db02e5655f3f75401171fffc18d5b3f65b2e81648d436f",
+              "20156fc0d384fd2c9278e220e494413a6723f3a2be7bc13f51b05a7d8c70b74d",
+              "b8064a2cc103eb81698b45ce732b238ff47d4a90cdaf902d6761f478866a0ae2",
+              "d32c30bbf09957f9c6ed37250977c4fc021bfe68001b4a389c3f5db27e1c7aa7",
+              "ed98221fa876a0c9935e696327eee91b4602182ee1275414c8a55ddade1f634c"
+            ],
+            "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4",
+            "prompt_version": "visible-evidence-v1",
+            "elapsed_seconds": 13.888409116000048,
+            "gateway_request_id": "9f9e30cd-919a-410f-a161-1f663900d379",
+            "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+            "upstream_request_id": null,
+            "structured_output_policy": "asu-json-schema-gemma-v1"
+          },
+          "status": "match",
+          "intervals": [
+            {
+              "end_seconds": 20.14,
+              "start_seconds": 17.88
+            },
+            {
+              "end_seconds": 21.64,
+              "start_seconds": 20.88
+            }
+          ],
+          "observation": "A robot arm is seen moving a clear cup from the right side of the table to a position directly under the coffee machine's dispenser between 17.88 and 20.14 seconds. After 20.88 seconds, the robot arm moves away from the cup, which remains under the machine."
+        },
+        "created_at": "2026-11-06 17:46:01.180606+00:00"
+      },
+      {
+        "id": "ab63a8bd-0903-4867-9615-23df8827608d",
+        "query": "A robot moves a clear cup under the coffee machine.",
+        "start_seconds": 8.0,
+        "end_seconds": 18.0,
+        "spec": {
+          "seed": 0,
+          "model_id": "gemma4-31b-it",
+          "revision": "hosted-unpinned",
+          "temperature": 0,
+          "helper_addons": "off",
+          "prompt_version": "visible-evidence-v1",
+          "reasoning_effort": "none",
+          "sampling_version": "eight-slots-sorted-actual-pts-v1",
+          "frames_per_window": 8,
+          "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+          "description_max_tokens": 1024,
+          "verification_max_tokens": 2048,
+          "structured_output_policy": "asu-json-schema-gemma-v1",
+          "verification_schema_version": "status-intervals-v2"
+        },
+        "samples": [
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 8.64,
+            "source_seconds": 8.64,
+            "requested_seconds": 8.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 9.88,
+            "source_seconds": 9.88,
+            "requested_seconds": 9.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 11.14,
+            "source_seconds": 11.14,
+            "requested_seconds": 11.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 12.38,
+            "source_seconds": 12.38,
+            "requested_seconds": 12.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 13.64,
+            "source_seconds": 13.64,
+            "requested_seconds": 13.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 14.88,
+            "source_seconds": 14.88,
+            "requested_seconds": 14.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 16.14,
+            "source_seconds": 16.14,
+            "requested_seconds": 16.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 17.38,
+            "source_seconds": 17.38,
+            "requested_seconds": 17.375
+          }
+        ],
+        "response": {
+          "_trace": {
+            "model": "gemma4-31b-it",
+            "usage": {
+              "co2_g": 0.068347,
+              "energy_wh": 0.202811,
+              "total_tokens": 2467,
+              "prompt_tokens": 2444,
+              "completion_tokens": 23,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "multimodal_tokens": {
+                  "image": 2144
+                },
+                "created_cache_tokens": 2432
+              }
+            },
+            "revision": "hosted-unpinned",
+            "request_id": "6998d748-7d9f-472c-91ab-cc088054cc71",
+            "http_status": 200,
+            "frame_sha256": [
+              "df61098d436c511359b82af204614564c7579e5f1c10129b02c8cb266964a56a",
+              "3b956d54762160f2104d30ddc4e606b40758bddfc292f8a18f25104833474a69",
+              "3ec4f92642cc3ec036af7faba804a0cb516e00e6180c22a3159b019cf6413143",
+              "bc1c33cd54385b8c809501c3eb1743bd3a0a6145161913cd982f86aa133cfa0f",
+              "56fed19fab84c890486302fb0eeddba59e0aff0047e7795d39cfdb5a9f7f916b",
+              "71c8c1ac803aa9f710198298846f914cb3aa114c6d1696d1e08806c51df328e6",
+              "67633179b37caccc5620092d5519490f48974b03c6546219b1a9793364378929",
+              "b088aa766e157580cedcae351695cf505d96e9106baf89dffbd42eb69476d7a1"
+            ],
+            "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4",
+            "prompt_version": "visible-evidence-v1",
+            "elapsed_seconds": 3.0090309330000764,
+            "gateway_request_id": "f0ff3adc-4928-4f5a-ae87-28a8501d80a9",
+            "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+            "upstream_request_id": null,
+            "structured_output_policy": "asu-json-schema-gemma-v1"
+          },
+          "status": "insufficient_evidence",
+          "intervals": [],
+          "observation": "insufficient_evidence"
+        },
+        "created_at": "2026-11-06 17:46:05.894194+00:00"
+      },
+      {
+        "id": "484a8ad4-1fa1-4f1f-b7b1-2b028086b256",
+        "query": "A robot moves a clear cup under the coffee machine.",
+        "start_seconds": 0.0,
+        "end_seconds": 10.0,
+        "spec": {
+          "seed": 0,
+          "model_id": "gemma4-31b-it",
+          "revision": "hosted-unpinned",
+          "temperature": 0,
+          "helper_addons": "off",
+          "prompt_version": "visible-evidence-v1",
+          "reasoning_effort": "none",
+          "sampling_version": "eight-slots-sorted-actual-pts-v1",
+          "frames_per_window": 8,
+          "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+          "description_max_tokens": 1024,
+          "verification_max_tokens": 2048,
+          "structured_output_policy": "asu-json-schema-gemma-v1",
+          "verification_schema_version": "status-intervals-v2"
+        },
+        "samples": [
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 0.64,
+            "source_seconds": 0.64,
+            "requested_seconds": 0.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 1.88,
+            "source_seconds": 1.88,
+            "requested_seconds": 1.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 3.14,
+            "source_seconds": 3.14,
+            "requested_seconds": 3.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 4.38,
+            "source_seconds": 4.38,
+            "requested_seconds": 4.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 5.64,
+            "source_seconds": 5.64,
+            "requested_seconds": 5.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 6.88,
+            "source_seconds": 6.88,
+            "requested_seconds": 6.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 8.14,
+            "source_seconds": 8.14,
+            "requested_seconds": 8.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 9.38,
+            "source_seconds": 9.38,
+            "requested_seconds": 9.375
+          }
+        ],
+        "response": {
+          "_trace": {
+            "model": "gemma4-31b-it",
+            "usage": {
+              "co2_g": 0.096385,
+              "energy_wh": 0.286008,
+              "total_tokens": 2460,
+              "prompt_tokens": 2436,
+              "completion_tokens": 24,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "multimodal_tokens": {
+                  "image": 2144
+                },
+                "created_cache_tokens": 2432
+              }
+            },
+            "revision": "hosted-unpinned",
+            "request_id": "5bc46de1-17e7-4c8e-b93f-bb1d9150f573",
+            "http_status": 200,
+            "frame_sha256": [
+              "b59e1fc368edaf48569a9a359e13b9dcecb5c2bd533e6fa071ea5c03ce12c5ee",
+              "69df14aa9147ee096b0d0e28d6e5bac689449a9723e7c969f76c1952c2cbabd4",
+              "4c75086d560d2548a26e5020aaff99468fe93dab8dd6dafd8c7b14652b69c647",
+              "05838b8df67dcbf9231bdad18c6384f67214db7e7a96839580818d6f9fb3cd4d",
+              "dce1eacea601131e608042ec946de5dab5457e3ceb893c02562949eedf9ffc1e",
+              "9bdd86f0475d9817f83fd8ecd371662398b98890d88fb9f3c4744aab1e6b4032",
+              "7d589b6c836b87b7be703953ac2fcd61c3c4dd0de78bd359e763e0682b8c807a",
+              "6070303a554999ae163e5097b24a8faa154c1e01f651f0da0ad711ea300b3bea"
+            ],
+            "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4",
+            "prompt_version": "visible-evidence-v1",
+            "elapsed_seconds": 3.97638427600009,
+            "gateway_request_id": "cc6cd3b0-c423-4c38-9c96-1975a2bdf4b8",
+            "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+            "upstream_request_id": null,
+            "structured_output_policy": "asu-json-schema-gemma-v1"
+          },
+          "status": "insufficient_evidence",
+          "intervals": [],
+          "observation": "insufficient_evidence"
+        },
+        "created_at": "2026-11-06 17:46:11.431542+00:00"
+      },
+      {
+        "id": "14deb0e2-0e31-44ec-8ff8-525934074dae",
+        "query": "A person wearing a red shirt is visible.",
+        "start_seconds": 0.0,
+        "end_seconds": 10.0,
+        "spec": {
+          "seed": 0,
+          "model_id": "gemma4-31b-it",
+          "revision": "hosted-unpinned",
+          "temperature": 0,
+          "helper_addons": "off",
+          "prompt_version": "visible-evidence-v1",
+          "reasoning_effort": "none",
+          "sampling_version": "eight-slots-sorted-actual-pts-v1",
+          "frames_per_window": 8,
+          "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+          "description_max_tokens": 1024,
+          "verification_max_tokens": 2048,
+          "structured_output_policy": "asu-json-schema-gemma-v1",
+          "verification_schema_version": "status-intervals-v2"
+        },
+        "samples": [
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 0.64,
+            "source_seconds": 0.64,
+            "requested_seconds": 0.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 1.88,
+            "source_seconds": 1.88,
+            "requested_seconds": 1.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 3.14,
+            "source_seconds": 3.14,
+            "requested_seconds": 3.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 4.38,
+            "source_seconds": 4.38,
+            "requested_seconds": 4.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 5.64,
+            "source_seconds": 5.64,
+            "requested_seconds": 5.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 6.88,
+            "source_seconds": 6.88,
+            "requested_seconds": 6.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 8.14,
+            "source_seconds": 8.14,
+            "requested_seconds": 8.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 9.38,
+            "source_seconds": 9.38,
+            "requested_seconds": 9.375
+          }
+        ],
+        "response": {
+          "_trace": {
+            "model": "gemma4-31b-it",
+            "usage": {
+              "co2_g": 0.105488,
+              "energy_wh": 0.313021,
+              "total_tokens": 2456,
+              "prompt_tokens": 2434,
+              "completion_tokens": 22,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "multimodal_tokens": {
+                  "image": 2144
+                },
+                "created_cache_tokens": 2432
+              }
+            },
+            "revision": "hosted-unpinned",
+            "request_id": "ec794738-69d3-41e1-868b-493a6bf1e017",
+            "http_status": 200,
+            "frame_sha256": [
+              "b59e1fc368edaf48569a9a359e13b9dcecb5c2bd533e6fa071ea5c03ce12c5ee",
+              "69df14aa9147ee096b0d0e28d6e5bac689449a9723e7c969f76c1952c2cbabd4",
+              "4c75086d560d2548a26e5020aaff99468fe93dab8dd6dafd8c7b14652b69c647",
+              "05838b8df67dcbf9231bdad18c6384f67214db7e7a96839580818d6f9fb3cd4d",
+              "dce1eacea601131e608042ec946de5dab5457e3ceb893c02562949eedf9ffc1e",
+              "9bdd86f0475d9817f83fd8ecd371662398b98890d88fb9f3c4744aab1e6b4032",
+              "7d589b6c836b87b7be703953ac2fcd61c3c4dd0de78bd359e763e0682b8c807a",
+              "6070303a554999ae163e5097b24a8faa154c1e01f651f0da0ad711ea300b3bea"
+            ],
+            "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4",
+            "prompt_version": "visible-evidence-v1",
+            "elapsed_seconds": 5.589927618999809,
+            "gateway_request_id": "e1d19749-1ba5-4008-a500-5a9acd212f99",
+            "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+            "upstream_request_id": null,
+            "structured_output_policy": "asu-json-schema-gemma-v1"
+          },
+          "status": "no_match",
+          "intervals": [],
+          "observation": "insufficient_evidence"
+        },
+        "created_at": "2026-11-06 17:47:14.849537+00:00"
+      },
+      {
+        "id": "509c5b7b-9ecd-464b-8a99-1a89ed8845e6",
+        "query": "A person wearing a red shirt is visible.",
+        "start_seconds": 16.0,
+        "end_seconds": 22.0,
+        "spec": {
+          "seed": 0,
+          "model_id": "gemma4-31b-it",
+          "revision": "hosted-unpinned",
+          "temperature": 0,
+          "helper_addons": "off",
+          "prompt_version": "visible-evidence-v1",
+          "reasoning_effort": "none",
+          "sampling_version": "eight-slots-sorted-actual-pts-v1",
+          "frames_per_window": 8,
+          "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+          "description_max_tokens": 1024,
+          "verification_max_tokens": 2048,
+          "structured_output_policy": "asu-json-schema-gemma-v1",
+          "verification_schema_version": "status-intervals-v2"
+        },
+        "samples": [
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 16.38,
+            "source_seconds": 16.38,
+            "requested_seconds": 16.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 17.14,
+            "source_seconds": 17.14,
+            "requested_seconds": 17.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 17.88,
+            "source_seconds": 17.88,
+            "requested_seconds": 17.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 18.64,
+            "source_seconds": 18.64,
+            "requested_seconds": 18.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 19.38,
+            "source_seconds": 19.38,
+            "requested_seconds": 19.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 20.14,
+            "source_seconds": 20.14,
+            "requested_seconds": 20.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 20.88,
+            "source_seconds": 20.88,
+            "requested_seconds": 20.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 21.64,
+            "source_seconds": 21.64,
+            "requested_seconds": 21.625
+          }
+        ],
+        "response": {
+          "_trace": {
+            "model": "gemma4-31b-it",
+            "usage": {
+              "co2_g": 0.112014,
+              "energy_wh": 0.332387,
+              "total_tokens": 2467,
+              "prompt_tokens": 2445,
+              "completion_tokens": 22,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "multimodal_tokens": {
+                  "image": 2144
+                },
+                "created_cache_tokens": 2432
+              }
+            },
+            "revision": "hosted-unpinned",
+            "request_id": "bbb1ce53-d4b9-40b5-9b3f-6e27728f385b",
+            "http_status": 200,
+            "frame_sha256": [
+              "70d27d952bfaf5e020aea6bb96f5b0f000a632b1cf0a12ee222a832f86e38257",
+              "2a9810901c76315002d72b63fc982282a0ffff2b418626b7f929f905a61d48ef",
+              "8c1233f5eed16f8567d2731a4f4ab38501ef1c7eb791d337b9ee5142abfd91ea",
+              "f651b98e9b048f8aa1db02e5655f3f75401171fffc18d5b3f65b2e81648d436f",
+              "20156fc0d384fd2c9278e220e494413a6723f3a2be7bc13f51b05a7d8c70b74d",
+              "b8064a2cc103eb81698b45ce732b238ff47d4a90cdaf902d6761f478866a0ae2",
+              "d32c30bbf09957f9c6ed37250977c4fc021bfe68001b4a389c3f5db27e1c7aa7",
+              "ed98221fa876a0c9935e696327eee91b4602182ee1275414c8a55ddade1f634c"
+            ],
+            "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4",
+            "prompt_version": "visible-evidence-v1",
+            "elapsed_seconds": 3.483248255000035,
+            "gateway_request_id": "2a825748-0940-4f9f-a1af-bd220ec84d4e",
+            "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+            "upstream_request_id": null,
+            "structured_output_policy": "asu-json-schema-gemma-v1"
+          },
+          "status": "no_match",
+          "intervals": [],
+          "observation": "insufficient_evidence"
+        },
+        "created_at": "2026-11-06 17:47:19.817657+00:00"
+      },
+      {
+        "id": "401aba4f-290c-4924-aed8-4484e6113449",
+        "query": "A person wearing a red shirt is visible.",
+        "start_seconds": 8.0,
+        "end_seconds": 18.0,
+        "spec": {
+          "seed": 0,
+          "model_id": "gemma4-31b-it",
+          "revision": "hosted-unpinned",
+          "temperature": 0,
+          "helper_addons": "off",
+          "prompt_version": "visible-evidence-v1",
+          "reasoning_effort": "none",
+          "sampling_version": "eight-slots-sorted-actual-pts-v1",
+          "frames_per_window": 8,
+          "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+          "description_max_tokens": 1024,
+          "verification_max_tokens": 2048,
+          "structured_output_policy": "asu-json-schema-gemma-v1",
+          "verification_schema_version": "status-intervals-v2"
+        },
+        "samples": [
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 8.64,
+            "source_seconds": 8.64,
+            "requested_seconds": 8.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 9.88,
+            "source_seconds": 9.88,
+            "requested_seconds": 9.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 11.14,
+            "source_seconds": 11.14,
+            "requested_seconds": 11.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 12.38,
+            "source_seconds": 12.38,
+            "requested_seconds": 12.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 13.64,
+            "source_seconds": 13.64,
+            "requested_seconds": 13.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 14.88,
+            "source_seconds": 14.88,
+            "requested_seconds": 14.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 16.14,
+            "source_seconds": 16.14,
+            "requested_seconds": 16.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 17.38,
+            "source_seconds": 17.38,
+            "requested_seconds": 17.375
+          }
+        ],
+        "response": {
+          "_trace": {
+            "model": "gemma4-31b-it",
+            "usage": {
+              "co2_g": 0.13514,
+              "energy_wh": 0.401009,
+              "total_tokens": 2464,
+              "prompt_tokens": 2442,
+              "completion_tokens": 22,
+              "prompt_tokens_details": {
+                "cached_tokens": 0,
+                "multimodal_tokens": {
+                  "image": 2144
+                },
+                "created_cache_tokens": 2432
+              }
+            },
+            "revision": "hosted-unpinned",
+            "request_id": "7501d46b-7f2f-41c5-aedb-ec23b879961d",
+            "http_status": 200,
+            "frame_sha256": [
+              "df61098d436c511359b82af204614564c7579e5f1c10129b02c8cb266964a56a",
+              "3b956d54762160f2104d30ddc4e606b40758bddfc292f8a18f25104833474a69",
+              "3ec4f92642cc3ec036af7faba804a0cb516e00e6180c22a3159b019cf6413143",
+              "bc1c33cd54385b8c809501c3eb1743bd3a0a6145161913cd982f86aa133cfa0f",
+              "56fed19fab84c890486302fb0eeddba59e0aff0047e7795d39cfdb5a9f7f916b",
+              "71c8c1ac803aa9f710198298846f914cb3aa114c6d1696d1e08806c51df328e6",
+              "67633179b37caccc5620092d5519490f48974b03c6546219b1a9793364378929",
+              "b088aa766e157580cedcae351695cf505d96e9106baf89dffbd42eb69476d7a1"
+            ],
+            "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4",
+            "prompt_version": "visible-evidence-v1",
+            "elapsed_seconds": 3.095014560999971,
+            "gateway_request_id": "6dd8f5af-23dd-4bd0-b671-4e4bb78bc01f",
+            "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+            "upstream_request_id": null,
+            "structured_output_policy": "asu-json-schema-gemma-v1"
+          },
+          "status": "no_match",
+          "intervals": [],
+          "observation": "insufficient_evidence"
+        },
+        "created_at": "2026-11-06 17:47:24.617849+00:00"
+      },
+      {
+        "id": "8df651fb-bac9-4f7b-8bd5-86382df57073",
+        "query": "A robot moves a clear cup under the coffee machine.",
+        "start_seconds": 16.0,
+        "end_seconds": 22.0,
+        "spec": {
+          "seed": 0,
+          "model_id": "gemma4-31b-it",
+          "revision": "hosted-unpinned",
+          "temperature": 0,
+          "helper_addons": "off",
+          "prompt_version": "visible-evidence-v1",
+          "reasoning_effort": "none",
+          "sampling_version": "eight-slots-sorted-actual-pts-v1",
+          "frames_per_window": 8,
+          "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+          "description_max_tokens": 1024,
+          "verification_max_tokens": 2048,
+          "structured_output_policy": "asu-json-schema-gemma-v1",
+          "verification_schema_version": "status-intervals-v2"
+        },
+        "samples": [
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 16.38,
+            "source_seconds": 16.38,
+            "requested_seconds": 16.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 17.14,
+            "source_seconds": 17.14,
+            "requested_seconds": 17.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 17.88,
+            "source_seconds": 17.88,
+            "requested_seconds": 17.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 18.64,
+            "source_seconds": 18.64,
+            "requested_seconds": 18.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 19.38,
+            "source_seconds": 19.38,
+            "requested_seconds": 19.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 20.14,
+            "source_seconds": 20.14,
+            "requested_seconds": 20.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 20.88,
+            "source_seconds": 20.88,
+            "requested_seconds": 20.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 21.64,
+            "source_seconds": 21.64,
+            "requested_seconds": 21.625
+          }
+        ],
+        "response": {
+          "_trace": {
+            "model": "gemma4-31b-it",
+            "usage": {
+              "co2_g": 0.339368,
+              "energy_wh": 1.007028,
+              "total_tokens": 2590,
+              "prompt_tokens": 2447,
+              "completion_tokens": 143,
+              "prompt_tokens_details": {
+                "cached_tokens": 2432,
+                "multimodal_tokens": {
+                  "image": 2144
+                },
+                "created_cache_tokens": 0
+              }
+            },
+            "revision": "hosted-unpinned",
+            "request_id": "9fd72b12-2418-4e6e-b111-5ef238e17879",
+            "http_status": 200,
+            "frame_sha256": [
+              "70d27d952bfaf5e020aea6bb96f5b0f000a632b1cf0a12ee222a832f86e38257",
+              "2a9810901c76315002d72b63fc982282a0ffff2b418626b7f929f905a61d48ef",
+              "8c1233f5eed16f8567d2731a4f4ab38501ef1c7eb791d337b9ee5142abfd91ea",
+              "f651b98e9b048f8aa1db02e5655f3f75401171fffc18d5b3f65b2e81648d436f",
+              "20156fc0d384fd2c9278e220e494413a6723f3a2be7bc13f51b05a7d8c70b74d",
+              "b8064a2cc103eb81698b45ce732b238ff47d4a90cdaf902d6761f478866a0ae2",
+              "d32c30bbf09957f9c6ed37250977c4fc021bfe68001b4a389c3f5db27e1c7aa7",
+              "ed98221fa876a0c9935e696327eee91b4602182ee1275414c8a55ddade1f634c"
+            ],
+            "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4",
+            "prompt_version": "visible-evidence-v1",
+            "elapsed_seconds": 7.679476787000112,
+            "gateway_request_id": "4fedf271-b8a2-4aef-8200-b007334a96ac",
+            "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+            "upstream_request_id": null,
+            "structured_output_policy": "asu-json-schema-gemma-v1"
+          },
+          "status": "match",
+          "intervals": [
+            {
+              "end_seconds": 20.14,
+              "start_seconds": 17.88
+            },
+            {
+              "end_seconds": 21.64,
+              "start_seconds": 20.88
+            }
+          ],
+          "observation": "A robot arm is seen moving a clear cup from the right side of the table to a position directly under the coffee machine's dispenser between 17.88 and 20.14 seconds. After 20.88 seconds, the robot arm moves away from the cup, which remains under the machine."
+        },
+        "created_at": "2026-11-06 17:50:25.329419+00:00"
+      },
+      {
+        "id": "ab86e2e5-3f11-4f63-9383-6a54c14fc814",
+        "query": "A robot moves a clear cup under the coffee machine.",
+        "start_seconds": 8.0,
+        "end_seconds": 18.0,
+        "spec": {
+          "seed": 0,
+          "model_id": "gemma4-31b-it",
+          "revision": "hosted-unpinned",
+          "temperature": 0,
+          "helper_addons": "off",
+          "prompt_version": "visible-evidence-v1",
+          "reasoning_effort": "none",
+          "sampling_version": "eight-slots-sorted-actual-pts-v1",
+          "frames_per_window": 8,
+          "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+          "description_max_tokens": 1024,
+          "verification_max_tokens": 2048,
+          "structured_output_policy": "asu-json-schema-gemma-v1",
+          "verification_schema_version": "status-intervals-v2"
+        },
+        "samples": [
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 8.64,
+            "source_seconds": 8.64,
+            "requested_seconds": 8.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 9.88,
+            "source_seconds": 9.88,
+            "requested_seconds": 9.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 11.14,
+            "source_seconds": 11.14,
+            "requested_seconds": 11.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 12.38,
+            "source_seconds": 12.38,
+            "requested_seconds": 12.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 13.64,
+            "source_seconds": 13.64,
+            "requested_seconds": 13.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 14.88,
+            "source_seconds": 14.88,
+            "requested_seconds": 14.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 16.14,
+            "source_seconds": 16.14,
+            "requested_seconds": 16.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 17.38,
+            "source_seconds": 17.38,
+            "requested_seconds": 17.375
+          }
+        ],
+        "response": {
+          "_trace": {
+            "model": "gemma4-31b-it",
+            "usage": {
+              "co2_g": 0.060961,
+              "energy_wh": 0.180893,
+              "total_tokens": 2467,
+              "prompt_tokens": 2444,
+              "completion_tokens": 23,
+              "prompt_tokens_details": {
+                "cached_tokens": 2432,
+                "multimodal_tokens": {
+                  "image": 2144
+                },
+                "created_cache_tokens": 0
+              }
+            },
+            "revision": "hosted-unpinned",
+            "request_id": "874401df-7313-466b-a04a-028d8a915f9b",
+            "http_status": 200,
+            "frame_sha256": [
+              "df61098d436c511359b82af204614564c7579e5f1c10129b02c8cb266964a56a",
+              "3b956d54762160f2104d30ddc4e606b40758bddfc292f8a18f25104833474a69",
+              "3ec4f92642cc3ec036af7faba804a0cb516e00e6180c22a3159b019cf6413143",
+              "bc1c33cd54385b8c809501c3eb1743bd3a0a6145161913cd982f86aa133cfa0f",
+              "56fed19fab84c890486302fb0eeddba59e0aff0047e7795d39cfdb5a9f7f916b",
+              "71c8c1ac803aa9f710198298846f914cb3aa114c6d1696d1e08806c51df328e6",
+              "67633179b37caccc5620092d5519490f48974b03c6546219b1a9793364378929",
+              "b088aa766e157580cedcae351695cf505d96e9106baf89dffbd42eb69476d7a1"
+            ],
+            "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4",
+            "prompt_version": "visible-evidence-v1",
+            "elapsed_seconds": 1.6081823479999002,
+            "gateway_request_id": "ce9b2eef-651c-466f-9fe3-670d82b797dd",
+            "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+            "upstream_request_id": null,
+            "structured_output_policy": "asu-json-schema-gemma-v1"
+          },
+          "status": "insufficient_evidence",
+          "intervals": [],
+          "observation": "insufficient_evidence"
+        },
+        "created_at": "2026-11-06 17:50:28.620083+00:00"
+      },
+      {
+        "id": "b50d9a17-84d7-4e04-9631-5ab7d27c21cd",
+        "query": "A robot moves a clear cup under the coffee machine.",
+        "start_seconds": 0.0,
+        "end_seconds": 10.0,
+        "spec": {
+          "seed": 0,
+          "model_id": "gemma4-31b-it",
+          "revision": "hosted-unpinned",
+          "temperature": 0,
+          "helper_addons": "off",
+          "prompt_version": "visible-evidence-v1",
+          "reasoning_effort": "none",
+          "sampling_version": "eight-slots-sorted-actual-pts-v1",
+          "frames_per_window": 8,
+          "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+          "description_max_tokens": 1024,
+          "verification_max_tokens": 2048,
+          "structured_output_policy": "asu-json-schema-gemma-v1",
+          "verification_schema_version": "status-intervals-v2"
+        },
+        "samples": [
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 0.64,
+            "source_seconds": 0.64,
+            "requested_seconds": 0.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 1.88,
+            "source_seconds": 1.88,
+            "requested_seconds": 1.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 3.14,
+            "source_seconds": 3.14,
+            "requested_seconds": 3.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 4.38,
+            "source_seconds": 4.38,
+            "requested_seconds": 4.375
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 5.64,
+            "source_seconds": 5.64,
+            "requested_seconds": 5.625
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 6.88,
+            "source_seconds": 6.88,
+            "requested_seconds": 6.875
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 8.14,
+            "source_seconds": 8.14,
+            "requested_seconds": 8.125
+          },
+          {
+            "selection": "at_or_after_request",
+            "pts_seconds": 9.38,
+            "source_seconds": 9.38,
+            "requested_seconds": 9.375
+          }
+        ],
+        "response": {
+          "_trace": {
+            "model": "gemma4-31b-it",
+            "usage": {
+              "co2_g": 0.052569,
+              "energy_wh": 0.155992,
+              "total_tokens": 2460,
+              "prompt_tokens": 2436,
+              "completion_tokens": 24,
+              "prompt_tokens_details": {
+                "cached_tokens": 2432,
+                "multimodal_tokens": {
+                  "image": 2144
+                },
+                "created_cache_tokens": 0
+              }
+            },
+            "revision": "hosted-unpinned",
+            "request_id": "406d847f-1b1a-4893-bddc-fbdf9dfd0720",
+            "http_status": 200,
+            "frame_sha256": [
+              "b59e1fc368edaf48569a9a359e13b9dcecb5c2bd533e6fa071ea5c03ce12c5ee",
+              "69df14aa9147ee096b0d0e28d6e5bac689449a9723e7c969f76c1952c2cbabd4",
+              "4c75086d560d2548a26e5020aaff99468fe93dab8dd6dafd8c7b14652b69c647",
+              "05838b8df67dcbf9231bdad18c6384f67214db7e7a96839580818d6f9fb3cd4d",
+              "dce1eacea601131e608042ec946de5dab5457e3ceb893c02562949eedf9ffc1e",
+              "9bdd86f0475d9817f83fd8ecd371662398b98890d88fb9f3c4744aab1e6b4032",
+              "7d589b6c836b87b7be703953ac2fcd61c3c4dd0de78bd359e763e0682b8c807a",
+              "6070303a554999ae163e5097b24a8faa154c1e01f651f0da0ad711ea300b3bea"
+            ],
+            "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4",
+            "prompt_version": "visible-evidence-v1",
+            "elapsed_seconds": 1.5065957930000877,
+            "gateway_request_id": "d965b3f1-4d7e-4d4c-bfbf-1024fd6423e0",
+            "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+            "upstream_request_id": null,
+            "structured_output_policy": "asu-json-schema-gemma-v1"
+          },
+          "status": "insufficient_evidence",
+          "intervals": [],
+          "observation": "insufficient_evidence"
+        },
+        "created_at": "2026-11-06 17:50:31.675353+00:00"
+      }
+    ],
+    "schema_version": 4,
+    "runtime_versions": {
+      "local-video-search": "0.1.0",
+      "fastapi": "0.162.0",
+      "starlette": "1.10.0",
+      "pydantic": "2.14.3",
+      "Pillow": "12.1.0",
+      "transformers": "4.57.6",
+      "torch": "2.9.0+cpu"
+    },
+    "application_source_sha256": {
+      "src/video_search/uploads.py": "0a2d942ae226a15de9198f86ede842de700090abc6594995aed91d466b18c3b1",
+      "src/video_search/encoder.py": "e70c5cd8e9211041ab88bfb0eea1eac08819563e9dad705bb7ad1e032b1b839d",
+      "src/video_search/__init__.py": "e759aa22b3f95a2578b79f6a2dfba807d3bd89fb8bce6bfdf900ee763b5593be",
+      "src/video_search/schema.sql": "4c97f0020327aed5cab6ca9e28cadfd9c5712acf7646a16ced9b953910f70a9a",
+      "src/video_search/log.py": "7473a7ac6ef71e4cc028790dbae4c0463ebd263c7f7eca0f28cf927a5844e9c2",
+      "src/video_search/text_encoder.py": "3a758ed9ba87c2b0dd79cb73b8c2705449446e71cb559263637cc2a884a83bcd",
+      "src/video_search/store.py": "5bcca50fffad86a88dd9ead019ebbf07f67251879dd350111ba7e5313a35cffc",
+      "src/video_search/api.py": "249498b09f473cd39c31949d918d54abc67bdcee7c1d3804cfbd411daefd24a7",
+      "src/video_search/worker.py": "ca5f37246bbc6c88daf57342dd7bf6185dc0291fb490ba6caacb0e1b6796c9ec",
+      "src/video_search/config.py": "1956615beb838206ea57205732c64080d0194fb9fadd600affc70d871aa7f4b0",
+      "src/video_search/vlm.py": "342864272132f0cd4cbfecaa363a1c9131c596246e7c0f601fa0e08b41df5066",
+      "src/video_search/frames.py": "73c363152b21da9d414c73f47c7b26b460db0e753262688d6658a8b2cebc5612",
+      "src/video_search/analysis.py": "a96ea220abb97d46d15416bbcac3db54b1bd5081ee4100d93c7c0718cc38420b",
+      "src/video_search/media.py": "2c29fe48590f0343f30951a8d10aa2e8ff1f15b78bcf3e99631e01d88f330285",
+      "src/video_search/static/app.js": "52ec0ba94a434a738b5070f595fe6e0c1b3e210a5bea7ab8a99258d6f29f3d4f",
+      "src/video_search/static/app.css": "462e47eee1f64ea85064058f33be304fceae825cfafd833344fb186cc9100001",
+      "src/video_search/static/index.html": "9d20f827bda82023e3e14a5476b5860c1ca32752f769c115161e54c77095efb1",
+      "src/video_search/migrations/002_visual.sql": "7519b4f34b37f79136c7795e3259f94e6e21fca3a200c0213ff41ff23253ddde",
+      "src/video_search/migrations/003_descriptions.sql": "204a5664b639e6429bdd8d585bccc912bd46d7658f8c7f8404ebb7ec045ca212",
+      "src/video_search/migrations/004_uploads.sql": "9770343c05e19bb997a63650b2ddc208ab41d42ed9e6d9d3e593e4302cc2f1c5"
+    }
+  },
+  "screenshots": [
+    "output/playwright/upload-indexing.png",
+    "output/playwright/final-playback.png",
+    "output/playwright/mobile.png"
+  ]
+}

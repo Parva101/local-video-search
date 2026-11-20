@@ -1,0 +1,229 @@
+{
+  "aggregation_source_sha256": "a5b33867e2e1b48480179792a2efabd55b62cbead70725c5976910d0f483986e",
+  "author_native_batch4": {
+    "checkpoint_sha256": "b3033d72ae5de5f99d9544b85ab0a0378998b0e8bfeb9db633a3e00c54960bb1",
+    "evaluation_batch_size": 4,
+    "metrics_percent": {
+      "R1@0.3": 72.63440860215053,
+      "R1@0.5": 60.18817204301076,
+      "R1@0.7": 38.54838709677419,
+      "mIoU": 52.167337729466766
+    },
+    "scope": "Separate check using author-config batch size; not part of the matched batch32 comparison."
+  },
+  "author_reference": {
+    "checkpoint_sha256": "b3033d72ae5de5f99d9544b85ab0a0378998b0e8bfeb9db633a3e00c54960bb1",
+    "comparison": "Separate pretrained reference; authors used their test-selection procedure. Not a same-training control.",
+    "metrics_percent": {
+      "R1@0.3": 72.60752688172043,
+      "R1@0.5": 60.10752688172043,
+      "R1@0.7": 38.54838709677419,
+      "mIoU": 52.11823222742558
+    }
+  },
+  "evaluation_batch_size": 32,
+  "freeze_sha256": "8130de15a57c7bae3ddef178cce157c7eb0e7c40507e07a6673b1d7f7c23dff4",
+  "identities": {
+    "driver_sha256": "b7233ea4c5e81de868f8d8f44d180945363162db8602457aaef91b955496dbee",
+    "features_sha256": "2fb9c59c596459046b091146b0de9853a79d8c022f65966b137dc363628307cf",
+    "metadata_sha256": "fbf26493b5b1b7c08e3cb0b79e3ef400709229205cfea24745798292ba7eb7d6",
+    "training_driver_sha256": "06522db12314de22dc6c18ae9e108936990073e7c274bb5420cb1ebd0b3b33c0"
+  },
+  "limits": [
+    "Processed author Charades-STA release; not a canonical-label reproduction.",
+    "Seven test query strings and 562 shared test intervals differ from the canonical copy; maximum endpoint difference is 0.18534 seconds.",
+    "The old 69-query subset was exposed; this is not an untouched-test or SOTA claim.",
+    "Positive single-video interval retrieval only; no absent-query, corpus, repeated-event, count or long-video result.",
+    "All seeds are reported; no seed or model is selected using test performance."
+  ],
+  "methods": {
+    "baseline": {
+      "mean_percent": {
+        "R1@0.3": 71.05734767025089,
+        "R1@0.5": 60.0358422939068,
+        "R1@0.7": 37.31182795698925,
+        "mIoU": 51.09489856203362
+      },
+      "per_seed_percent": {
+        "2018": {
+          "R1@0.3": 71.61290322580646,
+          "R1@0.5": 61.317204301075265,
+          "R1@0.7": 37.446236559139784,
+          "mIoU": 51.829958818858735
+        },
+        "2019": {
+          "R1@0.3": 70.91397849462365,
+          "R1@0.5": 59.758064516129025,
+          "R1@0.7": 37.016129032258064,
+          "mIoU": 50.894443356437776
+        },
+        "2020": {
+          "R1@0.3": 70.64516129032258,
+          "R1@0.5": 59.03225806451613,
+          "R1@0.7": 37.473118279569896,
+          "mIoU": 50.56029351080436
+        }
+      },
+      "sample_standard_deviation_percentage_points": {
+        "R1@0.3": 0.4995469485579383,
+        "R1@0.5": 1.1675252444216413,
+        "R1@0.7": 0.2564352691981032,
+        "mIoU": 0.6581407263701735
+      }
+    },
+    "quality": {
+      "mean_percent": {
+        "R1@0.3": 69.22043010752688,
+        "R1@0.5": 58.79928315412186,
+        "R1@0.7": 38.64695340501792,
+        "mIoU": 50.441340881828175
+      },
+      "per_seed_percent": {
+        "2018": {
+          "R1@0.3": 69.00537634408602,
+          "R1@0.5": 58.54838709677419,
+          "R1@0.7": 39.40860215053764,
+          "mIoU": 50.61221816620866
+        },
+        "2019": {
+          "R1@0.3": 69.86559139784946,
+          "R1@0.5": 59.89247311827957,
+          "R1@0.7": 38.70967741935484,
+          "mIoU": 50.81102406375609
+        },
+        "2020": {
+          "R1@0.3": 68.79032258064515,
+          "R1@0.5": 57.95698924731183,
+          "R1@0.7": 37.82258064516129,
+          "mIoU": 49.90078041551978
+        }
+      },
+      "sample_standard_deviation_percentage_points": {
+        "R1@0.3": 0.5689787765730289,
+        "R1@0.5": 0.9918347026538834,
+        "R1@0.7": 0.7948690334639821,
+        "mIoU": 0.47857617943915254
+      }
+    }
+  },
+  "quality_minus_baseline": {
+    "bootstrap": {
+      "method": "Paired seed pairs and source-video clusters, both sampled with replacement; the video draw is shared across sampled seed pairs.",
+      "repetitions": 2000,
+      "seed": 20261114,
+      "warning": "Only three seed pairs; uncertainty estimates are limited."
+    },
+    "ci95_percentage_points": {
+      "R1@0.3": [
+        -3.215904810911746,
+        -0.3836118738066418
+      ],
+      "R1@0.5": [
+        -3.078214856905407,
+        0.5467365313809549
+      ],
+      "R1@0.7": [
+        -0.2097074331510774,
+        2.7577858809357627
+      ],
+      "mIoU": [
+        -1.567215788183859,
+        0.3040548091144558
+      ]
+    },
+    "mean_delta_percentage_points": {
+      "R1@0.3": -1.8369175627240164,
+      "R1@0.5": -1.2365591397849467,
+      "R1@0.7": 1.3351254480286734,
+      "mIoU": -0.6535576802054429
+    },
+    "per_seed_percentage_points": {
+      "2018": {
+        "R1@0.3": -2.6075268817204345,
+        "R1@0.5": -2.7688172043010773,
+        "R1@0.7": 1.9623655913978522,
+        "mIoU": -1.2177406526500678
+      },
+      "2019": {
+        "R1@0.3": -1.0483870967741948,
+        "R1@0.5": 0.13440860215053752,
+        "R1@0.7": 1.6935483870967716,
+        "mIoU": -0.08341929268168569
+      },
+      "2020": {
+        "R1@0.3": -1.85483870967742,
+        "R1@0.5": -1.0752688172043001,
+        "R1@0.7": 0.34946236559139643,
+        "mIoU": -0.6595130952845751
+      }
+    }
+  },
+  "query_count": 3720,
+  "report_count": 7,
+  "report_sha256": {
+    "author-native-b4": "8436c772b6705a76d52f485650518e84fe5829bcb4eaf63db8f4c7a8edc1dc0e",
+    "author-reference": "f78c073f434356500c40b16b874339849f2d340f478233bb25dc315b3966bce6",
+    "baseline-2018": "b2091b2358faddcac156a845f504dfd812775bf2ec2cf2e257cdf6be87dac14b",
+    "baseline-2019": "a0b029075f8dfe7375e00ad60481fda77fc37d58ee1699d1f49fa886c2476b30",
+    "baseline-2020": "f7162d9f719e7988f61d166a653707972341fdf575aec7391ad0f58b4101f8ca",
+    "quality-2018": "786276a795c9eed34ab7030ccffe62e68dd489f948084d8308c640210fb3bca8",
+    "quality-2019": "e9d8caf8ac5fd354ee709a293e1f6cc288626d0ecb36c021420d3f4b39ea6bd8",
+    "quality-2020": "c31b4a1c939789a0469b3fc766e465469e5fbdba15f52c33387496fd8d10244e"
+  },
+  "seed_pairs": 3,
+  "selected_epochs": {
+    "baseline-2018": 20,
+    "baseline-2019": 31,
+    "baseline-2020": 32,
+    "quality-2018": 37,
+    "quality-2019": 26,
+    "quality-2020": 24
+  },
+  "source_video_count": 1334,
+  "summary_source_sha256": "29eaa933e4302f4b9c663cba02e86b9c10204d61859cc7cd1da83fafd11c8ecf",
+  "timing": {
+    "author-native-b4": {
+      "elapsed_seconds": 24.362013458274305,
+      "inference_seconds": 10.628499403595924
+    },
+    "author-reference": {
+      "elapsed_seconds": 23.702519747894257,
+      "inference_seconds": 9.35618634102866
+    },
+    "baseline-2018": {
+      "elapsed_seconds": 325.5916801346466,
+      "inference_seconds": 16.35632983688265
+    },
+    "baseline-2019": {
+      "elapsed_seconds": 19.09409976331517,
+      "inference_seconds": 5.730196841061115
+    },
+    "baseline-2020": {
+      "elapsed_seconds": 19.160528988111764,
+      "inference_seconds": 5.663055306300521
+    },
+    "quality-2018": {
+      "elapsed_seconds": 20.980209233704954,
+      "inference_seconds": 5.99200929608196
+    },
+    "quality-2019": {
+      "elapsed_seconds": 18.604206101968884,
+      "inference_seconds": 5.830930805765092
+    },
+    "quality-2020": {
+      "elapsed_seconds": 22.901890723966062,
+      "inference_seconds": 5.897317565046251
+    }
+  },
+  "timing_scope": "Per-case timers use released precomputed features; raw extraction and query encoding are excluded. Python/container startup precedes these timers.",
+  "training_job": {
+    "elapsed_seconds": 16504,
+    "epochs_per_run": 100,
+    "exit_code": "0:0",
+    "gpu_count": 1,
+    "id": 1488158,
+    "state": "COMPLETED"
+  },
+  "units": "percent and percentage-point differences",
+  "version": "trained-temporal-comparison-v1"
+}

@@ -1,0 +1,2133 @@
+{
+  "purpose": "Small engineering smoke check; not public benchmark accuracy.",
+  "manifest_sha256": "8b94f2edc7dc1f1a164d4661e6357e9aa9c91f64a70d052d80816e230ec3dd5a",
+  "recording": {
+    "id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+    "source_path": "qwen-coffee-demo.mp4",
+    "sha256": "6d8c9cd342be3985e59ff9e1d4738ad467c75cf190127e2e53530cdd4faed1b2",
+    "size": 4607959,
+    "mtime_ns": 1793949058266832600,
+    "created_at": "2026-11-06T07:13:07.133559+00:00",
+    "metadata": {
+      "codec": "h264",
+      "width": 640,
+      "height": 480,
+      "has_audio": false,
+      "time_base": "1/12800",
+      "duration_source": "video_stream",
+      "duration_seconds": 22.0,
+      "pipeline_version": "import-v1",
+      "video_stream_index": 0,
+      "search_index_status": "ready",
+      "timing_origin_known": true,
+      "source_start_seconds": 0.0,
+      "window_length_seconds": 10,
+      "window_overlap_seconds": 2
+    },
+    "windows_count": 3
+  },
+  "retrieval": {
+    "visual": {
+      "cases": [
+        {
+          "case_id": "capsule",
+          "response": {
+            "results": [
+              {
+                "build_id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 8.0,
+                "end_seconds": 18.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 9.68,
+                    "source_seconds": 9.68,
+                    "requested_seconds": 9.666666666666666
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 13.0,
+                    "source_seconds": 13.0,
+                    "requested_seconds": 13.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 16.34,
+                    "source_seconds": 16.34,
+                    "requested_seconds": 16.333333333333336
+                  }
+                ],
+                "similarity": 0.17390106035458452,
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              },
+              {
+                "build_id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 0.0,
+                "end_seconds": 10.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 1.68,
+                    "source_seconds": 1.68,
+                    "requested_seconds": 1.6666666666666665
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 5.0,
+                    "source_seconds": 5.0,
+                    "requested_seconds": 5.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 8.34,
+                    "source_seconds": 8.34,
+                    "requested_seconds": 8.333333333333334
+                  }
+                ],
+                "similarity": 0.17018133339023622,
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              },
+              {
+                "build_id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 16.0,
+                "end_seconds": 22.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 17.0,
+                    "source_seconds": 17.0,
+                    "requested_seconds": 17.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 19.0,
+                    "source_seconds": 19.0,
+                    "requested_seconds": 19.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 21.0,
+                    "source_seconds": 21.0,
+                    "requested_seconds": 21.0
+                  }
+                ],
+                "similarity": 0.15023669894277503,
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              }
+            ],
+            "coverage": {
+              "total_recordings": 1,
+              "total_windows": 3,
+              "ready_recordings": 1,
+              "ready_windows": 3,
+              "incomplete_builds": [],
+              "incomplete_builds_count": 0
+            },
+            "spec": {
+              "model_id": "google/siglip2-base-patch16-224",
+              "revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+              "dimensions": 768,
+              "preprocess_version": "ffmpeg-max512-siglip-native-pil-rgb-v1",
+              "sampling_version": "window-sixth-mid-five-sixths-after-or-window-first-pts-v1",
+              "frames_per_window": 3,
+              "pooling": "mean-l2-frame-then-l2-window",
+              "runtime": "torch-2.9.0-transformers-4.57.6-pillow-12.1.0-cpu-float32-v1"
+            },
+            "query": "A robot picks up a round coffee capsule and moves it to the coffee machine.",
+            "path": "visual",
+            "result_type": "unverified_visual_candidates",
+            "timing": {
+              "encode_seconds": 3.9595250290003605,
+              "search_seconds": 0.029903775999628124,
+              "total_seconds": 3.9894288049999886
+            }
+          },
+          "top1_temporal_iou": 0.2222222222222222,
+          "hit_at_1_iou_0_3": false
+        },
+        {
+          "case_id": "cup",
+          "response": {
+            "results": [
+              {
+                "build_id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 8.0,
+                "end_seconds": 18.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 9.68,
+                    "source_seconds": 9.68,
+                    "requested_seconds": 9.666666666666666
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 13.0,
+                    "source_seconds": 13.0,
+                    "requested_seconds": 13.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 16.34,
+                    "source_seconds": 16.34,
+                    "requested_seconds": 16.333333333333336
+                  }
+                ],
+                "similarity": 0.19475761887522114,
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              },
+              {
+                "build_id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 0.0,
+                "end_seconds": 10.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 1.68,
+                    "source_seconds": 1.68,
+                    "requested_seconds": 1.6666666666666665
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 5.0,
+                    "source_seconds": 5.0,
+                    "requested_seconds": 5.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 8.34,
+                    "source_seconds": 8.34,
+                    "requested_seconds": 8.333333333333334
+                  }
+                ],
+                "similarity": 0.19086360578916417,
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              },
+              {
+                "build_id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 16.0,
+                "end_seconds": 22.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 17.0,
+                    "source_seconds": 17.0,
+                    "requested_seconds": 17.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 19.0,
+                    "source_seconds": 19.0,
+                    "requested_seconds": 19.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 21.0,
+                    "source_seconds": 21.0,
+                    "requested_seconds": 21.0
+                  }
+                ],
+                "similarity": 0.1631384291135355,
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              }
+            ],
+            "coverage": {
+              "total_recordings": 1,
+              "total_windows": 3,
+              "ready_recordings": 1,
+              "ready_windows": 3,
+              "incomplete_builds": [],
+              "incomplete_builds_count": 0
+            },
+            "spec": {
+              "model_id": "google/siglip2-base-patch16-224",
+              "revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+              "dimensions": 768,
+              "preprocess_version": "ffmpeg-max512-siglip-native-pil-rgb-v1",
+              "sampling_version": "window-sixth-mid-five-sixths-after-or-window-first-pts-v1",
+              "frames_per_window": 3,
+              "pooling": "mean-l2-frame-then-l2-window",
+              "runtime": "torch-2.9.0-transformers-4.57.6-pillow-12.1.0-cpu-float32-v1"
+            },
+            "query": "A robot picks up a clear cup and places it under the coffee machine.",
+            "path": "visual",
+            "result_type": "unverified_visual_candidates",
+            "timing": {
+              "encode_seconds": 0.06410223500097345,
+              "search_seconds": 0.029844245998901897,
+              "total_seconds": 0.09394648099987535
+            }
+          },
+          "top1_temporal_iou": 0.14285714285714285,
+          "hit_at_1_iou_0_3": false
+        }
+      ],
+      "recall_at_1_iou_0_3": 0.0
+    },
+    "description": {
+      "cases": [
+        {
+          "case_id": "capsule",
+          "response": {
+            "results": [
+              {
+                "build_id": "ef560747-2bd2-46c8-af48-4560be22a462",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 8.0,
+                "end_seconds": 18.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 8.64,
+                    "source_seconds": 8.64,
+                    "requested_seconds": 8.625
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 9.88,
+                    "source_seconds": 9.88,
+                    "requested_seconds": 9.875
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 11.14,
+                    "source_seconds": 11.14,
+                    "requested_seconds": 11.125
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 12.38,
+                    "source_seconds": 12.38,
+                    "requested_seconds": 12.375
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 13.64,
+                    "source_seconds": 13.64,
+                    "requested_seconds": 13.625
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 14.88,
+                    "source_seconds": 14.88,
+                    "requested_seconds": 14.875
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 16.14,
+                    "source_seconds": 16.14,
+                    "requested_seconds": 16.125
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 17.38,
+                    "source_seconds": 17.38,
+                    "requested_seconds": 17.375
+                  }
+                ],
+                "description": {
+                  "_trace": {
+                    "model": "Qwen/Qwen3.6-27B",
+                    "usage": {
+                      "total_tokens": 1994,
+                      "prompt_tokens": 1818,
+                      "completion_tokens": 176,
+                      "prompt_tokens_details": null
+                    },
+                    "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                    "request_id": "ff5990ec-465c-4e8e-9c8f-6676eb5de82a",
+                    "http_status": 200,
+                    "frame_sha256": [
+                      "df61098d436c511359b82af204614564c7579e5f1c10129b02c8cb266964a56a",
+                      "3b956d54762160f2104d30ddc4e606b40758bddfc292f8a18f25104833474a69",
+                      "3ec4f92642cc3ec036af7faba804a0cb516e00e6180c22a3159b019cf6413143",
+                      "bc1c33cd54385b8c809501c3eb1743bd3a0a6145161913cd982f86aa133cfa0f",
+                      "56fed19fab84c890486302fb0eeddba59e0aff0047e7795d39cfdb5a9f7f916b",
+                      "71c8c1ac803aa9f710198298846f914cb3aa114c6d1696d1e08806c51df328e6",
+                      "67633179b37caccc5620092d5519490f48974b03c6546219b1a9793364378929",
+                      "b088aa766e157580cedcae351695cf505d96e9106baf89dffbd42eb69476d7a1"
+                    ],
+                    "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+                    "prompt_version": "visible-evidence-v1",
+                    "elapsed_seconds": 12.547732715000166,
+                    "upstream_request_id": null
+                  },
+                  "actions": [
+                    "A left robotic arm moves a white capsule toward the central machine's dispenser slot.",
+                    "The capsule is inserted into the machine.",
+                    "The left robotic arm retracts away from the machine.",
+                    "A right robotic arm approaches and grasps a clear plastic cup.",
+                    "The right robotic arm lifts the cup off the surface."
+                  ],
+                  "objects": [
+                    "Central machine with a capsule dispenser",
+                    "White capsule",
+                    "Clear plastic cup",
+                    "Left robotic arm",
+                    "Right robotic arm"
+                  ],
+                  "summary": "A robotic arm on the left inserts a white capsule into the top of a central machine. After the capsule is loaded, the arm retracts. Subsequently, a second robotic arm on the right picks up a clear plastic cup from the table.",
+                  "uncertainties": [
+                    "The exact moment the capsule is fully seated is obscured by the arm's position."
+                  ]
+                },
+                "vector_similarity": 0.6788244258306411,
+                "vector_rank": 1,
+                "lexical_rank": 0.0,
+                "lexical_position": null,
+                "rrf_score": 0.01639344262295082,
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              },
+              {
+                "build_id": "ef560747-2bd2-46c8-af48-4560be22a462",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 16.0,
+                "end_seconds": 22.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 16.38,
+                    "source_seconds": 16.38,
+                    "requested_seconds": 16.375
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 17.14,
+                    "source_seconds": 17.14,
+                    "requested_seconds": 17.125
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 17.88,
+                    "source_seconds": 17.88,
+                    "requested_seconds": 17.875
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 18.64,
+                    "source_seconds": 18.64,
+                    "requested_seconds": 18.625
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 19.38,
+                    "source_seconds": 19.38,
+                    "requested_seconds": 19.375
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 20.14,
+                    "source_seconds": 20.14,
+                    "requested_seconds": 20.125
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 20.88,
+                    "source_seconds": 20.88,
+                    "requested_seconds": 20.875
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 21.64,
+                    "source_seconds": 21.64,
+                    "requested_seconds": 21.625
+                  }
+                ],
+                "description": {
+                  "_trace": {
+                    "model": "Qwen/Qwen3.6-27B",
+                    "usage": {
+                      "total_tokens": 2011,
+                      "prompt_tokens": 1821,
+                      "completion_tokens": 190,
+                      "prompt_tokens_details": null
+                    },
+                    "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                    "request_id": "982d7f34-9b00-49de-80da-5188743784c4",
+                    "http_status": 200,
+                    "frame_sha256": [
+                      "70d27d952bfaf5e020aea6bb96f5b0f000a632b1cf0a12ee222a832f86e38257",
+                      "2a9810901c76315002d72b63fc982282a0ffff2b418626b7f929f905a61d48ef",
+                      "8c1233f5eed16f8567d2731a4f4ab38501ef1c7eb791d337b9ee5142abfd91ea",
+                      "f651b98e9b048f8aa1db02e5655f3f75401171fffc18d5b3f65b2e81648d436f",
+                      "20156fc0d384fd2c9278e220e494413a6723f3a2be7bc13f51b05a7d8c70b74d",
+                      "b8064a2cc103eb81698b45ce732b238ff47d4a90cdaf902d6761f478866a0ae2",
+                      "d32c30bbf09957f9c6ed37250977c4fc021bfe68001b4a389c3f5db27e1c7aa7",
+                      "ed98221fa876a0c9935e696327eee91b4602182ee1275414c8a55ddade1f634c"
+                    ],
+                    "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+                    "prompt_version": "visible-evidence-v1",
+                    "elapsed_seconds": 13.581817852998938,
+                    "upstream_request_id": null
+                  },
+                  "actions": [
+                    "The right robotic arm moves from the right side towards the center.",
+                    "The right robotic arm grasps a clear plastic cup.",
+                    "The right robotic arm moves the cup to the dispenser nozzle.",
+                    "The right robotic arm releases the cup under the nozzle.",
+                    "The right robotic arm retracts back to the right side."
+                  ],
+                  "objects": [
+                    "Central beverage dispenser machine",
+                    "Clear plastic cup",
+                    "Right robotic arm",
+                    "Left robotic arm (stationary)"
+                  ],
+                  "summary": "A robotic arm on the right side of the frame picks up a clear plastic cup and places it under the dispenser nozzle of a central machine. After positioning the cup, the arm retracts to the right. A second robotic arm on the left remains stationary throughout the sequence.",
+                  "uncertainties": [
+                    "The specific type of machine is not identifiable beyond a dispenser.",
+                    "The left robotic arm's purpose is unclear as it does not move."
+                  ]
+                },
+                "vector_similarity": 0.5740911960601848,
+                "vector_rank": 2,
+                "lexical_rank": 0.0,
+                "lexical_position": null,
+                "rrf_score": 0.016129032258064516,
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              },
+              {
+                "build_id": "ef560747-2bd2-46c8-af48-4560be22a462",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 0.0,
+                "end_seconds": 10.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 0.64,
+                    "source_seconds": 0.64,
+                    "requested_seconds": 0.625
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 1.88,
+                    "source_seconds": 1.88,
+                    "requested_seconds": 1.875
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 3.14,
+                    "source_seconds": 3.14,
+                    "requested_seconds": 3.125
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 4.38,
+                    "source_seconds": 4.38,
+                    "requested_seconds": 4.375
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 5.64,
+                    "source_seconds": 5.64,
+                    "requested_seconds": 5.625
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 6.88,
+                    "source_seconds": 6.88,
+                    "requested_seconds": 6.875
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 8.14,
+                    "source_seconds": 8.14,
+                    "requested_seconds": 8.125
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 9.38,
+                    "source_seconds": 9.38,
+                    "requested_seconds": 9.375
+                  }
+                ],
+                "description": {
+                  "_trace": {
+                    "model": "Qwen/Qwen3.6-27B",
+                    "usage": {
+                      "total_tokens": 1999,
+                      "prompt_tokens": 1812,
+                      "completion_tokens": 187,
+                      "prompt_tokens_details": null
+                    },
+                    "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                    "request_id": "a43bae53-4f94-4d84-8994-8f286258a9b5",
+                    "http_status": 200,
+                    "frame_sha256": [
+                      "b59e1fc368edaf48569a9a359e13b9dcecb5c2bd533e6fa071ea5c03ce12c5ee",
+                      "69df14aa9147ee096b0d0e28d6e5bac689449a9723e7c969f76c1952c2cbabd4",
+                      "4c75086d560d2548a26e5020aaff99468fe93dab8dd6dafd8c7b14652b69c647",
+                      "05838b8df67dcbf9231bdad18c6384f67214db7e7a96839580818d6f9fb3cd4d",
+                      "dce1eacea601131e608042ec946de5dab5457e3ceb893c02562949eedf9ffc1e",
+                      "9bdd86f0475d9817f83fd8ecd371662398b98890d88fb9f3c4744aab1e6b4032",
+                      "7d589b6c836b87b7be703953ac2fcd61c3c4dd0de78bd359e763e0682b8c807a",
+                      "6070303a554999ae163e5097b24a8faa154c1e01f651f0da0ad711ea300b3bea"
+                    ],
+                    "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+                    "prompt_version": "visible-evidence-v1",
+                    "elapsed_seconds": 16.388383199999225,
+                    "upstream_request_id": null
+                  },
+                  "actions": [
+                    "Two robotic arms approach a white cylinder and a white stick.",
+                    "The arms coordinate to grasp the white cylinder.",
+                    "The left arm lifts the white cylinder.",
+                    "The left arm moves the cylinder towards the central machine."
+                  ],
+                  "objects": [
+                    "Robotic arms",
+                    "White cylinder",
+                    "White stick",
+                    "Central machine",
+                    "Clear plastic cup"
+                  ],
+                  "summary": "The video shows a dual-arm robotic system operating on a dark surface. Initially, two robotic arms approach a small white cylindrical object and a white stick. The arms coordinate to grasp the white cylinder. Subsequently, the left arm lifts the cylinder and moves it towards a central machine, while the right arm remains stationary near the white stick. A clear plastic cup is visible in the background throughout the sequence.",
+                  "uncertainties": [
+                    "The exact function of the central machine is unclear.",
+                    "The purpose of the white stick is not evident."
+                  ]
+                },
+                "vector_similarity": 0.41783070074502904,
+                "vector_rank": 3,
+                "lexical_rank": 0.0,
+                "lexical_position": null,
+                "rrf_score": 0.015873015873015872,
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              }
+            ],
+            "coverage": {
+              "total_recordings": 1,
+              "total_windows": 3,
+              "ready_recordings": 1,
+              "ready_windows": 3,
+              "incomplete_builds": [],
+              "incomplete_builds_count": 0
+            },
+            "spec": {
+              "model_id": "Qwen/Qwen3.6-27B",
+              "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+              "prompt_version": "visible-evidence-v1",
+              "frames_per_window": 8,
+              "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+              "temperature": 0,
+              "seed": 0,
+              "enable_thinking": false,
+              "structured_output_policy": "vllm-0.20-xgrammar-compact-v1",
+              "description_max_tokens": 1024,
+              "verification_max_tokens": 2048,
+              "dimensions": 384,
+              "embedding": {
+                "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+                "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+                "dimensions": 384,
+                "pooling": "attention-mask-mean-l2",
+                "max_tokens": 256,
+                "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32"
+              },
+              "sampling_version": "eight-slots-sorted-actual-pts-v1",
+              "runtime": "openai-structured-vision-v1"
+            },
+            "query": "A robot picks up a round coffee capsule and moves it to the coffee machine.",
+            "path": "description",
+            "result_type": "unverified_multimodal_candidates",
+            "timing": {
+              "encode_seconds": 0.07226092999917455,
+              "search_seconds": 0.031856266999966465,
+              "total_seconds": 0.10411719699914102
+            }
+          },
+          "top1_temporal_iou": 0.2222222222222222,
+          "hit_at_1_iou_0_3": false
+        },
+        {
+          "case_id": "cup",
+          "response": {
+            "results": [
+              {
+                "build_id": "ef560747-2bd2-46c8-af48-4560be22a462",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 16.0,
+                "end_seconds": 22.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 16.38,
+                    "source_seconds": 16.38,
+                    "requested_seconds": 16.375
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 17.14,
+                    "source_seconds": 17.14,
+                    "requested_seconds": 17.125
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 17.88,
+                    "source_seconds": 17.88,
+                    "requested_seconds": 17.875
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 18.64,
+                    "source_seconds": 18.64,
+                    "requested_seconds": 18.625
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 19.38,
+                    "source_seconds": 19.38,
+                    "requested_seconds": 19.375
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 20.14,
+                    "source_seconds": 20.14,
+                    "requested_seconds": 20.125
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 20.88,
+                    "source_seconds": 20.88,
+                    "requested_seconds": 20.875
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 21.64,
+                    "source_seconds": 21.64,
+                    "requested_seconds": 21.625
+                  }
+                ],
+                "description": {
+                  "_trace": {
+                    "model": "Qwen/Qwen3.6-27B",
+                    "usage": {
+                      "total_tokens": 2011,
+                      "prompt_tokens": 1821,
+                      "completion_tokens": 190,
+                      "prompt_tokens_details": null
+                    },
+                    "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                    "request_id": "982d7f34-9b00-49de-80da-5188743784c4",
+                    "http_status": 200,
+                    "frame_sha256": [
+                      "70d27d952bfaf5e020aea6bb96f5b0f000a632b1cf0a12ee222a832f86e38257",
+                      "2a9810901c76315002d72b63fc982282a0ffff2b418626b7f929f905a61d48ef",
+                      "8c1233f5eed16f8567d2731a4f4ab38501ef1c7eb791d337b9ee5142abfd91ea",
+                      "f651b98e9b048f8aa1db02e5655f3f75401171fffc18d5b3f65b2e81648d436f",
+                      "20156fc0d384fd2c9278e220e494413a6723f3a2be7bc13f51b05a7d8c70b74d",
+                      "b8064a2cc103eb81698b45ce732b238ff47d4a90cdaf902d6761f478866a0ae2",
+                      "d32c30bbf09957f9c6ed37250977c4fc021bfe68001b4a389c3f5db27e1c7aa7",
+                      "ed98221fa876a0c9935e696327eee91b4602182ee1275414c8a55ddade1f634c"
+                    ],
+                    "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+                    "prompt_version": "visible-evidence-v1",
+                    "elapsed_seconds": 13.581817852998938,
+                    "upstream_request_id": null
+                  },
+                  "actions": [
+                    "The right robotic arm moves from the right side towards the center.",
+                    "The right robotic arm grasps a clear plastic cup.",
+                    "The right robotic arm moves the cup to the dispenser nozzle.",
+                    "The right robotic arm releases the cup under the nozzle.",
+                    "The right robotic arm retracts back to the right side."
+                  ],
+                  "objects": [
+                    "Central beverage dispenser machine",
+                    "Clear plastic cup",
+                    "Right robotic arm",
+                    "Left robotic arm (stationary)"
+                  ],
+                  "summary": "A robotic arm on the right side of the frame picks up a clear plastic cup and places it under the dispenser nozzle of a central machine. After positioning the cup, the arm retracts to the right. A second robotic arm on the left remains stationary throughout the sequence.",
+                  "uncertainties": [
+                    "The specific type of machine is not identifiable beyond a dispenser.",
+                    "The left robotic arm's purpose is unclear as it does not move."
+                  ]
+                },
+                "vector_similarity": 0.6551245656535299,
+                "vector_rank": 1,
+                "lexical_rank": 0.0,
+                "lexical_position": null,
+                "rrf_score": 0.01639344262295082,
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              },
+              {
+                "build_id": "ef560747-2bd2-46c8-af48-4560be22a462",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 8.0,
+                "end_seconds": 18.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 8.64,
+                    "source_seconds": 8.64,
+                    "requested_seconds": 8.625
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 9.88,
+                    "source_seconds": 9.88,
+                    "requested_seconds": 9.875
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 11.14,
+                    "source_seconds": 11.14,
+                    "requested_seconds": 11.125
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 12.38,
+                    "source_seconds": 12.38,
+                    "requested_seconds": 12.375
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 13.64,
+                    "source_seconds": 13.64,
+                    "requested_seconds": 13.625
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 14.88,
+                    "source_seconds": 14.88,
+                    "requested_seconds": 14.875
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 16.14,
+                    "source_seconds": 16.14,
+                    "requested_seconds": 16.125
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 17.38,
+                    "source_seconds": 17.38,
+                    "requested_seconds": 17.375
+                  }
+                ],
+                "description": {
+                  "_trace": {
+                    "model": "Qwen/Qwen3.6-27B",
+                    "usage": {
+                      "total_tokens": 1994,
+                      "prompt_tokens": 1818,
+                      "completion_tokens": 176,
+                      "prompt_tokens_details": null
+                    },
+                    "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                    "request_id": "ff5990ec-465c-4e8e-9c8f-6676eb5de82a",
+                    "http_status": 200,
+                    "frame_sha256": [
+                      "df61098d436c511359b82af204614564c7579e5f1c10129b02c8cb266964a56a",
+                      "3b956d54762160f2104d30ddc4e606b40758bddfc292f8a18f25104833474a69",
+                      "3ec4f92642cc3ec036af7faba804a0cb516e00e6180c22a3159b019cf6413143",
+                      "bc1c33cd54385b8c809501c3eb1743bd3a0a6145161913cd982f86aa133cfa0f",
+                      "56fed19fab84c890486302fb0eeddba59e0aff0047e7795d39cfdb5a9f7f916b",
+                      "71c8c1ac803aa9f710198298846f914cb3aa114c6d1696d1e08806c51df328e6",
+                      "67633179b37caccc5620092d5519490f48974b03c6546219b1a9793364378929",
+                      "b088aa766e157580cedcae351695cf505d96e9106baf89dffbd42eb69476d7a1"
+                    ],
+                    "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+                    "prompt_version": "visible-evidence-v1",
+                    "elapsed_seconds": 12.547732715000166,
+                    "upstream_request_id": null
+                  },
+                  "actions": [
+                    "A left robotic arm moves a white capsule toward the central machine's dispenser slot.",
+                    "The capsule is inserted into the machine.",
+                    "The left robotic arm retracts away from the machine.",
+                    "A right robotic arm approaches and grasps a clear plastic cup.",
+                    "The right robotic arm lifts the cup off the surface."
+                  ],
+                  "objects": [
+                    "Central machine with a capsule dispenser",
+                    "White capsule",
+                    "Clear plastic cup",
+                    "Left robotic arm",
+                    "Right robotic arm"
+                  ],
+                  "summary": "A robotic arm on the left inserts a white capsule into the top of a central machine. After the capsule is loaded, the arm retracts. Subsequently, a second robotic arm on the right picks up a clear plastic cup from the table.",
+                  "uncertainties": [
+                    "The exact moment the capsule is fully seated is obscured by the arm's position."
+                  ]
+                },
+                "vector_similarity": 0.6492408707511688,
+                "vector_rank": 2,
+                "lexical_rank": 0.0,
+                "lexical_position": null,
+                "rrf_score": 0.016129032258064516,
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              },
+              {
+                "build_id": "ef560747-2bd2-46c8-af48-4560be22a462",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 0.0,
+                "end_seconds": 10.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 0.64,
+                    "source_seconds": 0.64,
+                    "requested_seconds": 0.625
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 1.88,
+                    "source_seconds": 1.88,
+                    "requested_seconds": 1.875
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 3.14,
+                    "source_seconds": 3.14,
+                    "requested_seconds": 3.125
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 4.38,
+                    "source_seconds": 4.38,
+                    "requested_seconds": 4.375
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 5.64,
+                    "source_seconds": 5.64,
+                    "requested_seconds": 5.625
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 6.88,
+                    "source_seconds": 6.88,
+                    "requested_seconds": 6.875
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 8.14,
+                    "source_seconds": 8.14,
+                    "requested_seconds": 8.125
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 9.38,
+                    "source_seconds": 9.38,
+                    "requested_seconds": 9.375
+                  }
+                ],
+                "description": {
+                  "_trace": {
+                    "model": "Qwen/Qwen3.6-27B",
+                    "usage": {
+                      "total_tokens": 1999,
+                      "prompt_tokens": 1812,
+                      "completion_tokens": 187,
+                      "prompt_tokens_details": null
+                    },
+                    "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                    "request_id": "a43bae53-4f94-4d84-8994-8f286258a9b5",
+                    "http_status": 200,
+                    "frame_sha256": [
+                      "b59e1fc368edaf48569a9a359e13b9dcecb5c2bd533e6fa071ea5c03ce12c5ee",
+                      "69df14aa9147ee096b0d0e28d6e5bac689449a9723e7c969f76c1952c2cbabd4",
+                      "4c75086d560d2548a26e5020aaff99468fe93dab8dd6dafd8c7b14652b69c647",
+                      "05838b8df67dcbf9231bdad18c6384f67214db7e7a96839580818d6f9fb3cd4d",
+                      "dce1eacea601131e608042ec946de5dab5457e3ceb893c02562949eedf9ffc1e",
+                      "9bdd86f0475d9817f83fd8ecd371662398b98890d88fb9f3c4744aab1e6b4032",
+                      "7d589b6c836b87b7be703953ac2fcd61c3c4dd0de78bd359e763e0682b8c807a",
+                      "6070303a554999ae163e5097b24a8faa154c1e01f651f0da0ad711ea300b3bea"
+                    ],
+                    "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+                    "prompt_version": "visible-evidence-v1",
+                    "elapsed_seconds": 16.388383199999225,
+                    "upstream_request_id": null
+                  },
+                  "actions": [
+                    "Two robotic arms approach a white cylinder and a white stick.",
+                    "The arms coordinate to grasp the white cylinder.",
+                    "The left arm lifts the white cylinder.",
+                    "The left arm moves the cylinder towards the central machine."
+                  ],
+                  "objects": [
+                    "Robotic arms",
+                    "White cylinder",
+                    "White stick",
+                    "Central machine",
+                    "Clear plastic cup"
+                  ],
+                  "summary": "The video shows a dual-arm robotic system operating on a dark surface. Initially, two robotic arms approach a small white cylindrical object and a white stick. The arms coordinate to grasp the white cylinder. Subsequently, the left arm lifts the cylinder and moves it towards a central machine, while the right arm remains stationary near the white stick. A clear plastic cup is visible in the background throughout the sequence.",
+                  "uncertainties": [
+                    "The exact function of the central machine is unclear.",
+                    "The purpose of the white stick is not evident."
+                  ]
+                },
+                "vector_similarity": 0.47135013341903687,
+                "vector_rank": 3,
+                "lexical_rank": 0.0,
+                "lexical_position": null,
+                "rrf_score": 0.015873015873015872,
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              }
+            ],
+            "coverage": {
+              "total_recordings": 1,
+              "total_windows": 3,
+              "ready_recordings": 1,
+              "ready_windows": 3,
+              "incomplete_builds": [],
+              "incomplete_builds_count": 0
+            },
+            "spec": {
+              "model_id": "Qwen/Qwen3.6-27B",
+              "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+              "prompt_version": "visible-evidence-v1",
+              "frames_per_window": 8,
+              "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+              "temperature": 0,
+              "seed": 0,
+              "enable_thinking": false,
+              "structured_output_policy": "vllm-0.20-xgrammar-compact-v1",
+              "description_max_tokens": 1024,
+              "verification_max_tokens": 2048,
+              "dimensions": 384,
+              "embedding": {
+                "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+                "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+                "dimensions": 384,
+                "pooling": "attention-mask-mean-l2",
+                "max_tokens": 256,
+                "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32"
+              },
+              "sampling_version": "eight-slots-sorted-actual-pts-v1",
+              "runtime": "openai-structured-vision-v1"
+            },
+            "query": "A robot picks up a clear cup and places it under the coffee machine.",
+            "path": "description",
+            "result_type": "unverified_multimodal_candidates",
+            "timing": {
+              "encode_seconds": 0.007520721999753732,
+              "search_seconds": 0.031406306001372286,
+              "total_seconds": 0.03892702800112602
+            }
+          },
+          "top1_temporal_iou": 1.0,
+          "hit_at_1_iou_0_3": true
+        }
+      ],
+      "recall_at_1_iou_0_3": 0.5
+    },
+    "hybrid": {
+      "cases": [
+        {
+          "case_id": "capsule",
+          "response": {
+            "results": [
+              {
+                "build_id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 8.0,
+                "end_seconds": 18.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 9.68,
+                    "source_seconds": 9.68,
+                    "requested_seconds": 9.666666666666666
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 13.0,
+                    "source_seconds": 13.0,
+                    "requested_seconds": 13.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 16.34,
+                    "source_seconds": 16.34,
+                    "requested_seconds": 16.333333333333336
+                  }
+                ],
+                "similarity": 0.17390106035458452,
+                "paths": [
+                  "visual",
+                  "description"
+                ],
+                "fusion_score": 0.03278688524590164,
+                "branch_scores": {
+                  "visual": 0.17390106035458452,
+                  "description": 0.01639344262295082
+                },
+                "description": {
+                  "_trace": {
+                    "model": "Qwen/Qwen3.6-27B",
+                    "usage": {
+                      "total_tokens": 1994,
+                      "prompt_tokens": 1818,
+                      "completion_tokens": 176,
+                      "prompt_tokens_details": null
+                    },
+                    "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                    "request_id": "ff5990ec-465c-4e8e-9c8f-6676eb5de82a",
+                    "http_status": 200,
+                    "frame_sha256": [
+                      "df61098d436c511359b82af204614564c7579e5f1c10129b02c8cb266964a56a",
+                      "3b956d54762160f2104d30ddc4e606b40758bddfc292f8a18f25104833474a69",
+                      "3ec4f92642cc3ec036af7faba804a0cb516e00e6180c22a3159b019cf6413143",
+                      "bc1c33cd54385b8c809501c3eb1743bd3a0a6145161913cd982f86aa133cfa0f",
+                      "56fed19fab84c890486302fb0eeddba59e0aff0047e7795d39cfdb5a9f7f916b",
+                      "71c8c1ac803aa9f710198298846f914cb3aa114c6d1696d1e08806c51df328e6",
+                      "67633179b37caccc5620092d5519490f48974b03c6546219b1a9793364378929",
+                      "b088aa766e157580cedcae351695cf505d96e9106baf89dffbd42eb69476d7a1"
+                    ],
+                    "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+                    "prompt_version": "visible-evidence-v1",
+                    "elapsed_seconds": 12.547732715000166,
+                    "upstream_request_id": null
+                  },
+                  "actions": [
+                    "A left robotic arm moves a white capsule toward the central machine's dispenser slot.",
+                    "The capsule is inserted into the machine.",
+                    "The left robotic arm retracts away from the machine.",
+                    "A right robotic arm approaches and grasps a clear plastic cup.",
+                    "The right robotic arm lifts the cup off the surface."
+                  ],
+                  "objects": [
+                    "Central machine with a capsule dispenser",
+                    "White capsule",
+                    "Clear plastic cup",
+                    "Left robotic arm",
+                    "Right robotic arm"
+                  ],
+                  "summary": "A robotic arm on the left inserts a white capsule into the top of a central machine. After the capsule is loaded, the arm retracts. Subsequently, a second robotic arm on the right picks up a clear plastic cup from the table.",
+                  "uncertainties": [
+                    "The exact moment the capsule is fully seated is obscured by the arm's position."
+                  ]
+                },
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              },
+              {
+                "build_id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 0.0,
+                "end_seconds": 10.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 1.68,
+                    "source_seconds": 1.68,
+                    "requested_seconds": 1.6666666666666665
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 5.0,
+                    "source_seconds": 5.0,
+                    "requested_seconds": 5.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 8.34,
+                    "source_seconds": 8.34,
+                    "requested_seconds": 8.333333333333334
+                  }
+                ],
+                "similarity": 0.17018133339023622,
+                "paths": [
+                  "visual",
+                  "description"
+                ],
+                "fusion_score": 0.03200204813108039,
+                "branch_scores": {
+                  "visual": 0.17018133339023622,
+                  "description": 0.015873015873015872
+                },
+                "description": {
+                  "_trace": {
+                    "model": "Qwen/Qwen3.6-27B",
+                    "usage": {
+                      "total_tokens": 1999,
+                      "prompt_tokens": 1812,
+                      "completion_tokens": 187,
+                      "prompt_tokens_details": null
+                    },
+                    "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                    "request_id": "a43bae53-4f94-4d84-8994-8f286258a9b5",
+                    "http_status": 200,
+                    "frame_sha256": [
+                      "b59e1fc368edaf48569a9a359e13b9dcecb5c2bd533e6fa071ea5c03ce12c5ee",
+                      "69df14aa9147ee096b0d0e28d6e5bac689449a9723e7c969f76c1952c2cbabd4",
+                      "4c75086d560d2548a26e5020aaff99468fe93dab8dd6dafd8c7b14652b69c647",
+                      "05838b8df67dcbf9231bdad18c6384f67214db7e7a96839580818d6f9fb3cd4d",
+                      "dce1eacea601131e608042ec946de5dab5457e3ceb893c02562949eedf9ffc1e",
+                      "9bdd86f0475d9817f83fd8ecd371662398b98890d88fb9f3c4744aab1e6b4032",
+                      "7d589b6c836b87b7be703953ac2fcd61c3c4dd0de78bd359e763e0682b8c807a",
+                      "6070303a554999ae163e5097b24a8faa154c1e01f651f0da0ad711ea300b3bea"
+                    ],
+                    "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+                    "prompt_version": "visible-evidence-v1",
+                    "elapsed_seconds": 16.388383199999225,
+                    "upstream_request_id": null
+                  },
+                  "actions": [
+                    "Two robotic arms approach a white cylinder and a white stick.",
+                    "The arms coordinate to grasp the white cylinder.",
+                    "The left arm lifts the white cylinder.",
+                    "The left arm moves the cylinder towards the central machine."
+                  ],
+                  "objects": [
+                    "Robotic arms",
+                    "White cylinder",
+                    "White stick",
+                    "Central machine",
+                    "Clear plastic cup"
+                  ],
+                  "summary": "The video shows a dual-arm robotic system operating on a dark surface. Initially, two robotic arms approach a small white cylindrical object and a white stick. The arms coordinate to grasp the white cylinder. Subsequently, the left arm lifts the cylinder and moves it towards a central machine, while the right arm remains stationary near the white stick. A clear plastic cup is visible in the background throughout the sequence.",
+                  "uncertainties": [
+                    "The exact function of the central machine is unclear.",
+                    "The purpose of the white stick is not evident."
+                  ]
+                },
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              },
+              {
+                "build_id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 16.0,
+                "end_seconds": 22.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 17.0,
+                    "source_seconds": 17.0,
+                    "requested_seconds": 17.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 19.0,
+                    "source_seconds": 19.0,
+                    "requested_seconds": 19.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 21.0,
+                    "source_seconds": 21.0,
+                    "requested_seconds": 21.0
+                  }
+                ],
+                "similarity": 0.15023669894277503,
+                "paths": [
+                  "visual",
+                  "description"
+                ],
+                "fusion_score": 0.03200204813108039,
+                "branch_scores": {
+                  "visual": 0.15023669894277503,
+                  "description": 0.016129032258064516
+                },
+                "description": {
+                  "_trace": {
+                    "model": "Qwen/Qwen3.6-27B",
+                    "usage": {
+                      "total_tokens": 2011,
+                      "prompt_tokens": 1821,
+                      "completion_tokens": 190,
+                      "prompt_tokens_details": null
+                    },
+                    "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                    "request_id": "982d7f34-9b00-49de-80da-5188743784c4",
+                    "http_status": 200,
+                    "frame_sha256": [
+                      "70d27d952bfaf5e020aea6bb96f5b0f000a632b1cf0a12ee222a832f86e38257",
+                      "2a9810901c76315002d72b63fc982282a0ffff2b418626b7f929f905a61d48ef",
+                      "8c1233f5eed16f8567d2731a4f4ab38501ef1c7eb791d337b9ee5142abfd91ea",
+                      "f651b98e9b048f8aa1db02e5655f3f75401171fffc18d5b3f65b2e81648d436f",
+                      "20156fc0d384fd2c9278e220e494413a6723f3a2be7bc13f51b05a7d8c70b74d",
+                      "b8064a2cc103eb81698b45ce732b238ff47d4a90cdaf902d6761f478866a0ae2",
+                      "d32c30bbf09957f9c6ed37250977c4fc021bfe68001b4a389c3f5db27e1c7aa7",
+                      "ed98221fa876a0c9935e696327eee91b4602182ee1275414c8a55ddade1f634c"
+                    ],
+                    "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+                    "prompt_version": "visible-evidence-v1",
+                    "elapsed_seconds": 13.581817852998938,
+                    "upstream_request_id": null
+                  },
+                  "actions": [
+                    "The right robotic arm moves from the right side towards the center.",
+                    "The right robotic arm grasps a clear plastic cup.",
+                    "The right robotic arm moves the cup to the dispenser nozzle.",
+                    "The right robotic arm releases the cup under the nozzle.",
+                    "The right robotic arm retracts back to the right side."
+                  ],
+                  "objects": [
+                    "Central beverage dispenser machine",
+                    "Clear plastic cup",
+                    "Right robotic arm",
+                    "Left robotic arm (stationary)"
+                  ],
+                  "summary": "A robotic arm on the right side of the frame picks up a clear plastic cup and places it under the dispenser nozzle of a central machine. After positioning the cup, the arm retracts to the right. A second robotic arm on the left remains stationary throughout the sequence.",
+                  "uncertainties": [
+                    "The specific type of machine is not identifiable beyond a dispenser.",
+                    "The left robotic arm's purpose is unclear as it does not move."
+                  ]
+                },
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              }
+            ],
+            "coverage": {
+              "visual": {
+                "total_recordings": 1,
+                "total_windows": 3,
+                "ready_recordings": 1,
+                "ready_windows": 3,
+                "incomplete_builds": [],
+                "incomplete_builds_count": 0
+              },
+              "description": {
+                "total_recordings": 1,
+                "total_windows": 3,
+                "ready_recordings": 1,
+                "ready_windows": 3,
+                "incomplete_builds": [],
+                "incomplete_builds_count": 0
+              }
+            },
+            "spec": {
+              "visual": {
+                "model_id": "google/siglip2-base-patch16-224",
+                "revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+                "dimensions": 768,
+                "preprocess_version": "ffmpeg-max512-siglip-native-pil-rgb-v1",
+                "sampling_version": "window-sixth-mid-five-sixths-after-or-window-first-pts-v1",
+                "frames_per_window": 3,
+                "pooling": "mean-l2-frame-then-l2-window",
+                "runtime": "torch-2.9.0-transformers-4.57.6-pillow-12.1.0-cpu-float32-v1"
+              },
+              "description": {
+                "model_id": "Qwen/Qwen3.6-27B",
+                "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                "prompt_version": "visible-evidence-v1",
+                "frames_per_window": 8,
+                "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+                "temperature": 0,
+                "seed": 0,
+                "enable_thinking": false,
+                "structured_output_policy": "vllm-0.20-xgrammar-compact-v1",
+                "description_max_tokens": 1024,
+                "verification_max_tokens": 2048,
+                "dimensions": 384,
+                "embedding": {
+                  "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+                  "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+                  "dimensions": 384,
+                  "pooling": "attention-mask-mean-l2",
+                  "max_tokens": 256,
+                  "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32"
+                },
+                "sampling_version": "eight-slots-sorted-actual-pts-v1",
+                "runtime": "openai-structured-vision-v1"
+              }
+            },
+            "query": "A robot picks up a round coffee capsule and moves it to the coffee machine.",
+            "path": "hybrid",
+            "result_type": "unverified_multimodal_candidates",
+            "timing": {
+              "encode_seconds": 0.07395221499973559,
+              "search_seconds": 0.04425273299966648,
+              "total_seconds": 0.11820494799940207
+            }
+          },
+          "top1_temporal_iou": 0.2222222222222222,
+          "hit_at_1_iou_0_3": false
+        },
+        {
+          "case_id": "cup",
+          "response": {
+            "results": [
+              {
+                "build_id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 8.0,
+                "end_seconds": 18.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 9.68,
+                    "source_seconds": 9.68,
+                    "requested_seconds": 9.666666666666666
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 13.0,
+                    "source_seconds": 13.0,
+                    "requested_seconds": 13.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 16.34,
+                    "source_seconds": 16.34,
+                    "requested_seconds": 16.333333333333336
+                  }
+                ],
+                "similarity": 0.19475761887522114,
+                "paths": [
+                  "visual",
+                  "description"
+                ],
+                "fusion_score": 0.03252247488101534,
+                "branch_scores": {
+                  "visual": 0.19475761887522114,
+                  "description": 0.016129032258064516
+                },
+                "description": {
+                  "_trace": {
+                    "model": "Qwen/Qwen3.6-27B",
+                    "usage": {
+                      "total_tokens": 1994,
+                      "prompt_tokens": 1818,
+                      "completion_tokens": 176,
+                      "prompt_tokens_details": null
+                    },
+                    "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                    "request_id": "ff5990ec-465c-4e8e-9c8f-6676eb5de82a",
+                    "http_status": 200,
+                    "frame_sha256": [
+                      "df61098d436c511359b82af204614564c7579e5f1c10129b02c8cb266964a56a",
+                      "3b956d54762160f2104d30ddc4e606b40758bddfc292f8a18f25104833474a69",
+                      "3ec4f92642cc3ec036af7faba804a0cb516e00e6180c22a3159b019cf6413143",
+                      "bc1c33cd54385b8c809501c3eb1743bd3a0a6145161913cd982f86aa133cfa0f",
+                      "56fed19fab84c890486302fb0eeddba59e0aff0047e7795d39cfdb5a9f7f916b",
+                      "71c8c1ac803aa9f710198298846f914cb3aa114c6d1696d1e08806c51df328e6",
+                      "67633179b37caccc5620092d5519490f48974b03c6546219b1a9793364378929",
+                      "b088aa766e157580cedcae351695cf505d96e9106baf89dffbd42eb69476d7a1"
+                    ],
+                    "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+                    "prompt_version": "visible-evidence-v1",
+                    "elapsed_seconds": 12.547732715000166,
+                    "upstream_request_id": null
+                  },
+                  "actions": [
+                    "A left robotic arm moves a white capsule toward the central machine's dispenser slot.",
+                    "The capsule is inserted into the machine.",
+                    "The left robotic arm retracts away from the machine.",
+                    "A right robotic arm approaches and grasps a clear plastic cup.",
+                    "The right robotic arm lifts the cup off the surface."
+                  ],
+                  "objects": [
+                    "Central machine with a capsule dispenser",
+                    "White capsule",
+                    "Clear plastic cup",
+                    "Left robotic arm",
+                    "Right robotic arm"
+                  ],
+                  "summary": "A robotic arm on the left inserts a white capsule into the top of a central machine. After the capsule is loaded, the arm retracts. Subsequently, a second robotic arm on the right picks up a clear plastic cup from the table.",
+                  "uncertainties": [
+                    "The exact moment the capsule is fully seated is obscured by the arm's position."
+                  ]
+                },
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              },
+              {
+                "build_id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 16.0,
+                "end_seconds": 22.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 17.0,
+                    "source_seconds": 17.0,
+                    "requested_seconds": 17.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 19.0,
+                    "source_seconds": 19.0,
+                    "requested_seconds": 19.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 21.0,
+                    "source_seconds": 21.0,
+                    "requested_seconds": 21.0
+                  }
+                ],
+                "similarity": 0.1631384291135355,
+                "paths": [
+                  "visual",
+                  "description"
+                ],
+                "fusion_score": 0.032266458495966696,
+                "branch_scores": {
+                  "visual": 0.1631384291135355,
+                  "description": 0.01639344262295082
+                },
+                "description": {
+                  "_trace": {
+                    "model": "Qwen/Qwen3.6-27B",
+                    "usage": {
+                      "total_tokens": 2011,
+                      "prompt_tokens": 1821,
+                      "completion_tokens": 190,
+                      "prompt_tokens_details": null
+                    },
+                    "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                    "request_id": "982d7f34-9b00-49de-80da-5188743784c4",
+                    "http_status": 200,
+                    "frame_sha256": [
+                      "70d27d952bfaf5e020aea6bb96f5b0f000a632b1cf0a12ee222a832f86e38257",
+                      "2a9810901c76315002d72b63fc982282a0ffff2b418626b7f929f905a61d48ef",
+                      "8c1233f5eed16f8567d2731a4f4ab38501ef1c7eb791d337b9ee5142abfd91ea",
+                      "f651b98e9b048f8aa1db02e5655f3f75401171fffc18d5b3f65b2e81648d436f",
+                      "20156fc0d384fd2c9278e220e494413a6723f3a2be7bc13f51b05a7d8c70b74d",
+                      "b8064a2cc103eb81698b45ce732b238ff47d4a90cdaf902d6761f478866a0ae2",
+                      "d32c30bbf09957f9c6ed37250977c4fc021bfe68001b4a389c3f5db27e1c7aa7",
+                      "ed98221fa876a0c9935e696327eee91b4602182ee1275414c8a55ddade1f634c"
+                    ],
+                    "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+                    "prompt_version": "visible-evidence-v1",
+                    "elapsed_seconds": 13.581817852998938,
+                    "upstream_request_id": null
+                  },
+                  "actions": [
+                    "The right robotic arm moves from the right side towards the center.",
+                    "The right robotic arm grasps a clear plastic cup.",
+                    "The right robotic arm moves the cup to the dispenser nozzle.",
+                    "The right robotic arm releases the cup under the nozzle.",
+                    "The right robotic arm retracts back to the right side."
+                  ],
+                  "objects": [
+                    "Central beverage dispenser machine",
+                    "Clear plastic cup",
+                    "Right robotic arm",
+                    "Left robotic arm (stationary)"
+                  ],
+                  "summary": "A robotic arm on the right side of the frame picks up a clear plastic cup and places it under the dispenser nozzle of a central machine. After positioning the cup, the arm retracts to the right. A second robotic arm on the left remains stationary throughout the sequence.",
+                  "uncertainties": [
+                    "The specific type of machine is not identifiable beyond a dispenser.",
+                    "The left robotic arm's purpose is unclear as it does not move."
+                  ]
+                },
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              },
+              {
+                "build_id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+                "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+                "source_path": "qwen-coffee-demo.mp4",
+                "size": 4607959,
+                "mtime_ns": 1793949058266832600,
+                "start_seconds": 0.0,
+                "end_seconds": 10.0,
+                "samples": [
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 1.68,
+                    "source_seconds": 1.68,
+                    "requested_seconds": 1.6666666666666665
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 5.0,
+                    "source_seconds": 5.0,
+                    "requested_seconds": 5.0
+                  },
+                  {
+                    "selection": "at_or_after_request",
+                    "pts_seconds": 8.34,
+                    "source_seconds": 8.34,
+                    "requested_seconds": 8.333333333333334
+                  }
+                ],
+                "similarity": 0.19086360578916417,
+                "paths": [
+                  "visual",
+                  "description"
+                ],
+                "fusion_score": 0.03200204813108039,
+                "branch_scores": {
+                  "visual": 0.19086360578916417,
+                  "description": 0.015873015873015872
+                },
+                "description": {
+                  "_trace": {
+                    "model": "Qwen/Qwen3.6-27B",
+                    "usage": {
+                      "total_tokens": 1999,
+                      "prompt_tokens": 1812,
+                      "completion_tokens": 187,
+                      "prompt_tokens_details": null
+                    },
+                    "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                    "request_id": "a43bae53-4f94-4d84-8994-8f286258a9b5",
+                    "http_status": 200,
+                    "frame_sha256": [
+                      "b59e1fc368edaf48569a9a359e13b9dcecb5c2bd533e6fa071ea5c03ce12c5ee",
+                      "69df14aa9147ee096b0d0e28d6e5bac689449a9723e7c969f76c1952c2cbabd4",
+                      "4c75086d560d2548a26e5020aaff99468fe93dab8dd6dafd8c7b14652b69c647",
+                      "05838b8df67dcbf9231bdad18c6384f67214db7e7a96839580818d6f9fb3cd4d",
+                      "dce1eacea601131e608042ec946de5dab5457e3ceb893c02562949eedf9ffc1e",
+                      "9bdd86f0475d9817f83fd8ecd371662398b98890d88fb9f3c4744aab1e6b4032",
+                      "7d589b6c836b87b7be703953ac2fcd61c3c4dd0de78bd359e763e0682b8c807a",
+                      "6070303a554999ae163e5097b24a8faa154c1e01f651f0da0ad711ea300b3bea"
+                    ],
+                    "schema_sha256": "e3ac6d3730507361b41c7e41acb7f23f11970f9ab9563421e2d37b417743c24b",
+                    "prompt_version": "visible-evidence-v1",
+                    "elapsed_seconds": 16.388383199999225,
+                    "upstream_request_id": null
+                  },
+                  "actions": [
+                    "Two robotic arms approach a white cylinder and a white stick.",
+                    "The arms coordinate to grasp the white cylinder.",
+                    "The left arm lifts the white cylinder.",
+                    "The left arm moves the cylinder towards the central machine."
+                  ],
+                  "objects": [
+                    "Robotic arms",
+                    "White cylinder",
+                    "White stick",
+                    "Central machine",
+                    "Clear plastic cup"
+                  ],
+                  "summary": "The video shows a dual-arm robotic system operating on a dark surface. Initially, two robotic arms approach a small white cylindrical object and a white stick. The arms coordinate to grasp the white cylinder. Subsequently, the left arm lifts the cylinder and moves it towards a central machine, while the right arm remains stationary near the white stick. A clear plastic cup is visible in the background throughout the sequence.",
+                  "uncertainties": [
+                    "The exact function of the central machine is unclear.",
+                    "The purpose of the white stick is not evident."
+                  ]
+                },
+                "source_status": "available",
+                "verified": false,
+                "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+              }
+            ],
+            "coverage": {
+              "visual": {
+                "total_recordings": 1,
+                "total_windows": 3,
+                "ready_recordings": 1,
+                "ready_windows": 3,
+                "incomplete_builds": [],
+                "incomplete_builds_count": 0
+              },
+              "description": {
+                "total_recordings": 1,
+                "total_windows": 3,
+                "ready_recordings": 1,
+                "ready_windows": 3,
+                "incomplete_builds": [],
+                "incomplete_builds_count": 0
+              }
+            },
+            "spec": {
+              "visual": {
+                "model_id": "google/siglip2-base-patch16-224",
+                "revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+                "dimensions": 768,
+                "preprocess_version": "ffmpeg-max512-siglip-native-pil-rgb-v1",
+                "sampling_version": "window-sixth-mid-five-sixths-after-or-window-first-pts-v1",
+                "frames_per_window": 3,
+                "pooling": "mean-l2-frame-then-l2-window",
+                "runtime": "torch-2.9.0-transformers-4.57.6-pillow-12.1.0-cpu-float32-v1"
+              },
+              "description": {
+                "model_id": "Qwen/Qwen3.6-27B",
+                "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+                "prompt_version": "visible-evidence-v1",
+                "frames_per_window": 8,
+                "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+                "temperature": 0,
+                "seed": 0,
+                "enable_thinking": false,
+                "structured_output_policy": "vllm-0.20-xgrammar-compact-v1",
+                "description_max_tokens": 1024,
+                "verification_max_tokens": 2048,
+                "dimensions": 384,
+                "embedding": {
+                  "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+                  "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+                  "dimensions": 384,
+                  "pooling": "attention-mask-mean-l2",
+                  "max_tokens": 256,
+                  "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32"
+                },
+                "sampling_version": "eight-slots-sorted-actual-pts-v1",
+                "runtime": "openai-structured-vision-v1"
+              }
+            },
+            "query": "A robot picks up a clear cup and places it under the coffee machine.",
+            "path": "hybrid",
+            "result_type": "unverified_multimodal_candidates",
+            "timing": {
+              "encode_seconds": 0.07188912899982824,
+              "search_seconds": 0.04616340100074012,
+              "total_seconds": 0.11805253000056837
+            }
+          },
+          "top1_temporal_iou": 0.14285714285714285,
+          "hit_at_1_iou_0_3": false
+        }
+      ],
+      "recall_at_1_iou_0_3": 0.0
+    }
+  },
+  "verification": [
+    {
+      "case": {
+        "id": "cup-visible",
+        "query": "A robot moves a clear cup under the coffee machine.",
+        "start_seconds": 16,
+        "end_seconds": 22,
+        "context_seconds": 0,
+        "expected_status": "match"
+      },
+      "wall_seconds": 14.277745299994422,
+      "response": {
+        "id": "dce19648-4198-46ac-8de6-5dc6553d3c1e",
+        "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+        "query": "A robot moves a clear cup under the coffee machine.",
+        "inspection_start_seconds": 16.0,
+        "inspection_end_seconds": 22.0,
+        "samples": [
+          {
+            "requested_seconds": 16.375,
+            "source_seconds": 16.38,
+            "pts_seconds": 16.38,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 17.125,
+            "source_seconds": 17.14,
+            "pts_seconds": 17.14,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 17.875,
+            "source_seconds": 17.88,
+            "pts_seconds": 17.88,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 18.625,
+            "source_seconds": 18.64,
+            "pts_seconds": 18.64,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 19.375,
+            "source_seconds": 19.38,
+            "pts_seconds": 19.38,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 20.125,
+            "source_seconds": 20.14,
+            "pts_seconds": 20.14,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 20.875,
+            "source_seconds": 20.88,
+            "pts_seconds": 20.88,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 21.625,
+            "source_seconds": 21.64,
+            "pts_seconds": 21.64,
+            "selection": "at_or_after_request"
+          }
+        ],
+        "result": {
+          "status": "match",
+          "intervals": [
+            {
+              "start_seconds": 16.38,
+              "end_seconds": 20.14
+            }
+          ],
+          "observation": "The sequence of frames shows a robotic arm on the right holding a clear cup. The arm moves the cup from an open position towards the center, positioning it directly under the spout of the coffee machine. By the end of the interval, the cup is stationary under the dispenser.",
+          "_trace": {
+            "request_id": "34fb510b-05eb-4795-9d07-d069b0ff32c8",
+            "upstream_request_id": null,
+            "model": "Qwen/Qwen3.6-27B",
+            "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+            "usage": {
+              "prompt_tokens": 1862,
+              "total_tokens": 1959,
+              "completion_tokens": 97,
+              "prompt_tokens_details": null
+            },
+            "prompt_version": "visible-evidence-v1",
+            "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4",
+            "frame_sha256": [
+              "70d27d952bfaf5e020aea6bb96f5b0f000a632b1cf0a12ee222a832f86e38257",
+              "2a9810901c76315002d72b63fc982282a0ffff2b418626b7f929f905a61d48ef",
+              "8c1233f5eed16f8567d2731a4f4ab38501ef1c7eb791d337b9ee5142abfd91ea",
+              "f651b98e9b048f8aa1db02e5655f3f75401171fffc18d5b3f65b2e81648d436f",
+              "20156fc0d384fd2c9278e220e494413a6723f3a2be7bc13f51b05a7d8c70b74d",
+              "b8064a2cc103eb81698b45ce732b238ff47d4a90cdaf902d6761f478866a0ae2",
+              "d32c30bbf09957f9c6ed37250977c4fc021bfe68001b4a389c3f5db27e1c7aa7",
+              "ed98221fa876a0c9935e696327eee91b4602182ee1275414c8a55ddade1f634c"
+            ],
+            "http_status": 200,
+            "elapsed_seconds": 12.747292984999149
+          }
+        },
+        "checked_by_model": true,
+        "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+      },
+      "status_matches_expected": true
+    },
+    {
+      "case": {
+        "id": "person-absent",
+        "query": "A person wearing a red shirt is visible.",
+        "start_seconds": 0,
+        "end_seconds": 22,
+        "context_seconds": 0,
+        "expected_status": "no_match",
+        "scope": "Only supplied frames; no claim about unsampled time"
+      },
+      "wall_seconds": 6.53425160000188,
+      "response": {
+        "id": "2cd080d2-62a2-4e63-a80a-c64fe2c4b26d",
+        "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+        "query": "A person wearing a red shirt is visible.",
+        "inspection_start_seconds": 0,
+        "inspection_end_seconds": 22.0,
+        "samples": [
+          {
+            "requested_seconds": 1.375,
+            "source_seconds": 1.38,
+            "pts_seconds": 1.38,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 4.125,
+            "source_seconds": 4.14,
+            "pts_seconds": 4.14,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 6.875,
+            "source_seconds": 6.88,
+            "pts_seconds": 6.88,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 9.625,
+            "source_seconds": 9.64,
+            "pts_seconds": 9.64,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 12.375,
+            "source_seconds": 12.38,
+            "pts_seconds": 12.38,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 15.125,
+            "source_seconds": 15.14,
+            "pts_seconds": 15.14,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 17.875,
+            "source_seconds": 17.88,
+            "pts_seconds": 17.88,
+            "selection": "at_or_after_request"
+          },
+          {
+            "requested_seconds": 20.625,
+            "source_seconds": 20.64,
+            "pts_seconds": 20.64,
+            "selection": "at_or_after_request"
+          }
+        ],
+        "result": {
+          "status": "no_match",
+          "intervals": [],
+          "observation": "The provided frames show a robotic arm interacting with a coffee machine and a cup on a dark surface. There is no person, let alone one wearing a red shirt, visible in any of the frames.",
+          "_trace": {
+            "request_id": "fa9d9734-c084-4c32-8d19-5ddd018dd3b4",
+            "upstream_request_id": null,
+            "model": "Qwen/Qwen3.6-27B",
+            "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+            "usage": {
+              "prompt_tokens": 1853,
+              "total_tokens": 1913,
+              "completion_tokens": 60,
+              "prompt_tokens_details": null
+            },
+            "prompt_version": "visible-evidence-v1",
+            "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4",
+            "frame_sha256": [
+              "3e89470f4e39b1cdea7819ac8d6dcd7869de7608d1fcb1ddad1c5a4024e7942f",
+              "c2f13c6a97e9902343e33829a0cb5bb627cafa6387656fa8634f50b400d9abdf",
+              "9bdd86f0475d9817f83fd8ecd371662398b98890d88fb9f3c4744aab1e6b4032",
+              "d35afaa20631f5a256fe60a24e2951bfa4bfd4c1089f5d319b9d52948861bbff",
+              "bc1c33cd54385b8c809501c3eb1743bd3a0a6145161913cd982f86aa133cfa0f",
+              "8496d482fd4f9bd54278faa7e1e1885cebcd8369248852d113f804cb328a1200",
+              "8c1233f5eed16f8567d2731a4f4ab38501ef1c7eb791d337b9ee5142abfd91ea",
+              "e025fb654a42c0ab361f67e6588c4fd4090afcd8566d3153abfb7ee839549478"
+            ],
+            "http_status": 200,
+            "elapsed_seconds": 4.898545734000436
+          }
+        },
+        "checked_by_model": true,
+        "media_url": "/recordings/cf0d3bdf-f092-4609-b04e-7cb87aaf0a23/media"
+      },
+      "status_matches_expected": true
+    }
+  ],
+  "visual_builds": [
+    {
+      "id": "2b2899c7-cef5-48c3-951b-7f6cc4b462a5",
+      "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+      "config_key": "331db5eeb3635afe4080be591c4cb1a2b7000c4b12275929eb212cfad21591ef",
+      "spec": {
+        "pooling": "mean-l2-frame-then-l2-window",
+        "runtime": "torch-2.9.0-transformers-4.57.6-pillow-12.1.0-cpu-float32-v1",
+        "model_id": "google/siglip2-base-patch16-224",
+        "revision": "75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2",
+        "dimensions": 768,
+        "sampling_version": "window-sixth-mid-five-sixths-after-or-window-first-pts-v1",
+        "frames_per_window": 3,
+        "preprocess_version": "ffmpeg-max512-siglip-native-pil-rgb-v1"
+      },
+      "state": "ready",
+      "created_at": "2026-11-06T07:13:30.250621+00:00",
+      "updated_at": "2026-11-06T07:13:37.843125+00:00",
+      "source_path": "qwen-coffee-demo.mp4",
+      "job_id": "2002b1cc-9064-47d3-8e16-197adb1c16f1",
+      "completed_windows": 3,
+      "total_windows": 3
+    }
+  ],
+  "description_builds": [
+    {
+      "id": "ef560747-2bd2-46c8-af48-4560be22a462",
+      "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+      "config_key": "f2031c0b2b63be8e226d1f43985fda3098e4a1b29d50f9cbfe7d782b8d1138ec",
+      "spec": {
+        "seed": 0,
+        "runtime": "openai-structured-vision-v1",
+        "model_id": "Qwen/Qwen3.6-27B",
+        "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+        "embedding": {
+          "pooling": "attention-mask-mean-l2",
+          "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32",
+          "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+          "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+          "dimensions": 384,
+          "max_tokens": 256
+        },
+        "dimensions": 384,
+        "temperature": 0,
+        "prompt_version": "visible-evidence-v1",
+        "enable_thinking": false,
+        "sampling_version": "eight-slots-sorted-actual-pts-v1",
+        "frames_per_window": 8,
+        "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+        "description_max_tokens": 1024,
+        "verification_max_tokens": 2048,
+        "structured_output_policy": "vllm-0.20-xgrammar-compact-v1"
+      },
+      "state": "ready",
+      "created_at": "2026-11-06T08:21:39.646568+00:00",
+      "updated_at": "2026-11-06T08:22:31.097128+00:00",
+      "source_path": "qwen-coffee-demo.mp4",
+      "job_id": "eec56990-75b1-4d68-bb4f-83184b9ded93",
+      "completed_windows": 3,
+      "total_windows": 3
+    },
+    {
+      "id": "2c6987ef-fbea-4c6b-a994-e1b66721a1c5",
+      "recording_id": "cf0d3bdf-f092-4609-b04e-7cb87aaf0a23",
+      "config_key": "9e99eee9f40b884fcb5edc0c319113f5d0f82f49a8277cd91239c23bda055124",
+      "spec": {
+        "seed": 0,
+        "runtime": "openai-structured-vision-v1",
+        "model_id": "Qwen/Qwen3.6-27B",
+        "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+        "embedding": {
+          "pooling": "attention-mask-mean-l2",
+          "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32",
+          "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+          "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+          "dimensions": 384,
+          "max_tokens": 256
+        },
+        "dimensions": 384,
+        "temperature": 0,
+        "prompt_version": "visible-evidence-v1",
+        "enable_thinking": false,
+        "sampling_version": "eight-slots-sorted-actual-pts-v1",
+        "frames_per_window": 8,
+        "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+        "description_max_tokens": 1024,
+        "verification_max_tokens": 2048
+      },
+      "state": "ready",
+      "created_at": "2026-11-06T08:07:47.236300+00:00",
+      "updated_at": "2026-11-06T08:08:57.749854+00:00",
+      "source_path": "qwen-coffee-demo.mp4",
+      "job_id": "14c994c0-2c02-415e-8284-952caa1a2d12",
+      "completed_windows": 3,
+      "total_windows": 3
+    }
+  ],
+  "status": "complete engineering smoke run; provisional labels; not public benchmark accuracy",
+  "initial_manifest_sha256": "f206ef62bbdb52e520f3d247cc0cf5689fecfa3a1f186b3e0812d584923a5de4",
+  "annotation_note": "Clarified that the coding assistant, not an independent human, reviewed frames. Queries, labels, intervals and metric are unchanged. Clarification saved before Qwen inference.",
+  "verification_contract_failures": [
+    {
+      "case_id": "cup-visible",
+      "schema_version": "v1",
+      "http_status": 502,
+      "error": {
+        "level": "WARNING",
+        "event": "vision_model_error",
+        "code": "invalid_vlm_response",
+        "message": "Vision response did not match the required schema",
+        "details": {
+          "params": {
+            "model": "Qwen/Qwen3.6-27B",
+            "task": "verify",
+            "frame_count": 8,
+            "start_seconds": 16.0,
+            "end_seconds": 22.0
+          },
+          "status": 200,
+          "response_body": "{\"id\":\"chatcmpl-eba35229-3877-46f4-bef8-24167e55aac8\",\"object\":\"chat.completion\",\"created\":1793952566,\"model\":\"Qwen/Qwen3.6-27B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"status\\\": \\\"match\\\",\\n  \\\"intervals\\\": [\\n    \\n    ],\\n  \\\"observation\\\": \\\"The video frames show a robotic arm holding a clear cup. At 16.38s, the cup is held to the right of the coffee machine. From 17.14s to 19.38s, the arm moves the cup towards and positions it directly under the machine's dispenser. By 20.14s, the cup is in place under the spout. This sequence of frames provides direct visual evidence of the robot moving the cup under the coffee machine.\\\"\\n}\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[],\"reasoning\":null},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null}],\"service_tier\":null,\"system_fingerprint\":null,\"usage\":{\"prompt_tokens\":1862,\"total_tokens\":1998,\"completion_tokens\":136,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"kv_transfer_params\":null}",
+          "request_id": "eba35229-3877-46f4-bef8-24167e55aac8"
+        },
+        "request_id": "1c037507-da53-4aef-bfef-93e0f9034523"
+      }
+    },
+    {
+      "case_id": "cup-visible",
+      "schema_version": "v2",
+      "http_status": 502,
+      "error": {
+        "level": "WARNING",
+        "event": "vision_model_error",
+        "code": "invalid_vlm_response",
+        "message": "Vision response did not match the required schema",
+        "details": {
+          "params": {
+            "model": "Qwen/Qwen3.6-27B",
+            "task": "verify",
+            "frame_count": 8,
+            "start_seconds": 16.0,
+            "end_seconds": 22.0
+          },
+          "status": 200,
+          "response_body": "{\"id\":\"chatcmpl-1589ed20-b23f-403f-b871-13824a3cdc84\",\"object\":\"chat.completion\",\"created\":1793952762,\"model\":\"Qwen/Qwen3.6-27B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"status\\\": \\\"match\\\",\\n  \\\"intervals\\\": [\\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n    \\n   ",
+          "request_id": "1589ed20-b23f-403f-b871-13824a3cdc84"
+        },
+        "request_id": "b8be66a7-792f-4985-8c32-2578162e0908"
+      }
+    }
+  ],
+  "offline_restart_check": {
+    "search_worked": true,
+    "saved_verifications_worked": true,
+    "live_verification_status": 503,
+    "live_verification_code": "vlm_not_configured",
+    "description_top_interval": [
+      16,
+      22
+    ]
+  },
+  "code_hash_manifest": "qwen-runtime-results.json"
+}

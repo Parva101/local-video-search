@@ -1,0 +1,106 @@
+name: local-video-search
+
+x-app: &app
+  image: local-video-search:dev
+  build:
+    context: .
+    target: vision
+  environment: &environment
+    DATABASE_URL: postgresql://video:video-local@db:5432/video
+    MEDIA_ROOT: /media
+    LIBRARY_ID: ${VIDEO_DIRECTORY:?Set VIDEO_DIRECTORY to an absolute existing directory in .env}
+    MODEL_CACHE: /models
+    QWEN_BASE_URL: ${QWEN_BASE_URL:-}
+    QWEN_API_KEY: ${QWEN_API_KEY:-}
+    VISION_PROVIDER: ${VISION_PROVIDER:-qwen}
+    VOYAGER_BASE_URL: ${VOYAGER_BASE_URL:-https://openai.rc.asu.edu/v1}
+    VOYAGER_API_KEY: ${VOYAGER_API_KEY:-}
+    UPLOAD_MAX_BYTES: ${UPLOAD_MAX_BYTES:-2147483648}
+    UPLOAD_READ_ROOT: /uploaded-media
+  volumes:
+    - models:/models
+    - type: bind
+      source: ${VIDEO_DIRECTORY:?Set VIDEO_DIRECTORY to an absolute existing directory in .env}
+      target: /media
+      read_only: true
+      bind:
+        create_host_path: false
+    - uploads:/uploaded-media:ro
+  depends_on:
+    db:
+      condition: service_healthy
+  init: true
+
+services:
+  db:
+    image: pgvector/pgvector:0.8.7-pg17
+    environment:
+      POSTGRES_USER: video
+      POSTGRES_PASSWORD: video-local
+      POSTGRES_DB: video
+    volumes:
+      - database:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U video -d video"]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+  api:
+    <<: *app
+    environment:
+      <<: *environment
+      UPLOAD_WRITE_ROOT: /uploads
+    volumes:
+      - models:/models
+      - type: bind
+        source: ${VIDEO_DIRECTORY:?Set VIDEO_DIRECTORY to an absolute existing directory in .env}
+        target: /media
+        read_only: true
+        bind:
+          create_host_path: false
+      - uploads:/uploaded-media:ro
+      - uploads:/uploads
+    ports:
+      - "127.0.0.1:8000:8000"
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+  worker:
+    <<: *app
+    command: [python, -m, video_search.worker]
+    restart: "on-failure:3"
+  test-db:
+    profiles: [test]
+    image: pgvector/pgvector:0.8.7-pg17
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: test-local
+      POSTGRES_DB: test
+    tmpfs:
+      - /var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U test -d test"]
+      interval: 2s
+      timeout: 5s
+      retries: 20
+  test:
+    profiles: [test]
+    build:
+      context: .
+      target: test
+    environment:
+      TEST_DATABASE_URL: postgresql://test:test-local@test-db:5432/test
+      MODEL_CACHE: /models
+      RUN_MODEL_TESTS: ${RUN_MODEL_TESTS:-0}
+    volumes:
+      - models:/models:ro
+    depends_on:
+      test-db:
+        condition: service_healthy
+
+volumes:
+  database:
+  models:
+  uploads:

@@ -1,0 +1,691 @@
+{
+  "scope": "One known public development query; no held-out benchmark, novelty or SOTA claim. Labels are unchanged. All retrieval candidates share one identical 19-window pool.",
+  "created_at": "2026-11-08T17:17:36.301240+00:00",
+  "manifest": "qvhighlights-public-example.json",
+  "manifest_sha256": "4f5973116b6085fa74e8f8b93854056983708e183cd1d999e7d209d6e0c75630",
+  "source_sha256": "e847dbe79219afc6d70225117684a7e03563e1580b6f455ece13f89747cb5a50",
+  "query_id": 8056,
+  "query": "Chef makes pizza and cuts it up.",
+  "target": [
+    {
+      "video_id": "RoripwjYFp8_60.0_210.0",
+      "start_seconds": 106,
+      "end_seconds": 122
+    }
+  ],
+  "retrieval": {
+    "candidate_count": 19,
+    "baseline": {
+      "evaluator_version": "temporal-diagnostics-v1",
+      "name": "qvhighlights-public-pizza-example-v1",
+      "split": "public-example-development",
+      "provenance": "Official Moment-DETR run_on_video example at commit b7e553ac3b0c898ee6b85e03ee507c064eab89ca; target labels copied unchanged and verified before local model output. Video bounds use the exact imported media duration, 150.016533 seconds; the author annotation rounds duration to 150 seconds. This correction does not change target labels or relax interval validation.",
+      "metrics": {
+        "R@1/IoU=0.3": 0.0,
+        "target_coverage@1/IoU=0.3": 0.0,
+        "all_targets@1/IoU=0.3": 0.0,
+        "R@1/IoU=0.5": 0.0,
+        "target_coverage@1/IoU=0.5": 0.0,
+        "all_targets@1/IoU=0.5": 0.0,
+        "R@1/IoU=0.7": 0.0,
+        "target_coverage@1/IoU=0.7": 0.0,
+        "all_targets@1/IoU=0.7": 0.0,
+        "R@3/IoU=0.3": 1.0,
+        "target_coverage@3/IoU=0.3": 1.0,
+        "all_targets@3/IoU=0.3": 1.0,
+        "R@3/IoU=0.5": 1.0,
+        "target_coverage@3/IoU=0.5": 1.0,
+        "all_targets@3/IoU=0.5": 1.0,
+        "R@3/IoU=0.7": 0.0,
+        "target_coverage@3/IoU=0.7": 0.0,
+        "all_targets@3/IoU=0.7": 0.0,
+        "R@5/IoU=0.3": 1.0,
+        "target_coverage@5/IoU=0.3": 1.0,
+        "all_targets@5/IoU=0.3": 1.0,
+        "R@5/IoU=0.5": 1.0,
+        "target_coverage@5/IoU=0.5": 1.0,
+        "all_targets@5/IoU=0.5": 1.0,
+        "R@5/IoU=0.7": 0.0,
+        "target_coverage@5/IoU=0.7": 0.0,
+        "all_targets@5/IoU=0.7": 0.0
+      },
+      "counts": {
+        "queries": 1,
+        "positive_queries": 1,
+        "negative_queries": 0
+      },
+      "negative_abstention_rate": null,
+      "cost": {
+        "calls_total": 0,
+        "frames_total": 0,
+        "elapsed_seconds_total": 5.624707399998442
+      },
+      "per_query": [
+        {
+          "query_id": 8056,
+          "target_count": 1,
+          "candidate_count": 19,
+          "metrics": {
+            "R@1/IoU=0.3": 0,
+            "target_coverage@1/IoU=0.3": 0.0,
+            "all_targets@1/IoU=0.3": 0,
+            "R@1/IoU=0.5": 0,
+            "target_coverage@1/IoU=0.5": 0.0,
+            "all_targets@1/IoU=0.5": 0,
+            "R@1/IoU=0.7": 0,
+            "target_coverage@1/IoU=0.7": 0.0,
+            "all_targets@1/IoU=0.7": 0,
+            "R@3/IoU=0.3": 1,
+            "target_coverage@3/IoU=0.3": 1.0,
+            "all_targets@3/IoU=0.3": 1,
+            "R@3/IoU=0.5": 1,
+            "target_coverage@3/IoU=0.5": 1.0,
+            "all_targets@3/IoU=0.5": 1,
+            "R@3/IoU=0.7": 0,
+            "target_coverage@3/IoU=0.7": 0.0,
+            "all_targets@3/IoU=0.7": 0,
+            "R@5/IoU=0.3": 1,
+            "target_coverage@5/IoU=0.3": 1.0,
+            "all_targets@5/IoU=0.3": 1,
+            "R@5/IoU=0.5": 1,
+            "target_coverage@5/IoU=0.5": 1.0,
+            "all_targets@5/IoU=0.5": 1,
+            "R@5/IoU=0.7": 0,
+            "target_coverage@5/IoU=0.7": 0.0,
+            "all_targets@5/IoU=0.7": 0
+          }
+        }
+      ],
+      "limits": "Diagnostic rates, not official mAP. Candidate order is preserved. No claim of complete event labels or benchmark superiority."
+    },
+    "reranked": {
+      "evaluator_version": "temporal-diagnostics-v1",
+      "name": "qvhighlights-public-pizza-example-v1",
+      "split": "public-example-development",
+      "provenance": "Official Moment-DETR run_on_video example at commit b7e553ac3b0c898ee6b85e03ee507c064eab89ca; target labels copied unchanged and verified before local model output. Video bounds use the exact imported media duration, 150.016533 seconds; the author annotation rounds duration to 150 seconds. This correction does not change target labels or relax interval validation.",
+      "metrics": {
+        "R@1/IoU=0.3": 1.0,
+        "target_coverage@1/IoU=0.3": 1.0,
+        "all_targets@1/IoU=0.3": 1.0,
+        "R@1/IoU=0.5": 1.0,
+        "target_coverage@1/IoU=0.5": 1.0,
+        "all_targets@1/IoU=0.5": 1.0,
+        "R@1/IoU=0.7": 0.0,
+        "target_coverage@1/IoU=0.7": 0.0,
+        "all_targets@1/IoU=0.7": 0.0,
+        "R@3/IoU=0.3": 1.0,
+        "target_coverage@3/IoU=0.3": 1.0,
+        "all_targets@3/IoU=0.3": 1.0,
+        "R@3/IoU=0.5": 1.0,
+        "target_coverage@3/IoU=0.5": 1.0,
+        "all_targets@3/IoU=0.5": 1.0,
+        "R@3/IoU=0.7": 0.0,
+        "target_coverage@3/IoU=0.7": 0.0,
+        "all_targets@3/IoU=0.7": 0.0,
+        "R@5/IoU=0.3": 1.0,
+        "target_coverage@5/IoU=0.3": 1.0,
+        "all_targets@5/IoU=0.3": 1.0,
+        "R@5/IoU=0.5": 1.0,
+        "target_coverage@5/IoU=0.5": 1.0,
+        "all_targets@5/IoU=0.5": 1.0,
+        "R@5/IoU=0.7": 0.0,
+        "target_coverage@5/IoU=0.7": 0.0,
+        "all_targets@5/IoU=0.7": 0.0
+      },
+      "counts": {
+        "queries": 1,
+        "positive_queries": 1,
+        "negative_queries": 0
+      },
+      "negative_abstention_rate": null,
+      "cost": {
+        "calls_total": 0,
+        "frames_total": 0,
+        "elapsed_seconds_total": 2.3670171000048867
+      },
+      "per_query": [
+        {
+          "query_id": 8056,
+          "target_count": 1,
+          "candidate_count": 19,
+          "metrics": {
+            "R@1/IoU=0.3": 1,
+            "target_coverage@1/IoU=0.3": 1.0,
+            "all_targets@1/IoU=0.3": 1,
+            "R@1/IoU=0.5": 1,
+            "target_coverage@1/IoU=0.5": 1.0,
+            "all_targets@1/IoU=0.5": 1,
+            "R@1/IoU=0.7": 0,
+            "target_coverage@1/IoU=0.7": 0.0,
+            "all_targets@1/IoU=0.7": 0,
+            "R@3/IoU=0.3": 1,
+            "target_coverage@3/IoU=0.3": 1.0,
+            "all_targets@3/IoU=0.3": 1,
+            "R@3/IoU=0.5": 1,
+            "target_coverage@3/IoU=0.5": 1.0,
+            "all_targets@3/IoU=0.5": 1,
+            "R@3/IoU=0.7": 0,
+            "target_coverage@3/IoU=0.7": 0.0,
+            "all_targets@3/IoU=0.7": 0,
+            "R@5/IoU=0.3": 1,
+            "target_coverage@5/IoU=0.3": 1.0,
+            "all_targets@5/IoU=0.3": 1,
+            "R@5/IoU=0.5": 1,
+            "target_coverage@5/IoU=0.5": 1.0,
+            "all_targets@5/IoU=0.5": 1,
+            "R@5/IoU=0.7": 0,
+            "target_coverage@5/IoU=0.7": 0.0,
+            "all_targets@5/IoU=0.7": 0
+          }
+        }
+      ],
+      "limits": "Diagnostic rates, not official mAP. Candidate order is preserved. No claim of complete event labels or benchmark superiority."
+    },
+    "reranker": {
+      "spec": {
+        "model_id": "cross-encoder/ms-marco-MiniLM-L6-v2",
+        "revision": "233902d25c440f23af6f7d6e94d2946bac0bee0a",
+        "max_tokens": 512,
+        "max_candidates": 24,
+        "text_recipe": "query-paired-with-summary-actions-objects-space-joined-v1",
+        "score_definition": "raw-classifier-logit-descending-not-probability",
+        "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32-threads4"
+      },
+      "candidate_count": 19,
+      "seconds": 0.2576659030000883
+    }
+  },
+  "official_r1_check": {
+    "scope": "One public development query only; not held-out benchmark performance",
+    "official_commit": "b7e553ac3b0c898ee6b85e03ee507c064eab89ca",
+    "R1_percent": {
+      "baseline": {
+        "0.3": 0.0,
+        "0.5": 0.0,
+        "0.7": 0.0
+      },
+      "reranked": {
+        "0.3": 100.0,
+        "0.5": 100.0,
+        "0.7": 0.0
+      }
+    }
+  },
+  "source_checks": {
+    "ranked": {
+      "status": "match",
+      "budget": {
+        "max_checks": 3,
+        "max_frames": 24,
+        "calls": 2,
+        "http_attempts": 2,
+        "sent_frame_slots": 16,
+        "cost_note": "Calls and frames count completed logical checks. HTTP attempts and sent frame slots include retries; provider compute and failed-attempt token use are unknown.",
+        "frames": 16,
+        "inspected_seconds": 20.0,
+        "unique_inspected_seconds": 20.0
+      },
+      "matched_intervals": [
+        {
+          "video_id": "RoripwjYFp8_60.0_210.0",
+          "start_seconds": 116.382933,
+          "end_seconds": 120.153366
+        }
+      ],
+      "metrics": {
+        "R@1/IoU=0.3": 0.0,
+        "target_coverage@1/IoU=0.3": 0.0,
+        "all_targets@1/IoU=0.3": 0.0,
+        "R@1/IoU=0.5": 0.0,
+        "target_coverage@1/IoU=0.5": 0.0,
+        "all_targets@1/IoU=0.5": 0.0,
+        "R@1/IoU=0.7": 0.0,
+        "target_coverage@1/IoU=0.7": 0.0,
+        "all_targets@1/IoU=0.7": 0.0,
+        "R@3/IoU=0.3": 0.0,
+        "target_coverage@3/IoU=0.3": 0.0,
+        "all_targets@3/IoU=0.3": 0.0,
+        "R@3/IoU=0.5": 0.0,
+        "target_coverage@3/IoU=0.5": 0.0,
+        "all_targets@3/IoU=0.5": 0.0,
+        "R@3/IoU=0.7": 0.0,
+        "target_coverage@3/IoU=0.7": 0.0,
+        "all_targets@3/IoU=0.7": 0.0,
+        "R@5/IoU=0.3": 0.0,
+        "target_coverage@5/IoU=0.3": 0.0,
+        "all_targets@5/IoU=0.3": 0.0,
+        "R@5/IoU=0.5": 0.0,
+        "target_coverage@5/IoU=0.5": 0.0,
+        "all_targets@5/IoU=0.5": 0.0,
+        "R@5/IoU=0.7": 0.0,
+        "target_coverage@5/IoU=0.7": 0.0,
+        "all_targets@5/IoU=0.7": 0.0
+      },
+      "elapsed_seconds": 27.85655279999628,
+      "verification_prompt_version": "visible-evidence-gemma-verification-json-v1",
+      "returned_retrieval_candidates": 12
+    },
+    "adaptive": {
+      "status": "match",
+      "budget": {
+        "max_checks": 3,
+        "max_frames": 24,
+        "calls": 2,
+        "http_attempts": 2,
+        "sent_frame_slots": 16,
+        "cost_note": "Calls and frames count completed logical checks. HTTP attempts and sent frame slots include retries; provider compute and failed-attempt token use are unknown.",
+        "frames": 16,
+        "inspected_seconds": 20.0,
+        "unique_inspected_seconds": 20.0
+      },
+      "matched_intervals": [
+        {
+          "video_id": "RoripwjYFp8_60.0_210.0",
+          "start_seconds": 116.382933,
+          "end_seconds": 120.153366
+        }
+      ],
+      "metrics": {
+        "R@1/IoU=0.3": 0.0,
+        "target_coverage@1/IoU=0.3": 0.0,
+        "all_targets@1/IoU=0.3": 0.0,
+        "R@1/IoU=0.5": 0.0,
+        "target_coverage@1/IoU=0.5": 0.0,
+        "all_targets@1/IoU=0.5": 0.0,
+        "R@1/IoU=0.7": 0.0,
+        "target_coverage@1/IoU=0.7": 0.0,
+        "all_targets@1/IoU=0.7": 0.0,
+        "R@3/IoU=0.3": 0.0,
+        "target_coverage@3/IoU=0.3": 0.0,
+        "all_targets@3/IoU=0.3": 0.0,
+        "R@3/IoU=0.5": 0.0,
+        "target_coverage@3/IoU=0.5": 0.0,
+        "all_targets@3/IoU=0.5": 0.0,
+        "R@3/IoU=0.7": 0.0,
+        "target_coverage@3/IoU=0.7": 0.0,
+        "all_targets@3/IoU=0.7": 0.0,
+        "R@5/IoU=0.3": 0.0,
+        "target_coverage@5/IoU=0.3": 0.0,
+        "all_targets@5/IoU=0.3": 0.0,
+        "R@5/IoU=0.5": 0.0,
+        "target_coverage@5/IoU=0.5": 0.0,
+        "all_targets@5/IoU=0.5": 0.0,
+        "R@5/IoU=0.7": 0.0,
+        "target_coverage@5/IoU=0.7": 0.0,
+        "all_targets@5/IoU=0.7": 0.0
+      },
+      "elapsed_seconds": 37.247850499996275,
+      "verification_prompt_version": "visible-evidence-gemma-verification-json-v1",
+      "returned_retrieval_candidates": 12
+    },
+    "reranked_adaptive": {
+      "status": "match",
+      "budget": {
+        "max_checks": 3,
+        "max_frames": 24,
+        "calls": 1,
+        "http_attempts": 1,
+        "sent_frame_slots": 8,
+        "cost_note": "Calls and frames count completed logical checks. HTTP attempts and sent frame slots include retries; provider compute and failed-attempt token use are unknown.",
+        "frames": 8,
+        "inspected_seconds": 10.0,
+        "unique_inspected_seconds": 10.0
+      },
+      "matched_intervals": [
+        {
+          "video_id": "RoripwjYFp8_60.0_210.0",
+          "start_seconds": 116.382933,
+          "end_seconds": 120.153366
+        }
+      ],
+      "metrics": {
+        "R@1/IoU=0.3": 0.0,
+        "target_coverage@1/IoU=0.3": 0.0,
+        "all_targets@1/IoU=0.3": 0.0,
+        "R@1/IoU=0.5": 0.0,
+        "target_coverage@1/IoU=0.5": 0.0,
+        "all_targets@1/IoU=0.5": 0.0,
+        "R@1/IoU=0.7": 0.0,
+        "target_coverage@1/IoU=0.7": 0.0,
+        "all_targets@1/IoU=0.7": 0.0,
+        "R@3/IoU=0.3": 0.0,
+        "target_coverage@3/IoU=0.3": 0.0,
+        "all_targets@3/IoU=0.3": 0.0,
+        "R@3/IoU=0.5": 0.0,
+        "target_coverage@3/IoU=0.5": 0.0,
+        "all_targets@3/IoU=0.5": 0.0,
+        "R@3/IoU=0.7": 0.0,
+        "target_coverage@3/IoU=0.7": 0.0,
+        "all_targets@3/IoU=0.7": 0.0,
+        "R@5/IoU=0.3": 0.0,
+        "target_coverage@5/IoU=0.3": 0.0,
+        "all_targets@5/IoU=0.3": 0.0,
+        "R@5/IoU=0.5": 0.0,
+        "target_coverage@5/IoU=0.5": 0.0,
+        "all_targets@5/IoU=0.5": 0.0,
+        "R@5/IoU=0.7": 0.0,
+        "target_coverage@5/IoU=0.7": 0.0,
+        "all_targets@5/IoU=0.7": 0.0
+      },
+      "elapsed_seconds": 7.208641399993212,
+      "verification_prompt_version": "visible-evidence-gemma-verification-json-v1",
+      "returned_retrieval_candidates": 12
+    }
+  },
+  "browser": {
+    "whitespace_query_rejected": true,
+    "double_submit_search_requests": 1,
+    "trace_download_valid": true,
+    "playback_start_seconds": 116.382933,
+    "playback_ready_state": 4,
+    "refresh_preserves_recording_selection": true,
+    "mobile_viewport_width": 390,
+    "document_width": 375,
+    "document_scroll_width": 375,
+    "console_errors": 0,
+    "deployment_network_errors": 3,
+    "deployment_error_note": "Three polling requests failed during the deliberate API container restart. Raw errors were retained. A fresh page load then reported zero console errors."
+  },
+  "verification": {
+    "regression_tests_passed": 201,
+    "regression_warnings": 2,
+    "regression_seconds": 71.96,
+    "additional_api_integration_tests_passed": 2
+  },
+  "limits": [
+    "Known public example, n=1. No accuracy estimate across a dataset.",
+    "Adaptive selection ties the ranked baseline on this example.",
+    "Reranking improves retrieval rank and reduces source checks here; broader effectiveness is unknown.",
+    "Model match intervals cover a brief sub-action and miss the annotated complete event at tested IoU thresholds.",
+    "Three source checks cannot establish event counts, full event coverage, or absence.",
+    "Reported HTTP attempts include retries; failed-attempt provider compute is unknown."
+  ],
+  "description_spec": {
+    "model_id": "gemma4-31b-it",
+    "revision": "hosted-unpinned",
+    "prompt_version": "visible-evidence-gemma-json-v2",
+    "frames_per_window": 8,
+    "preprocess_version": "ordered-source-pts-jpeg90-max512-v1",
+    "temperature": 0,
+    "seed": 0,
+    "structured_output_policy": "asu-json-schema-gemma-v1",
+    "description_max_tokens": 1024,
+    "verification_max_tokens": 2048,
+    "reasoning_effort": "none",
+    "helper_addons": "off",
+    "dimensions": 384,
+    "embedding": {
+      "model_id": "sentence-transformers/all-MiniLM-L6-v2",
+      "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41",
+      "dimensions": 384,
+      "pooling": "attention-mask-mean-l2",
+      "max_tokens": 256,
+      "runtime": "torch-2.9.0-transformers-4.57.6-cpu-float32"
+    },
+    "sampling_version": "eight-slots-sorted-actual-pts-v1",
+    "runtime": "openai-structured-vision-v1"
+  },
+  "verifier_trace_identity": {
+    "model": "gemma4-31b-it",
+    "revision": "hosted-unpinned",
+    "prompt_version": "visible-evidence-gemma-verification-json-v1",
+    "structured_output_policy": "asu-json-schema-gemma-v1",
+    "system_fingerprint": "vllm-0.26.0-tp4-24487d56",
+    "schema_sha256": "8f94dbc7c14c03cce698a01eeb3cf01345a5a165203d8631210eaea2c4880ec4"
+  },
+  "code_sha256": {
+    "src/video_search/api.py": "0bca84763e2d84c2314ccb03cfe4d24563d9ad673f4f0572fd1a69dc64c323d8",
+    "src/video_search/evidence.py": "95e45e9872d312fdab22c5e3c034e82bcfd8b4b537a15cacc1f8bc2f2e056d53",
+    "src/video_search/reranker.py": "a8faf7f897d35cb0cd88904e77c286bfb0803acaa8090482c405d14dfee38c7d",
+    "src/video_search/vlm.py": "a3730e4703adb7695920c7d2a10c7bbec89694b78ec490fe5746fb6f6a94916f",
+    "src/video_search/evaluation.py": "10db9a8c74948a020c1aa36587990148d6192777da754d01609611100ee01dda",
+    "scripts/evaluate_retrieval.py": "5d430b5b261fb1df6e0419bc196463920f3e894679d0cb48553980d86b57ef6f",
+    "src/video_search/analysis.py": "ea532e3996c189a6b1b59afc96b4da7119507fa6345e6ea6728702d51f029e30"
+  },
+  "review": "Initial independent review found source-status and retry-accounting issues; both were fixed. Root reviewed final optional reranker wiring. A separate final independent review was unavailable due to reviewer account usage limits.",
+  "long_video_index_regression": {
+    "ready": true,
+    "windows": 205,
+    "source_hash_verified": true,
+    "frame_slots": 1640,
+    "unique_request_ids": 205,
+    "prompt_version": "visible-evidence-gemma-json-v2",
+    "max_summary_characters": 181,
+    "max_completion_tokens": 119,
+    "prompt_tokens": 524037,
+    "completion_tokens": 16188,
+    "model_elapsed_seconds_sum": 1599.9757910250007,
+    "old_saved_windows": 48,
+    "http_attempts_note": "Older worker traces do not include attempt counts; model elapsed includes retries. No exact provider cost claim.",
+    "old_saved_windows_unchanged_from_backup": true,
+    "privacy_note": "Only processing counts are published. User footage, descriptions, source identity and full request traces remain local."
+  },
+  "previous_verifier_source_checks": {
+    "ranked": {
+      "status": "match",
+      "budget": {
+        "max_checks": 3,
+        "max_frames": 24,
+        "calls": 2,
+        "http_attempts": 2,
+        "sent_frame_slots": 16,
+        "cost_note": "Calls and frames count completed logical checks. HTTP attempts and sent frame slots include retries; provider compute and failed-attempt token use are unknown.",
+        "frames": 16,
+        "inspected_seconds": 20.0,
+        "unique_inspected_seconds": 20.0
+      },
+      "checked_intervals": [
+        {
+          "inspection_start_seconds": 136.0,
+          "inspection_end_seconds": 146.0
+        },
+        {
+          "inspection_start_seconds": 112.0,
+          "inspection_end_seconds": 122.0
+        }
+      ],
+      "matched_intervals": [
+        {
+          "video_id": "RoripwjYFp8_60.0_210.0",
+          "start_seconds": 116.382933,
+          "end_seconds": 120.153366
+        },
+        {
+          "video_id": "RoripwjYFp8_60.0_210.0",
+          "start_seconds": 118.885433,
+          "end_seconds": 120.153366
+        }
+      ],
+      "metrics": {
+        "R@1/IoU=0.3": 0.0,
+        "target_coverage@1/IoU=0.3": 0.0,
+        "all_targets@1/IoU=0.3": 0.0,
+        "R@1/IoU=0.5": 0.0,
+        "target_coverage@1/IoU=0.5": 0.0,
+        "all_targets@1/IoU=0.5": 0.0,
+        "R@1/IoU=0.7": 0.0,
+        "target_coverage@1/IoU=0.7": 0.0,
+        "all_targets@1/IoU=0.7": 0.0,
+        "R@3/IoU=0.3": 0.0,
+        "target_coverage@3/IoU=0.3": 0.0,
+        "all_targets@3/IoU=0.3": 0.0,
+        "R@3/IoU=0.5": 0.0,
+        "target_coverage@3/IoU=0.5": 0.0,
+        "all_targets@3/IoU=0.5": 0.0,
+        "R@3/IoU=0.7": 0.0,
+        "target_coverage@3/IoU=0.7": 0.0,
+        "all_targets@3/IoU=0.7": 0.0,
+        "R@5/IoU=0.3": 0.0,
+        "target_coverage@5/IoU=0.3": 0.0,
+        "all_targets@5/IoU=0.3": 0.0,
+        "R@5/IoU=0.5": 0.0,
+        "target_coverage@5/IoU=0.5": 0.0,
+        "all_targets@5/IoU=0.5": 0.0,
+        "R@5/IoU=0.7": 0.0,
+        "target_coverage@5/IoU=0.7": 0.0,
+        "all_targets@5/IoU=0.7": 0.0
+      },
+      "elapsed_seconds": 47.47649349999847
+    },
+    "adaptive": {
+      "status": "match",
+      "budget": {
+        "max_checks": 3,
+        "max_frames": 24,
+        "calls": 2,
+        "http_attempts": 2,
+        "sent_frame_slots": 16,
+        "cost_note": "Calls and frames count completed logical checks. HTTP attempts and sent frame slots include retries; provider compute and failed-attempt token use are unknown.",
+        "frames": 16,
+        "inspected_seconds": 20.0,
+        "unique_inspected_seconds": 20.0
+      },
+      "checked_intervals": [
+        {
+          "inspection_start_seconds": 136.0,
+          "inspection_end_seconds": 146.0
+        },
+        {
+          "inspection_start_seconds": 112.0,
+          "inspection_end_seconds": 122.0
+        }
+      ],
+      "matched_intervals": [
+        {
+          "video_id": "RoripwjYFp8_60.0_210.0",
+          "start_seconds": 116.382933,
+          "end_seconds": 120.153366
+        },
+        {
+          "video_id": "RoripwjYFp8_60.0_210.0",
+          "start_seconds": 118.885433,
+          "end_seconds": 120.153366
+        }
+      ],
+      "metrics": {
+        "R@1/IoU=0.3": 0.0,
+        "target_coverage@1/IoU=0.3": 0.0,
+        "all_targets@1/IoU=0.3": 0.0,
+        "R@1/IoU=0.5": 0.0,
+        "target_coverage@1/IoU=0.5": 0.0,
+        "all_targets@1/IoU=0.5": 0.0,
+        "R@1/IoU=0.7": 0.0,
+        "target_coverage@1/IoU=0.7": 0.0,
+        "all_targets@1/IoU=0.7": 0.0,
+        "R@3/IoU=0.3": 0.0,
+        "target_coverage@3/IoU=0.3": 0.0,
+        "all_targets@3/IoU=0.3": 0.0,
+        "R@3/IoU=0.5": 0.0,
+        "target_coverage@3/IoU=0.5": 0.0,
+        "all_targets@3/IoU=0.5": 0.0,
+        "R@3/IoU=0.7": 0.0,
+        "target_coverage@3/IoU=0.7": 0.0,
+        "all_targets@3/IoU=0.7": 0.0,
+        "R@5/IoU=0.3": 0.0,
+        "target_coverage@5/IoU=0.3": 0.0,
+        "all_targets@5/IoU=0.3": 0.0,
+        "R@5/IoU=0.5": 0.0,
+        "target_coverage@5/IoU=0.5": 0.0,
+        "all_targets@5/IoU=0.5": 0.0,
+        "R@5/IoU=0.7": 0.0,
+        "target_coverage@5/IoU=0.7": 0.0,
+        "all_targets@5/IoU=0.7": 0.0
+      },
+      "elapsed_seconds": 26.303198599998723
+    },
+    "reranked_adaptive": {
+      "status": "match",
+      "budget": {
+        "max_checks": 3,
+        "max_frames": 24,
+        "calls": 1,
+        "http_attempts": 1,
+        "sent_frame_slots": 8,
+        "cost_note": "Calls and frames count completed logical checks. HTTP attempts and sent frame slots include retries; provider compute and failed-attempt token use are unknown.",
+        "frames": 8,
+        "inspected_seconds": 10,
+        "unique_inspected_seconds": 10
+      },
+      "matched_intervals": [
+        {
+          "video_id": "RoripwjYFp8_60.0_210.0",
+          "start_seconds": 116.382933,
+          "end_seconds": 120.153366
+        },
+        {
+          "video_id": "RoripwjYFp8_60.0_210.0",
+          "start_seconds": 118.885433,
+          "end_seconds": 120.153366
+        }
+      ],
+      "metrics": {
+        "R@1/IoU=0.3": 0.0,
+        "target_coverage@1/IoU=0.3": 0.0,
+        "all_targets@1/IoU=0.3": 0.0,
+        "R@1/IoU=0.5": 0.0,
+        "target_coverage@1/IoU=0.5": 0.0,
+        "all_targets@1/IoU=0.5": 0.0,
+        "R@1/IoU=0.7": 0.0,
+        "target_coverage@1/IoU=0.7": 0.0,
+        "all_targets@1/IoU=0.7": 0.0,
+        "R@3/IoU=0.3": 0.0,
+        "target_coverage@3/IoU=0.3": 0.0,
+        "all_targets@3/IoU=0.3": 0.0,
+        "R@3/IoU=0.5": 0.0,
+        "target_coverage@3/IoU=0.5": 0.0,
+        "all_targets@3/IoU=0.5": 0.0,
+        "R@3/IoU=0.7": 0.0,
+        "target_coverage@3/IoU=0.7": 0.0,
+        "all_targets@3/IoU=0.7": 0.0,
+        "R@5/IoU=0.3": 0.0,
+        "target_coverage@5/IoU=0.3": 0.0,
+        "all_targets@5/IoU=0.3": 0.0,
+        "R@5/IoU=0.5": 0.0,
+        "target_coverage@5/IoU=0.5": 0.0,
+        "all_targets@5/IoU=0.5": 0.0,
+        "R@5/IoU=0.7": 0.0,
+        "target_coverage@5/IoU=0.7": 0.0,
+        "all_targets@5/IoU=0.7": 0.0
+      },
+      "elapsed_seconds": 16.744963589000008
+    }
+  },
+  "source_check_comparison_note": "All methods use max3 checks/24 frame slots. Normal API candidate limit12 is retained. Plain retrieval uses its top12; optional reranking scores19 candidates before returning12. The winning candidate was already rank2 in the plain list; the source-check observations are one development run, not a general controlled effect estimate. The separate retrieval comparison above explicitly uses the same19-candidate pool.",
+  "verification_prompt_fix": {
+    "reason": "The first full-video browser source check was length-truncated. It failed visibly. Description indexing stayed ready.",
+    "new_prompt_version": "visible-evidence-gemma-verification-json-v1",
+    "schema_relaxed": false,
+    "token_cap_increased": false,
+    "description_reindexed": false,
+    "failed_window_probe": {
+      "valid": true,
+      "status": "match",
+      "completion_tokens": 58,
+      "elapsed_seconds": 3.43595882600016
+    },
+    "public_controls": [
+      {
+        "status": "match",
+        "completion_tokens": 61,
+        "elapsed_seconds": 4.717098294999914
+      },
+      {
+        "status": "no_match",
+        "completion_tokens": 35,
+        "elapsed_seconds": 3.417009293999854
+      }
+    ],
+    "final_original_video_browser": {
+      "succeeded": true,
+      "source_checks": 1,
+      "frame_slots": 8,
+      "elapsed_seconds": 9.555442802000016,
+      "trace_download_valid": true,
+      "saved_task_prompt_version_valid": true,
+      "description_index_unchanged": true,
+      "playback_ready_state": 4,
+      "console_errors": 0,
+      "privacy_note": "Full query, observations, timestamps and source identity remain private."
+    }
+  }
+}

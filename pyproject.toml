@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "local-video-search"
+version = "0.1.0"
+description = "Local video archive indexing and evidence search"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi==0.162.0",
+    "uvicorn==0.54.0",
+    "psycopg[binary]==3.3.8",
+]
+
+[project.optional-dependencies]
+test = ["pytest==9.2.0", "httpx2==2.16.0"]
+vision = ["torch==2.9.0", "transformers==4.57.6", "Pillow==12.1.0", "sentencepiece==0.2.1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+video_search = ["schema.sql", "migrations/*.sql", "static/*.html", "static/*.css", "static/*.js"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-o cache_dir=/tmp/video-search-pytest-cache"
+

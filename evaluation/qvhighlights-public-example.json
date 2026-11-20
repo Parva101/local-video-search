@@ -1,0 +1,23 @@
+{
+  "name": "qvhighlights-public-pizza-example-v1",
+  "split": "public-example-development",
+  "purpose": "A public engineering smoke test, not a benchmark result. This known example must not be used to claim held-out accuracy or SOTA.",
+  "provenance": "Official Moment-DETR run_on_video example at commit b7e553ac3b0c898ee6b85e03ee507c064eab89ca; target labels copied unchanged and verified before local model output. Video bounds use the exact imported media duration, 150.016533 seconds; the author annotation rounds duration to 150 seconds. This correction does not change target labels or relax interval validation.",
+  "annotation_url": "https://raw.githubusercontent.com/jayleicn/moment_detr/b7e553ac3b0c898ee6b85e03ee507c064eab89ca/run_on_video/example/queries.jsonl",
+  "media_url": "https://raw.githubusercontent.com/jayleicn/moment_detr/b7e553ac3b0c898ee6b85e03ee507c064eab89ca/run_on_video/example/RoripwjYFp8_60.0_210.0.mp4",
+  "videos": {
+    "RoripwjYFp8_60.0_210.0": {
+      "duration_seconds": 150.016533,
+      "annotation_duration_seconds": 150,
+      "sha256": "e847dbe79219afc6d70225117684a7e03563e1580b6f455ece13f89747cb5a50"
+    }
+  },
+  "queries": [
+    {
+      "id": 8056,
+      "query": "Chef makes pizza and cuts it up.",
+      "scope_video_ids": ["RoripwjYFp8_60.0_210.0"],
+      "targets": [{"video_id": "RoripwjYFp8_60.0_210.0", "start_seconds": 106, "end_seconds": 122}]
+    }
+  ]
+}

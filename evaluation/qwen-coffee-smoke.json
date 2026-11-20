@@ -1,0 +1,28 @@
+{
+  "purpose": "Engineering smoke test, not a public benchmark. Freeze before Qwen output.",
+  "source": {
+    "dataset": "lerobot/aloha_static_coffee",
+    "revision": "b144896feb1f37398a862927b22cd3abdf005a6b",
+    "license": "MIT (dataset card)",
+    "url": "https://huggingface.co/datasets/lerobot/aloha_static_coffee/resolve/b144896feb1f37398a862927b22cd3abdf005a6b/videos/observation.images.cam_high/chunk-000/file-000.mp4",
+    "sha256": "ee637bd6e56353ecc762bc7408f76c430674b0536e5a0a2eb51bf4e3640942f0",
+    "excerpt_start_seconds": 0,
+    "excerpt_end_seconds": 22,
+    "local_file": "qwen-coffee-demo.mp4",
+    "local_sha256": "6d8c9cd342be3985e59ff9e1d4738ad467c75cf190127e2e53530cdd4faed1b2"
+  },
+  "annotation": "The coding assistant visually reviewed ordered 1 fps source contact sheets before Qwen inference. Labels are provisional and have not had independent human review. Broad intervals reflect visible action phases, not frame-exact boundaries. One recording and two positive queries cannot establish general quality.",
+  "retrieval": {
+    "paths": ["visual", "description", "hybrid"],
+    "limit": 3,
+    "metric": "Recall@1 with temporal IoU >= 0.3 on the two positive queries",
+    "queries": [
+      {"id": "capsule", "query": "A robot picks up a round coffee capsule and moves it to the coffee machine.", "expected_intervals": [[0, 12]]},
+      {"id": "cup", "query": "A robot picks up a clear cup and places it under the coffee machine.", "expected_intervals": [[16, 22]]}
+    ]
+  },
+  "verification": [
+    {"id": "cup-visible", "query": "A robot moves a clear cup under the coffee machine.", "start_seconds": 16, "end_seconds": 22, "context_seconds": 0, "expected_status": "match"},
+    {"id": "person-absent", "query": "A person wearing a red shirt is visible.", "start_seconds": 0, "end_seconds": 22, "context_seconds": 0, "expected_status": "no_match", "scope": "Only supplied frames; no claim about unsampled time"}
+  ]
+}
