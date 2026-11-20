@@ -79,6 +79,10 @@ Prep job 2068865 COMPLETED in 38 s: all 12 pinned checkpoint files downloaded an
 
 Next, in order: (1) dataset build completes locally (frame extraction running); (2) scp `dataset/` to `$FINETUNE_ROOT` on Sol; (3) submit the smoke job (`FINETUNE_MODE=smoke`, one A100, 2 h wall), verify its log, leave any long run for the user to check; (4) after smoke passes, submit the full run (`FINETUNE_MODE=train`, 8 h wall); (5) eval the adapter on the held-out coffee fixtures against the hosted Gemma records — the acceptance gate.
 
+### Dataset built and smoke submitted — 20 November 2026
+
+Dataset complete locally in 280 s: **258 train / 58 eval** chat samples, 316 frame groups (2,528 JPEGs at the recorded sample times), coffee fixtures plus every tenth window held out. Transferred to Sol as one 78 MB tar (untarred and hash-verified: train/eval/manifest SHA-256 match; frame count 2,528 confirmed). Trainer scripts hash-verified on both machines. **Smoke job 2073664** submitted (one A100, 1 h wall, `FINETUNE_MODE=smoke`): installs pinned isolated peft/trl/accelerate/datasets, loads the verified base, attaches LoRA, runs 20 steps on a 64-sample slice, and writes `runs/finetune-v1/smoke-gate.json`. The smoke exists to catch package-version incompatibilities explicitly before any long run; under the two-failure rule, a failed smoke stops for re-planning, not silent retry. Check: `sacct -j 2073664 --format=JobID,State,ExitCode,Elapsed`; log: `logs/finetune-smoke-2073664.log`. If the gate passes, submit the full run with `FINETUNE_MODE=train` and an 8-hour wall, then run the acceptance eval.
+
 ## Current request: upload a video, index it, ask questions
 
 ### Reported failure: long-video index stops at48/205
