@@ -118,6 +118,14 @@ A real monitor bug was found and fixed (`8c54568`): the old script cleared ALERT
 
 Next, in order: when Sol answers, fetch `logs/finetune-smoke-2094734.log`, diagnose the fifth cause, and apply the escalation rule honestly — a fifth distinct cause in my own loop means the smoke is still doing its job, but the campaign pauses for a written decision on whether the plain-loop approach needs a different base plan rather than another fix.
 
+### Fifth cause diagnosed; probe-verified fix; smoke attempt 6 — 20 November 2026
+
+The fifth cause: my batch-key whitelist dropped `mm_token_type_ids`, which Qwen3-VL's multimodal RoPE requires. Written decision per the escalation rule: the plain-loop plan stands; the flaw was guessing processor output keys, so the trainer now passes the processor's full tensor contract through, and a new `--batch-probe` mode builds one batch on CPU and records the exact keys and shapes before any GPU is requested.
+
+**Batch probe job 2103006 COMPLETED 0:0 in 1:06** on the exact container versions: `input_ids` [2, 2509], `attention_mask` [2, 2509], `mm_token_type_ids` [2, 2509], `pixel_values` [9216, 1536] (16 images of 8 per sample), `image_grid_thw` [16, 3], and masked `labels` [2, 2509]. The interface is proven with evidence, not assumption. Committed `39b8b8c`; the pre-flight ladder now runs: local path check → CPU batch probe → GPU smoke.
+
+**Smoke attempt 6: job 2107653** (one A100, 1 h wall), tracked in the watch list. Check: `sacct -j 2107653`; log: `logs/finetune-smoke-2107653.log`; pass marker: `runs/finetune-v1/smoke-gate.json`. The probe's passing shapes mean the remaining unknown is only the forward/backward/optimizer path itself.
+
 ### Heartbeat protocol — 20 November 2026 (user requirement)
 
 The agent cannot self-wake; a session turn needs one message. So the user's role is reduced to a single-word heartbeat, and any session receiving it executes this playbook in order without asking anything:
