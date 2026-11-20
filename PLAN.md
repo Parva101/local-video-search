@@ -142,6 +142,8 @@ This local-first round still caught the biggest remaining bug before wasting ano
 
 **Full run submitted: job 2111550** (`FINETUNE_MODE=train`, 2 epochs over 258 samples, one A100, 2 h wall — the smoke's pace projects minutes of actual training). Tracked in the watch list; log: `logs/finetune-train-2111550.log`. On completion, the heartbeat protocol runs the acceptance eval: the adapter against the held-out coffee fixtures and pilot controls versus the hosted Gemma records, recorded honestly in PLAN/DECISIONS, and only a pass wires it into the app's Qwen client as a pinned revision.
 
+**Full training COMPLETED 0:0 in 14:20** (job 2111550). The trained adapter is at `runs/finetune-v1/adapter/` (161 MB safetensors, SHA-256 `c5268e8127a3a3cbe6e122e96307996359b7d07a5f416d6c6071ce68e50135d1`). **Acceptance eval submitted: job 2120547** (`FINETUNE_MODE=eval`, committed `fc2eab7`): generates on all 58 held-out rows and reports JSON validity, verification status agreement and summary word overlap against the hosted teacher records, with adapter and base identity pinned in `runs/finetune-v1/eval-report.json`. The verdict decides integration honestly: a pass wires the adapter into the app's Qwen client as a pinned local revision; a fail keeps the hosted path and records the negative result.
+
 ### Heartbeat protocol — 20 November 2026 (user requirement)
 
 The agent cannot self-wake; a session turn needs one message. So the user's role is reduced to a single-word heartbeat, and any session receiving it executes this playbook in order without asking anything:
