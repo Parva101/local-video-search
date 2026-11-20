@@ -1,0 +1,30 @@
+{
+  "recorded_date": "2026-11-20",
+  "run": {
+    "base_model": "Qwen/Qwen3-VL-4B-Instruct",
+    "base_revision": "ebb281ec70b05090aa6165b016eac8ec08e71b17",
+    "training": "LoRA r16 a32, two epochs over 364 rows: 258 clean distillation rows plus 106 in-interval positives and same-video out-of-interval hard negatives from the licensed pilot's train split",
+    "retrain_job": 2126197,
+    "eval_job": 2126198,
+    "held_out": "196 rows: the 58-row production slice (coffee fixtures plus every tenth window) and 138 rows from the licensed pilot's untouched test split"
+  },
+  "metrics": {
+    "json_valid_rate": 1.0,
+    "verification_rows": 156,
+    "verification_status_agreement": 0.776,
+    "description_rows": 40,
+    "mean_summary_word_overlap": 0.276
+  },
+  "comparison_to_shakedown": {
+    "json_valid_rate": "1.0 held on a 3.4x larger gate",
+    "verification_status_agreement": "0.611 on 18 rows to 0.776 on 156 rows (+16.5 points, the direct effect of hard-negative training)",
+    "mean_summary_word_overlap": "0.262 to 0.276"
+  },
+  "verdict": "The hard-negative training delivered a measured quality gain exactly where the system gates everything: verification calls now agree with the hosted teacher on three of four cases across a 156-row gate, at perfect schema validity, from a pinned 4B local model. Agreement is measured against the hosted teacher's recorded statuses, not human ground truth; the decisive comparison against the hosted model on untouched data is the frozen stage-7 benchmark protocol (research/untouched-benchmark-design-2026-11-20.md).",
+  "limits": [
+    "Status agreement is teacher-relative, not ground-truth accuracy.",
+    "The pilot's test videos appear in evaluation only; the pre-inference contamination audit in the stage-7 protocol governs any external claim.",
+    "One held-out split; word overlap is a coarse similarity, not correctness.",
+    "No SOTA or general-accuracy claim."
+  ]
+}
