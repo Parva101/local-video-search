@@ -77,8 +77,9 @@ def build_batch(samples, processor, device):
     for row, length in enumerate(prompt_lengths):
         labels[row, :length] = -100
     batch["labels"] = labels
-    return {key: value.to(device) for key, value in batch.items()
-            if key in ("input_ids", "attention_mask", "pixel_values", "image_grid_thw", "labels")}
+    # Pass the processor's full tensor contract through; guessing key names
+    # (and dropping one the model needs) caused a whole failure class.
+    return {key: value.to(device) for key, value in batch.items() if hasattr(value, "to")}
 
 
 def main():
@@ -95,6 +96,8 @@ def main():
     parser.add_argument("--warmup-steps", type=int, default=3)
     parser.add_argument("--smoke", action="store_true")
     parser.add_argument("--max-steps", type=int, default=20)
+    parser.add_argument("--batch-probe", action="store_true",
+                        help="Build one batch on CPU, print keys and shapes, and exit without loading the model")
     args = parser.parse_args()
     started = time.monotonic()
 
@@ -112,6 +115,15 @@ def main():
 
     processor = AutoProcessor.from_pretrained(base, local_files_only=True, trust_remote_code=False)
     processor.tokenizer.padding_side = "right"
+    if args.batch_probe:
+        rows = load_rows(args.data / "train.jsonl", args.data, limit=2)
+        batch = build_batch(rows, processor, "cpu")
+        keys = {key: list(value.shape) for key, value in batch.items()}
+        event("batch_probe", keys=keys)
+        args.out.mkdir(parents=True, exist_ok=True)
+        (args.out / "batch-probe.json").write_text(json.dumps(keys, indent=2, sort_keys=True) + "\n",
+                                                   encoding="utf-8")
+        return
     model = AutoModelForMultimodalLM.from_pretrained(
         base, local_files_only=True, trust_remote_code=False, use_safetensors=True,
         dtype=torch.bfloat16, device_map=None,

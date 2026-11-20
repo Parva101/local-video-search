@@ -29,7 +29,9 @@ if [[ ! -x "$ROOT/venv/bin/python3" ]]; then
         "$ROOT/venv/bin/pip" install --no-cache-dir -c "$ROOT/training-constraints.txt" peft trl
 fi
 ARGS=(--data "$ROOT/dataset" --out "$ROOT/runs/finetune-v1")
-if [[ "$MODE" == "smoke" ]]; then
+if [[ "$MODE" == "probe" ]]; then
+    ARGS+=(--batch-probe)
+elif [[ "$MODE" == "smoke" ]]; then
     ARGS+=(--smoke)
 else
     ARGS+=(--epochs 2)
