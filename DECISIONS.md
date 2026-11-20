@@ -370,3 +370,15 @@ Stage 5 under the autonomous mandate. The browser gains a **Search every indexed
 Final state: 535 model-enabled tests pass (2 private-checkout skips, 2 existing warnings); live database upgraded v4→v5→v6 in place; every new capability has a real end-to-end browser proof with zero console errors (image query at 17.88-20.14 s; keyword "today" scope; yesterday exclusion; Whisper ASR search with playback at 147.08 s; occurrence count 1 of 1 with adjacent-window merge 16.4-20.1 s; all-videos search).
 
 Known gaps kept visible: a fresh-machine Compose run is still recommended before broad announcements; supervised-benchmark comparisons (the mandate's stage 7) remain future work; ASR audio-origin and half-second merge limits apply.
+
+## Fine-tuned system model campaign — 20 November 2026
+
+The user asked why the answering model is not specially trained, and directed a Sol fine-tuning campaign. Honest basis: the only prior training was the UniVTG feature head, which full-test measurement rejected (58.80% vs 60.04%), so the answering model stayed the hosted, unpinned Gemma. A dedicated model is feasible and is now started.
+
+Base model: pinned `Qwen/Qwen3-VL-4B-Instruct` @ `ebb281ec70b05090aa6165b016eac8ec08e71b17` (Apache-2.0, 4.4B BF16). Why: strong for its size, LoRA-trainable on one A100, small enough to serve on a laptop GPU later, and it plugs into the app's existing OpenAI-compatible Qwen client with zero application changes — a new pinned revision instead of an unpinned hosted service.
+
+Training supervision, two sources kept distinct: (1) distillation from our saved production traces — description payloads and verification records the hosted model produced under our strict JSON schemas; (2) grounded positives and hard negatives from the licensed Charades-STA pilot (windows inside an annotated interval are positives; windows from the same video outside it are hard negatives, per the draft plan's own rule). Method: LoRA fine-tuning with isolated research packages on Sol, mirroring the UniVTG campaign's gates — pinned source hashes, a short smoke before any long run, resumable checkpoints, and an honest acceptance gate.
+
+Acceptance gate: the fine-tuned model must match or beat the hosted Gemma on the frozen verification and description contracts (the saved coffee fixtures and pilot controls) at equal or lower cost, with pinned weights. If it does not, we keep the hosted path and record the negative result. SOTA wording stays banned; the claim target is "best in class among local pinned systems for this pipeline".
+
+Proof started: training traces exported from the live database (descriptions and verifications with full samples); the pinned checkpoint download is submitted on Sol as a CPU job and left running; the LoRA training script follows after preparation passes.

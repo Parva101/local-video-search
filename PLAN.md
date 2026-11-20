@@ -60,6 +60,19 @@ Proof: full model-enabled regression **535 passed, 2 private-checkout skips, 2 e
 
 Remaining honest gaps for later sessions: a true fresh-machine Compose run (second project, clean volumes) is recommended before public announcements — every test already proves fresh schema creation, and the live DB proves in-place upgrades, but the end-to-end fresh-docker flow has not been run on another machine; the ASR audio-origin assumption; supervised-benchmark claims (stage 7) remain future work under the 19 November mandate's honest-comparison framing.
 
+### Fine-tuned system model campaign — started 20 November 2026
+
+Base pinned: `Qwen/Qwen3-VL-4B-Instruct` @ `ebb281ec70b05090aa6165b016eac8ec08e71b17` (Apache-2.0, 4.4B, ~8.9 GB). Why: LoRA-trainable on one A100, small enough to serve later on a 16 GB laptop GPU, and it plugs into the app's existing OpenAI-compatible Qwen client as a pinned revision with zero application changes. It replaces the unpinned hosted model dependency if it passes the gate.
+
+Supervision exported from the live database: 284 description rows and 32 verification rows with full samples and payloads (`​.codex-backups/finetune-data/`, no-BOM JSONL, hashes verified on both machines). Charades-STA grounded positives and same-video hard negatives join at dataset-build time from the licensed pilot.
+
+Steps, in order, for the next session:
+1. Prep job **2068865** (CPU) downloads and hashes the checkpoint. Check: `sacct -j 2068865 --format=JobID,State,ExitCode,Elapsed`. Log: `/scratch/psheta12/video-search-finetune-20261120/logs/prepare-finetune-2068865.log`. Manifest: `base-model-manifest.json`.
+2. Dataset builder: extract frames at recorded sample times from the licensed pilot and demo media; tasks are the description JSON schema (distillation) and the verification schema (status + intervals), with in-interval positives and same-video out-of-interval hard negatives. Keep sources distinct and hashed.
+3. LoRA training script with the campaign's gates: short smoke before any long run, resumable checkpoints, isolated research packages, no app dependency changes.
+4. One A100 job within the 960-minute class QoS; report the job ID and leave it running.
+5. Honest acceptance gate: match or beat hosted Gemma on the frozen coffee fixtures and pilot controls at equal tasks, with pinned weights. Keep the hosted path on failure and record the negative result. No SOTA wording; the claim target is best-in-class among local pinned systems for this pipeline.
+
 ## Current request: upload a video, index it, ask questions
 
 ### Reported failure: long-video index stops at48/205
