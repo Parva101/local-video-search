@@ -91,7 +91,7 @@ def main():
     parser.add_argument("--learning-rate", type=float, default=1e-4)
     parser.add_argument("--lora-r", type=int, default=16)
     parser.add_argument("--lora-alpha", type=int, default=32)
-    parser.add_argument("--per-device-batch", type=int, default=2)
+    parser.add_argument("--per-device-batch", type=int, default=1)
     parser.add_argument("--grad-accum", type=int, default=4)
     parser.add_argument("--warmup-steps", type=int, default=3)
     parser.add_argument("--smoke", action="store_true")
@@ -137,6 +137,11 @@ def main():
                       task_type="CAUSAL_LM", target_modules="all-linear")
     model = get_peft_model(model, lora)
     model.print_trainable_parameters()
+    # Vision-tower activations for eight-image samples need checkpointing;
+    # without it the first loss allocation exhausted an 80 GB A100.
+    model.config.use_cache = False
+    model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
+    model.enable_input_require_grads()
     model.train()
     device = "cuda"
 

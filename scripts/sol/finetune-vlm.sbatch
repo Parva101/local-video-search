@@ -38,5 +38,6 @@ else
 fi
 apptainer exec --cleanenv --bind /scratch --nv \
     --env PYTHONNOUSERSITE=1 --env HF_HUB_DISABLE_TELEMETRY=1 \
+    --env PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
     "$SIF" "$ROOT/venv/bin/python3" "$ROOT/project/scripts/sol/finetune_vlm.py" "${ARGS[@]}"
 printf '{"event":"job_done","mode":"%s","exit":0}\n' "$MODE"
