@@ -80,7 +80,7 @@ def build_sample(row, media_root: Path, frames_root: Path, index: int):
     for position, seconds in enumerate(stamps):
         frame_path = group / f"{position:02d}.jpg"
         extract_frame(video, seconds, frame_path)
-        content.append({"type": "image", "image": str(frame_path.relative_to(frames_root.parent))})
+        content.append({"type": "image", "image": frame_path.relative_to(frames_root.parent).as_posix()})
         content.append({"type": "text", "text": f"Frame at source-relative {seconds:.9f} seconds:"})
     if row["kind"] == "description":
         answer = row["payload"]

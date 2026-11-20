@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 import time
 
+from PIL import Image
+
 BASE_MANIFEST_DEFAULT = "/scratch/psheta12/video-search-finetune-20261120/base-model-manifest.json"
 
 
@@ -32,7 +34,7 @@ def load_manifest(path: Path) -> Path:
     return base
 
 
-def load_rows(path: Path, frames_root: Path, limit=None):
+def load_rows(path: Path, data_root: Path, limit=None):
     rows = []
     for line in path.read_text(encoding="utf-8").splitlines():
         row = json.loads(line)
@@ -40,27 +42,36 @@ def load_rows(path: Path, frames_root: Path, limit=None):
         for part in row["messages"][0]["content"]:
             if part["type"] == "image":
                 content.append({"type": "image"})
-                images.append(str(frames_root / part["image"]))
+                # Dataset builders may emit platform-specific separators; normalize.
+                name = part["image"].replace("\\", "/").removeprefix("frames/")
+                images.append(str((data_root / "frames" / name).resolve()))
             else:
                 content.append({"type": "text", "text": part["text"]})
         rows.append({"prompt": [{"role": "user", "content": content}],
                      "answer": row["messages"][1]["content"], "images": images})
         if limit and len(rows) >= limit:
             break
+    missing = [path for row in rows for path in row["images"] if not Path(path).is_file()]
+    if missing:
+        raise FileNotFoundError(f"Dataset image paths do not resolve: {missing[:3]}")
     return rows
 
 
 def build_batch(samples, processor, device):
-    texts, image_lists, prompt_lengths = [], [], []
+    texts, image_lists, prompt_lengths, opened = [], [], [], []
     for sample in samples:
         prompt_text = processor.apply_chat_template(sample["prompt"], tokenize=False,
                                                     add_generation_prompt=True)
         prompt_lengths.append(len(processor.tokenizer(prompt_text, add_special_tokens=False)["input_ids"]))
         full = sample["prompt"] + [{"role": "assistant", "content": sample["answer"]}]
         texts.append(processor.apply_chat_template(full, tokenize=False, add_generation_prompt=False))
-        image_lists.append(sample["images"])
+        images = [Image.open(path).convert("RGB") for path in sample["images"]]
+        opened.extend(images)
+        image_lists.append(images)
     batch = processor(text=texts, images=image_lists, padding=True,
                       truncation=True, max_length=4096, return_tensors="pt")
+    for image in opened:
+        image.close()
     labels = batch["input_ids"].clone()
     labels[labels == processor.tokenizer.pad_token_id] = -100
     for row, length in enumerate(prompt_lengths):
@@ -96,7 +107,6 @@ def main():
     base = load_manifest(args.base_manifest)
     event("base_verified", checkpoint=str(base))
 
-    from PIL import Image
     from torch.utils.data import DataLoader
     from transformers import AutoProcessor, AutoModelForMultimodalLM
 
@@ -118,16 +128,8 @@ def main():
     model.train()
     device = "cuda"
 
-    def rows_with_images(sample):
-        sample = dict(sample)
-        sample["images"] = [Image.open(path).convert("RGB") for path in sample["images"]]
-        return sample
-
-    frames_root = args.data / "frames"
-    train_rows = [rows_with_images(row) for row in
-                  load_rows(args.data / "train.jsonl", frames_root, limit=192 if args.smoke else None)]
-    eval_rows = [rows_with_images(row) for row in
-                 load_rows(args.data / "eval.jsonl", frames_root, limit=8 if args.smoke else None)]
+    train_rows = load_rows(args.data / "train.jsonl", args.data, limit=192 if args.smoke else None)
+    eval_rows = load_rows(args.data / "eval.jsonl", args.data, limit=8 if args.smoke else None)
     event("data_loaded", train=len(train_rows), eval=len(eval_rows), smoke=args.smoke)
 
     optimizer = torch.optim.AdamW((p for p in model.parameters() if p.requires_grad),
