@@ -95,6 +95,14 @@ Smoke 2079044 FAILED 1:0 after 4:08, and the monitor caught it automatically. Th
 
 Honest two-failure reading: the two smoke failures have different, precisely diagnosed causes — the first was environment contamination, the second a container type. This is a designed re-plan for a newly identified cause, not a blind third retry: the fix converts the loaded rows with `datasets.Dataset.from_list` (datasets 5.2.0 is already in the venv), committed as `7b4f48c` and hash-verified on both machines. **Smoke attempt 3: job 2080864** (one A100, 1 h wall). The monitor watch list now tracks 2080864; the alert for 2079044 clears on the next healthy poll. Check: `sacct -j 2080864`; log: `logs/finetune-smoke-2080864.log`; pass marker: `runs/finetune-v1/smoke-gate.json`. If this attempt fails on a further cause, stop and re-plan the training stack itself (for example a purpose-built training image) instead of iterating on the same one.
 
+### Third failure bit the rule; training stack re-planned — 20 November 2026
+
+Smoke 2080864 FAILED 1:0 after 1:50 on a third distinct cause: `datasets.Dataset.from_list` crashed inside Arrow schema inference over the heterogeneous chat content parts (image parts carry an `image` key, text parts a `text` key; Arrow needs uniform structs). Per the rule recorded in PLAN, iteration on the trl/datasets integration stops here.
+
+Re-planned stack, committed `c9c401c` and hash-verified on both machines: the trainer is now a **plain PyTorch loop** — peft LoRA (proven: 40.3M trainable params), a collator we control, prompt-masked labels with right padding, OneCycleLR, gradient clipping, epoch checkpoints — with **no trl and no datasets anywhere in the path**. The whole integration-failure class is removed rather than patched a fourth time. Smoke limit raised to 192 samples so the 20-step gate is reachable in one epoch.
+
+**Smoke attempt 4: job 2093596** (one A100, 1 h wall), tracked in the monitor watch list. Check: `sacct -j 2093596`; log: `logs/finetune-smoke-2093596.log`; pass marker: `runs/finetune-v1/smoke-gate.json`. A fourth distinct cause stops everything for a ground-up rethink, not another iteration.
+
 ### Heartbeat protocol — 20 November 2026 (user requirement)
 
 The agent cannot self-wake; a session turn needs one message. So the user's role is reduced to a single-word heartbeat, and any session receiving it executes this playbook in order without asking anything:
@@ -642,3 +650,15 @@ Approved and implemented: opencv-python-headless==4.9.0.80 replaces opencv-pytho
 New job: 2067147, CPU only, fresh stage, reuses and re-verifies the existing SIF. Check: sacct -j 2067147 --format=JobID,State,ExitCode,Elapsed. Log: /scratch/psheta12/video-search-sdst-20261115/logs/runtime-2067147.log. Reports required before any GPU gate: runtime/runtime.json, runtime/files.json, runtime-images/image.sha256. Leave the job running; do not tail it.
 
 Data path: open. Google Drive remains the only verified host of the 27.3 GB SDST archive, and its per-file traffic quota blocked every attempt from Sol and locally. No retry loop. The user has not yet chosen the next data route (longer delayed retry, author mirror request, alternate reference, or pause).
+
+## Side task — scheduled ENTER sender, 20 November 2026 (approved, complete)
+
+User request: a program that presses ENTER in a chosen app window at a set time, for a message typed in advance when the app has no scheduled send. Tool lives outside this repo at `D:\projects\send-enter\`; no video-project code was touched. Python with ctypes only; no new dependencies.
+
+Steps, each with its proof (all done):
+
+1. Time input, both forms — `--at` clock (a past time asks before moving to tomorrow) and `--in` countdown. Proof: `--help`; `0m` and `25:00` rejected; past `--at` answered "n" aborts with "no ENTER was sent", exit 1.
+2. Window match by title part; console and cloaked windows skipped; exact title preferred. Proof: `--list` returned exactly one match, "Untitled - Notepad".
+3. Send-time behavior: find again, restore, focus, verify the foreground window, then one ENTER; any failure sends no key; system sleep blocked while waiting. Proof: real run `--in 6s` — window found, focused, "ENTER sent" at the target second. One bug fixed on first retry: SetThreadExecutionState is a kernel32 export, not user32.
+4. Honest limits given: PC on and unlocked, terminal left open, hands off the keyboard at send time.
+5. Live test on the OpenCode desktop app, 20 November 2026 ~01:06: armed `--in 2m` against "Scheduled keyboard Enter sender — OpenCode"; the log proves focus and ENTER at 01:06:01; the user's "hi got the msg?" arrived as the next turn after the fire. One finder change was required and made for this test: terminal windows are valid targets (only the tool's own console is skipped). End-to-end proof completes when the user confirms that text was the unsubmitted input-box content.
