@@ -154,6 +154,12 @@ This local-first round still caught the biggest remaining bug before wasting ano
 
 Fixes committed (`7c7e36f`): description targets now carry only the four serving fields (`summary`, `actions`, `objects`, `uncertainties`); eval generation budget raised to 640 tokens. The dataset was rebuilt locally (same 258/58 split, new hashes `7b8956c9`/`813a7665`, targets verified trace-free) and transferred with hashes confirmed.
 
+### Wave 1 integrated; scaled dataset shipped — 20 November 2026
+
+All five Wave-1 agents completed and their lanes were reviewed, tested and pushed individually: docs (`50668f5`: 21-question catalog with exact API JSON plus operations/backup section), API/store hardening + platform tests (`98939b9`: /health schema/queue telemetry, per-recording count progress, quoted-phrase speech boost, 27 passed/2 gated; the exact-equality health assertion relaxed by the integrator as flagged), the frontend polish (`825bc6f`: honest all-videos label, checked-frames note, transcript source labels, focus rules — verified live at v0.7 with zero console errors), and the hard-negative builder (dry-run validated, then the full local run produced 122 positives + 122 same-video hard negatives).
+
+The scaled dataset was merged locally (`scripts/merge_finetune_datasets.py`, frame groups offset to avoid collisions): **364 train / 196 eval rows**, all 560 image paths resolving in the local pre-flight. Transferred to Sol with hashes verified and swapped in as the active `dataset/`; a chained **scaled retrain → acceptance eval** pair was submitted (job IDs recorded in the watch list). This run trains on real discriminative supervision: description distillation plus in-interval positives versus same-video out-of-interval hard negatives from the licensed pilot. The same held-out gate decides honestly.
+
 ### Swarm organization and acceptance eval v2 — 20 November 2026
 
 **The team** (user directive): 40 specialist roles organized into nine squads, documented in TEAM.md, executing as GLM-5.3 subagents in parallel waves with strict file lanes — no agent edits outside its lane; the main session is the tech lead that reviews, tests, commits and pushes every wave. Wave 1 in flight: backend test coverage, enterprise docs + sample questions, the Charades hard-negative dataset builder (the meaningful-training scale-up), frontend polish/accessibility, and API/store hardening.
