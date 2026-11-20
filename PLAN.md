@@ -142,7 +142,16 @@ This local-first round still caught the biggest remaining bug before wasting ano
 
 **Full run submitted: job 2111550** (`FINETUNE_MODE=train`, 2 epochs over 258 samples, one A100, 2 h wall — the smoke's pace projects minutes of actual training). Tracked in the watch list; log: `logs/finetune-train-2111550.log`. On completion, the heartbeat protocol runs the acceptance eval: the adapter against the held-out coffee fixtures and pilot controls versus the hosted Gemma records, recorded honestly in PLAN/DECISIONS, and only a pass wires it into the app's Qwen client as a pinned revision.
 
-**Full training COMPLETED 0:0 in 14:20** (job 2111550). The trained adapter is at `runs/finetune-v1/adapter/` (161 MB safetensors, SHA-256 `c5268e8127a3a3cbe6e122e96307996359b7d07a5f416d6c6071ce68e50135d1`). **Acceptance eval submitted: job 2120547** (`FINETUNE_MODE=eval`, committed `fc2eab7`): generates on all 58 held-out rows and reports JSON validity, verification status agreement and summary word overlap against the hosted teacher records, with adapter and base identity pinned in `runs/finetune-v1/eval-report.json`. The verdict decides integration honestly: a pass wires the adapter into the app's Qwen client as a pinned local revision; a fail keeps the hosted path and records the negative result.
+**Full training COMPLETED 0:0 in 14:20** (job 2111550). The trained adapter is at `runs/finetune-v1/adapter/` (161 MB safetensors, SHA-256 `c5268e8127a3a3cbe6e122e96307996359b7d07a5f416d6c6071ce68e50135d1`).
+
+### Dataset scale-up — the path to a meaningful quality claim (20 November 2026)
+
+The first training run was a pipeline shakedown: 258 rows is the entire production supervision inventory (284 descriptions + 32 verifications, minus the held-out slice), 253 of 284 from one recording, and 2 epochs its honest ceiling. It proves the pinned-model pipeline end to end; it cannot yet support a quality claim over hosted Gemma, and the acceptance eval will report that honestly.
+
+The meaningful training set, in build order for the next session:
+1. **Charades-STA grounded supervision** from the licensed pilot: 186 windows over 45 different scenes; in-interval positives versus same-scene out-of-interval hard negatives (the draft plan's rule — wrong time, same scene); plus the pilot's ~414 saved verification traces from private storage. Target: thousands of discriminative pairs.
+2. **Flywheel data**: every future indexing run and verified question adds supervision for free; index diverse footage to break the single-recording skew.
+3. Re-train (2-3 epochs on the expanded set), re-evaluate on the same held-out gate. Only a measured pass over hosted records claims anything — otherwise the negative result is recorded and the hosted path stays. **Acceptance eval submitted: job 2120547** (`FINETUNE_MODE=eval`, committed `fc2eab7`): generates on all 58 held-out rows and reports JSON validity, verification status agreement and summary word overlap against the hosted teacher records, with adapter and base identity pinned in `runs/finetune-v1/eval-report.json`. The verdict decides integration honestly: a pass wires the adapter into the app's Qwen client as a pinned local revision; a fail keeps the hosted path and records the negative result.
 
 ### Heartbeat protocol — 20 November 2026 (user requirement)
 
