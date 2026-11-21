@@ -1,0 +1,101 @@
+{
+  "name": "untouched-benchmark-results",
+  "version": "v1",
+  "date": "2026-11-21",
+  "protocol": {
+    "document": "research/untouched-benchmark-design-2026-11-20.md",
+    "original_freeze_commit": "06901bc",
+    "original_sha256": "403D07AF72016FB6CC3454594AB7FFBD5A224C2E1347A8F61DEFC9B19FD0C57B",
+    "amended_sha256": "9EEE47B2CABC9E9B64F2E03BBA55B46B08FEAF78065C88E5AAA103A6EDE5B61D",
+    "amendments": [
+      "Amendment 1 (pre-run): hosted comparison arms H1 = qwen3-vl-32b and X = gpt-oss-120b; GPT-6.1 blocked pending user credential at that time",
+      "Amendment 2 (pre-run): G = openai/gpt-6.1-sol via OpenRouter with a user-provisioned key; campaign cap recomputed to 2000 attempts"
+    ]
+  },
+  "claim_rule": "protocol section 7.3 wording map, applied verbatim; no SOTA or supervised-specialist comparison is claimed",
+  "task": "supplied-video temporal grounding; POST /evidence-search, description path, rerank true, limit 12, max_checks 2, 8 frames per check, 16 sent frame slots per query",
+  "contamination_audit": {
+    "outcome": "0 test videos in adapter training rows",
+    "claim_scope": "full 69-query primary claim",
+    "evidence": "private .codex-backups/stage7/contamination-audit.json; merged 364/196 dataset verified row-for-row against the hard-negative builder output"
+  },
+  "arms": {
+    "H_hosted_teacher_gemma4-31b-it_unpinned": {
+      "status": "complete",
+      "positives_69": {"R@1_IoU0.3_percent": 15.94, "R@1_IoU0.5_percent": 2.90, "R@1_IoU0.7_percent": 0.0,
+                        "mean_top1_IoU_percent": 8.69, "abstention_rate": 0.6812,
+                        "R@1_IoU0.5_video_grouped_95CI_percent": [0.0, 7.25]},
+      "negatives_20": {"false_matches": 0, "honest_refusals": 20, "false_match_rate": 0.0},
+      "invalid_reply_rate_of_answered_cases": 0.0,
+      "cost": {"ledger_attempts": 259, "describe": 103, "verify": 156,
+               "verify_latency_seconds": {"p50": 3.77, "p95": 22.96}}
+    },
+    "H1_hosted_qwen3-vl-32b_unpinned": {
+      "status": "complete_with_disclosed_serving_instability",
+      "positives_69": {"R@1_IoU0.3_percent": 24.64, "R@1_IoU0.5_percent": 8.70, "R@1_IoU0.7_percent": 0.0,
+                        "mean_top1_IoU_percent": 16.75, "abstention_rate": 0.4058,
+                        "R@1_IoU0.5_video_grouped_95CI_percent": [2.47, 16.67],
+                        "answered_cases": 88, "note": "1 of 89 cases unanswered after an infrastructure kill"},
+      "negatives_20": {"answered": 1, "false_matches": 0, "honest_refusals": 1,
+                        "note": "19 negatives lost to the same invalid-reply failure below"},
+      "invalid_reply_rate_of_answered_cases": 0.3636,
+      "T1_verdict": "FAIL, disclosed: gateway constrained decoding enters a whitespace loop (finish_reason length, tab runs) under the strict schema",
+      "cost": {"ledger_attempts": 202, "describe": 104, "verify": 98}
+    },
+    "X_hosted_gpt-oss-120b_unpinned": {
+      "status": "failed_at_description_contract",
+      "positives_69": "no query cases; description index could not be built under the frozen 1024-token budget (verbose reasoning and per-frame JSON truncate mid-JSON); 1 of 25 index builds completed; 47 ledger attempts charged",
+      "T1_verdict": "not evaluated (no query attempts)"
+    },
+    "A_pinned_adapter": {
+      "status": "complete",
+      "identity": {"base_model": "Qwen/Qwen3-VL-4B-Instruct", "base_revision": "ebb281ec70b05090aa6165b016eac8ec08e71b17",
+                    "adapter_sha256": "b1789134a95bac01f6126e438691caca54c0ef85f983f9f9e30ba1a46089522c",
+                    "served_as": "qwen3-vl-4b-adapter-v1",
+                    "acceptance_gate": "job 2126198, 196/196 schema-valid, unconstrained generation; served the same way here (disclosed)"},
+      "positives_69": {"R@1_IoU0.3_percent": 52.17, "R@1_IoU0.5_percent": 33.33, "R@1_IoU0.7_percent": 7.25,
+                        "mean_top1_IoU_percent": 30.05, "abstention_rate": 0.2464,
+                        "R@1_IoU0.5_video_grouped_95CI_percent": [20.0, 43.75]},
+      "negatives_20": {"false_matches": 0, "honest_refusals": 20, "false_match_rate": 0.0},
+      "invalid_reply_rate_of_answered_cases": 0.029,
+      "invalid_reply_note": "2 of 69 answered cases carry transport-class errors from an overnight serving-job cancellation (infrastructure, resumed per 8.3); 0 model-level invalid replies",
+      "cost": {"ledger_attempts": 310, "describe_including_75_transport_failures": 178, "verify": 132,
+               "verify_latency_seconds": {"p50": 0.52, "p95": 0.92}}
+    },
+    "B_pinned_zero_shot_base": {
+      "status": "blocked_by_serving_stack",
+      "evidence": "vLLM 0.20.0 and 0.26.0 both silently skip response_format guided decoding on the Qwen3-VL multimodal path (forcing test demanded a required field the model never emitted); the zero-shot base cannot satisfy the app's strict serving contract without enforcement; two-failure rule exhausted; 1 probe attempt charged",
+      "measurements": "none"
+    },
+    "G_hosted_openai_gpt-6.1-sol": {
+      "status": "blocked_pending_user_credential",
+      "evidence": "the provisioned key is a JWT service key (issuer admin), not an OpenRouter credential; chat endpoint 401 Missing Authentication header; 1 probe attempt charged",
+      "measurements": "none"
+    }
+  },
+  "paired_deltas_R@1_IoU0.5": {
+    "A_minus_H": {"delta_points": 30.43, "video_grouped_95CI_points": [16.67, 41.79], "bootstrap": "2000 reps, seed 20261120, 25 video groups"},
+    "A_minus_B": "not computed: arm B has no measurements",
+    "B_minus_H": "not computed: arm B has no measurements"
+  },
+  "thresholds": {
+    "T1_per_arm_invalid_reply_le_5pct": {"A": "pass", "H": "pass", "H1": "fail_disclosed", "X_B_G": "no query attempts"},
+    "T2_claim_arm_R@1_IoU0.3_ge_15.9pct": "pass (52.17)",
+    "T3_A_minus_H_CI_low_ge_minus_4.35_points": "pass (+16.67)",
+    "T4_A_minus_B_CI_low_gt_0": "not demonstrated; arm B has no measurements",
+    "T5_claim_arm_false_matches_le_4_of_20": "pass (0 of 20)",
+    "T6_cost_reported": "pass; claim-arm verify latency is ~7x faster than hosted; no adverse wall-cost wording required"
+  },
+  "claim_sentence_verbatim": "The pinned adapter matches the hosted teacher [CI: A - H = +30.43 points on R@1 IoU 0.5, video-grouped 95% CI 16.67 to 41.79]. The gain over its own pinned base was not demonstrated on this set. No best-in-class wording.",
+  "negatives_disclosure_verbatim": "the author team also built the system, so the negatives are adversarial, not random. The false-match rate measured on them is an upper-bound stress, not an average-case rate.",
+  "negatives_method_disclosure": "absence confirmed against the licensed per-video annotation inventory (the positives' own ground truth), not visual review (the executing agent cannot view images) and not model descriptions; manifest sha256 daddd0e5cc31369da8dd4ca11e692d0984f8e09681c755e2afcb010ed2230a87, 20 entries, kept private",
+  "ledger": {"cap": 2000, "attempts_used": 820, "never_refunded": true},
+  "retrieval_diagnostics_note": "pool-best top-1 IoU over the 12-candidate pool (raw equals reranked at top-1 for every arm): H 57.23, H1 56.96, A 57.17 mean top-1 IoU percent; the strict-verification path is measured against this strong ceiling, not against a ranked order",
+  "limits": [
+    "69 queries over 25 video groups; one query is 1.45 points; intervals are wide by construction",
+    "the 69 queries' prior exposure is disclosed in the protocol's honesty note; no untouched-held-out wording is used",
+    "hosted identities are unpinned; H's fingerprint matched the pilot's recorded teacher, H1's is recorded in ledger traces",
+    "arm A served without serving-layer grammar enforcement (multimodal guided-decoding gap); its validity comes from its trained contract, the same condition as its acceptance gate",
+    "H1's numbers are lower bounds on a stable contract; X's failure is a frozen-budget contract failure, not a capability claim; B's blocker is a serving-stack gap, not a base-model measurement"
+  ]
+}
