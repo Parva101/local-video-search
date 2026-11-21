@@ -15,11 +15,16 @@ One one-shot campaign, frozen budgets: 2 source checks, 8 frames per check,
 1024/verification 2048 max tokens, temperature 0, seed 0, per-query request
 `POST /evidence-search {path: "description", rerank: true, limit: 12,
 max_checks: 2}` on the supplied video. Durable ledger cap 2,000 (amended);
-**final count 820 attempts, all charged, never refunded**. Arms ran
-sequentially H, H1, X, A; B and G never reached queries (below). Infrastructure
-resumes under protocol 8.3: one Sol serving-job cancellation overnight
-(arm A mid-run), one dead tunnel (arm A index), both resumed with identical
-settings; recorded model-level failures were never retried.
+**final count 1,190 attempts, all charged, never refunded**. Arms ran
+sequentially H, H1, X, A; arm G followed as a supplementary pass on 21
+November under the same frozen identity and ledger, after the user corrected
+its route (the Amendment 2 credential was an OpenRouter misidentification; the
+correct endpoint is the CreateAI gateway, model served as `openai/gpt6_1_sol`
+— identity-neutral, since the frozen manifest pins arm name, declared model id
+and revision only); B never reached queries (below). Infrastructure resumes
+under protocol 8.3: one Sol serving-job cancellation overnight (arm A
+mid-run), one dead tunnel (arm A index), both resumed with identical settings;
+recorded model-level failures were never retried.
 
 | Arm | System model | Positives (69) | Negatives (20) | Notes |
 | --- | --- | --- | --- | --- |
@@ -28,7 +33,7 @@ settings; recorded model-level failures were never retried.
 | X | hosted `gpt-oss-120b`, unpinned | no query cases | — | **Failed arm at the description contract**: its verbose reasoning plus per-frame JSON exceeds the frozen 1024-token description budget, truncating mid-JSON; 1 of 25 index builds completed (45 attempts charged). Raising the budget is a frozen-budget change, forbidden after the first inference call |
 | A | **pinned adapter** (base `Qwen/Qwen3-VL-4B-Instruct` @ `ebb281ec...` + LoRA `b1789134...`, served as `qwen3-vl-4b-adapter-v1`) | **52.17 / 33.33 / 7.25 %, mean IoU 30.05 %**, abstain 24.6 % | **0 false matches, 20/20 honest refusals** | T1 clean (2 of 69 answered cases carry transport-class errors from the overnight job cancellation; 0 model invalids) |
 | B | pinned zero-shot base, same checkpoint | no measurements | no measurements | **Blocked by serving stack, two-failure rule exhausted**: vLLM 0.20.0 and 0.26.0 both silently skip `response_format` guided decoding on the Qwen3-VL multimodal path (proved by forcing tests with a required field the model never emitted); the zero-shot base needs that enforcement to satisfy the app's strict serving contract |
-| G | hosted `openai/gpt-6.1-sol` via OpenRouter | no measurements | no measurements | **Blocked pending user credential**: the provisioned `CREATEAI_API_KEY` is a JWT service key (issuer `admin`), not an OpenRouter credential (`sk-or-v1-...` or an OpenRouter-issued JWT); chat endpoint returns 401 "Missing Authentication header" |
+| G | hosted `openai/gpt-6.1-sol`, served as `openai/gpt6_1_sol` at the CreateAI gateway, unpinned | no query cases | no measurements | **Failed at the verification contract, disclosed**: route corrected from the misidentified OpenRouter credential; the description index built cleanly (25 of 25 videos, 102 windows, all HTTP 200 and schema-valid, p50 7.9 s per describe), and retrieval-only pools match the other arms (pool-best mean top-1 IoU 57.23 %) — but every frozen verify request was rejected upstream (HTTP 500 wrapping 400 `invalid_json_schema`: the endpoint requires object-typed response_format schemas; the app's frozen Verification union schema has no top-level type); 267 of 267 verify attempts failed; 0 of 89 cases answered; recorded, never repaired, per 8.3 |
 
 Paired deltas on R@1 IoU 0.5, video-grouped bootstrap (seed 20261120,
 2,000 reps): **A − H = +30.43 points, 95 % CI [16.67, 41.79]**. B − H and
@@ -38,7 +43,7 @@ A − B are not computed: arm B produced no measurements.
 
 | ID | Threshold | Verdict |
 | --- | --- | --- |
-| T1 | Per-arm invalid-reply rate ≤ 5 % | A ✓ (2.9 %, both transport-class), H ✓ (0 %), H1 ✗ (36.4 %, disclosed), X/B/G no query attempts |
+| T1 | Per-arm invalid-reply rate ≤ 5 % | A ✓ (2.9 %, both transport-class), H ✓ (0 %), H1 ✗ (36.4 %, disclosed), G ✗ (verification contract non-functional upstream; 0 of 89 cases answered), X/B no query attempts |
 | T2 | Claim arm R@1 IoU 0.3 ≥ 15.9 % | ✓ — A reached 52.17 % (36 of 69); the hosted teacher's own anchor was 15.94 % |
 | T3 | A − H on R@1 IoU 0.5: 95 % CI lower bound ≥ −4.35 points | ✓ — lower bound +16.67 points |
 | T4 | A − B on R@1 IoU 0.5: 95 % CI lower bound > 0 | **Not demonstrated** — arm B has no measurements (blocked by serving stack) |
@@ -73,7 +78,7 @@ annotated inventory; unscripted background presence remains a disclosed risk,
 not a hidden one. Manifest (20 entries, deterministic first-20 frozen order)
 SHA-256 `daddd0e5...a87`, kept private.
 
-## Cost (durable ledger, 820 of 2,000 attempts)
+## Cost (durable ledger, 1,190 of 2,000 attempts)
 
 | Arm | Attempts (describe / verify) | Verify latency p50 / p95 |
 | --- | --- | --- |
@@ -82,15 +87,18 @@ SHA-256 `daddd0e5...a87`, kept private.
 | X | 47 (charged; index only, failed) | — |
 | A | 310 (178 / 132; the 178 includes 75 transport failures from the cancelled serving job) | **0.52 s / 0.92 s** |
 | B | 1 (probe, failed) | — |
-| G | 1 (probe, 401) | — |
+| G | 371 (103 describe via CreateAI incl. its probe, all 200 / 267 verify, all rejected; plus the earlier 1 OpenRouter probe, 401) | rejected in ~0.9 s each (p50 0.84 s / p95 1.06 s); no completed checks |
 
 Retrieval diagnostics (best candidate in the 12-candidate pool, zero model
-calls): raw = reranked at top-1 for every arm (H 69.57 %, H1 66.07 %,
-A 68.66 % mean top-1 IoU); the description path's strict-verification gain
-over pool-best is therefore a comparison against a strong ceiling, not
-against the ranked order the pilot reported. Local visual retrieval
-(69 queries, zero model-service attempts) is stored under the private work
-directory with the same pools.
+calls): raw = reranked at top-1 for every arm with answered cases (H 69.57 %,
+H1 66.07 %, A 68.66 % mean top-1 IoU). Arm G's case pools were never saved
+(its cases errored before completion), so its number comes from a
+retrieval-only re-run over its completed index: pool-best R@1 IoU 0.5
+69.57 %, mean top-1 IoU 57.23 % — equal to arm H's ceiling. The
+description path's strict-verification gain over pool-best is therefore a
+comparison against a strong ceiling, not against the ranked order the pilot
+reported. Local visual retrieval (69 queries, zero model-service attempts) is
+stored under the private work directory with the same pools.
 
 ## Gates and audit
 
@@ -100,8 +108,10 @@ G1 freeze recorded; G2 identity pins verified fresh on Sol (base manifest
 adapter training rows** (all 106 Charades train rows are dev videos; merged
 dataset verified row-for-row) — the full 69-query set carries the primary
 claim; G4 negatives manifest hashed and private; G5 fresh ledger, cap
-enforced, never hit; G6 probes passed for H, H1, X, A; G7 every Sol job
-watched (`watch.json`: 2130192, 2132562, 2135198, 2139568, 2195712).
+enforced, never hit; G6 probes passed for H, H1, X, A and G (G's probe
+exercises the describe path; its verify incompatibility surfaced only at the
+query phase and is disclosed in its arm row); G7 every Sol job watched
+(`watch.json`: 2130192, 2132562, 2135198, 2139568, 2195712).
 
 ## Honest limits
 
@@ -118,7 +128,14 @@ watched (`watch.json`: 2130192, 2132562, 2135198, 2139568, 2195712).
   measured.
 - B's blocker is a serving-stack capability gap, not a base-model
   measurement; no A-vs-B number exists.
+- G's failure is an upstream schema-validation contract failure, not a
+  GPT-6.1 capability claim in either direction: its description index built
+  cleanly (25 of 25 videos) and its retrieval-only pools match the other
+  arms; only the strict verification stage could not run at this endpoint.
+  A future protocol that re-envelopes the union schema as an object-typed
+  root would be a new protocol document, not a rerun.
 - 25 video groups, 69 queries: one query is 1.45 points; intervals are wide
   by construction.
 - Hosted identities are unpinned; H's fingerprint matched the pilot's, H1's
-  is recorded in the ledger traces.
+  is recorded in the ledger traces, G's served id `openai/gpt6_1_sol` is
+  recorded in its probe and ledger traces.

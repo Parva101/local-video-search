@@ -9,7 +9,8 @@
     "amended_sha256": "9EEE47B2CABC9E9B64F2E03BBA55B46B08FEAF78065C88E5AAA103A6EDE5B61D",
     "amendments": [
       "Amendment 1 (pre-run): hosted comparison arms H1 = qwen3-vl-32b and X = gpt-oss-120b; GPT-6.1 blocked pending user credential at that time",
-      "Amendment 2 (pre-run): G = openai/gpt-6.1-sol via OpenRouter with a user-provisioned key; campaign cap recomputed to 2000 attempts"
+      "Amendment 2 (pre-run): G = openai/gpt-6.1-sol via OpenRouter with a user-provisioned key; campaign cap recomputed to 2000 attempts",
+      "Disclosure (2026-11-21, during execution): the Amendment 2 credential was misidentified; arm G was served via the CreateAI gateway instead of OpenRouter, identity-neutral to the frozen campaign; no protocol text changed"
     ]
   },
   "claim_rule": "protocol section 7.3 wording map, applied verbatim; no SOTA or supervised-specialist comparison is claimed",
@@ -68,9 +69,16 @@
       "measurements": "none"
     },
     "G_hosted_openai_gpt-6.1-sol": {
-      "status": "blocked_pending_user_credential",
-      "evidence": "the provisioned key is a JWT service key (issuer admin), not an OpenRouter credential; chat endpoint 401 Missing Authentication header; 1 probe attempt charged",
-      "measurements": "none"
+      "status": "failed_at_verification_contract",
+      "route_correction": "Amendment 2's OpenRouter route rested on a credential misidentification; the user corrected the endpoint to the CreateAI gateway (https://api-main.aiml.asu.edu/v1), served as openai/gpt6_1_sol, hosted and unpinned; identity-neutral to the frozen campaign (the manifest identity pins arm name, declared model id and revision only); no protocol text changed",
+      "index": "complete: 25 of 25 videos, 102 windows, 102 describe attempts, all HTTP 200 and schema-valid",
+      "evidence": "every frozen verify request was rejected upstream: HTTP 500 wrapping 400 invalid_json_schema (the endpoint requires response_format schemas of type object; the app's frozen Verification union schema has no top-level type); 267 of 267 verify attempts failed; 0 of 89 cases answered; recorded, never repaired, per protocol 8.3",
+      "retrieval_only_diagnostic": "pool-best top-1 IoU over the 12-candidate pool from G's own index, zero model calls: mean 57.23 percent, R@1 IoU 0.5 69.57 percent",
+      "T1_verdict": "fail, disclosed: the verification serving contract is non-functional at this endpoint; describe succeeded because its schema is a plain object",
+      "measurements": "no primary-path measurements; 1 earlier probe attempt charged on the blocked OpenRouter route (401)",
+      "cost": {"ledger_attempts_via_createai": 370, "describe_including_probe": 103, "verify_rejected": 267,
+               "verify_latency_seconds": {"p50": 0.84, "p95": 1.06},
+               "tokens_reported_on_describe": {"prompt": 371028, "completion": 31090}}
     }
   },
   "paired_deltas_R@1_IoU0.5": {
@@ -79,7 +87,7 @@
     "B_minus_H": "not computed: arm B has no measurements"
   },
   "thresholds": {
-    "T1_per_arm_invalid_reply_le_5pct": {"A": "pass", "H": "pass", "H1": "fail_disclosed", "X_B_G": "no query attempts"},
+    "T1_per_arm_invalid_reply_le_5pct": {"A": "pass", "H": "pass", "H1": "fail_disclosed", "G": "fail_disclosed (verification contract non-functional upstream; 0 of 89 cases answered)", "X_B": "no query attempts"},
     "T2_claim_arm_R@1_IoU0.3_ge_15.9pct": "pass (52.17)",
     "T3_A_minus_H_CI_low_ge_minus_4.35_points": "pass (+16.67)",
     "T4_A_minus_B_CI_low_gt_0": "not demonstrated; arm B has no measurements",
@@ -89,13 +97,14 @@
   "claim_sentence_verbatim": "The pinned adapter matches the hosted teacher [CI: A - H = +30.43 points on R@1 IoU 0.5, video-grouped 95% CI 16.67 to 41.79]. The gain over its own pinned base was not demonstrated on this set. No best-in-class wording.",
   "negatives_disclosure_verbatim": "the author team also built the system, so the negatives are adversarial, not random. The false-match rate measured on them is an upper-bound stress, not an average-case rate.",
   "negatives_method_disclosure": "absence confirmed against the licensed per-video annotation inventory (the positives' own ground truth), not visual review (the executing agent cannot view images) and not model descriptions; manifest sha256 daddd0e5cc31369da8dd4ca11e692d0984f8e09681c755e2afcb010ed2230a87, 20 entries, kept private",
-  "ledger": {"cap": 2000, "attempts_used": 820, "never_refunded": true},
-  "retrieval_diagnostics_note": "pool-best top-1 IoU over the 12-candidate pool (raw equals reranked at top-1 for every arm): H 57.23, H1 56.96, A 57.17 mean top-1 IoU percent; the strict-verification path is measured against this strong ceiling, not against a ranked order",
+  "ledger": {"cap": 2000, "attempts_used": 1190, "never_refunded": true},
+  "retrieval_diagnostics_note": "pool-best top-1 IoU over the 12-candidate pool (raw equals reranked at top-1 for every arm with answered cases): H 57.23, H1 56.96, A 57.17 mean top-1 IoU percent; G 57.23 from a retrieval-only re-run over its completed index (zero model calls, raw pool only, no answered cases to rerank); the strict-verification path is measured against this strong ceiling, not against a ranked order",
   "limits": [
     "69 queries over 25 video groups; one query is 1.45 points; intervals are wide by construction",
     "the 69 queries' prior exposure is disclosed in the protocol's honesty note; no untouched-held-out wording is used",
     "hosted identities are unpinned; H's fingerprint matched the pilot's recorded teacher, H1's is recorded in ledger traces",
     "arm A served without serving-layer grammar enforcement (multimodal guided-decoding gap); its validity comes from its trained contract, the same condition as its acceptance gate",
-    "H1's numbers are lower bounds on a stable contract; X's failure is a frozen-budget contract failure, not a capability claim; B's blocker is a serving-stack gap, not a base-model measurement"
+    "H1's numbers are lower bounds on a stable contract; X's failure is a frozen-budget contract failure, not a capability claim; B's blocker is a serving-stack gap, not a base-model measurement",
+    "G's failure is an upstream schema-validation contract failure, not a GPT-6.1 capability claim: its description index built cleanly (25 of 25 videos), and its retrieval-only pools match the other arms (pool-best mean top-1 IoU 57.23 percent); only the strict verification stage could not run"
   ]
 }
